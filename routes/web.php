@@ -91,3 +91,16 @@ Route::post('kependudukan/pendatang/update/{id}','PendatangController@update');
 Route::get('/kependudukan/pendatang/delete/{id}', 'PendatangController@destroy');
 Route::get('/kependudukan/pendatang/view/{id}', 'PendatangController@show');
 // End Pendatang
+
+// Identitas Desa
+Route::get('/pengaturan/identitas','IdentitasController@index');
+// End Indetitas Desa
+
+// Staff
+Route::get('/staff','StaffController@index');
+Route::get('/staff/add','StaffController@create');
+Route::post('/staff/create','StaffController@store');
+Route::get('/staff/edit/{id}', 'StaffController@edit');
+Route::post('/staff/update/{id}', 'StaffController@update');
+Route::get('/staff/delete/{id}', 'StaffController@destroy');
+// End Staff
