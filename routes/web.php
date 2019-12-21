@@ -67,9 +67,14 @@ Route::get('/kependudukan/penduduk/view/{id}', 'PendudukController@show');
 
 // Kelahiran
 Route::get('/kependudukan/kelahiran','KelahiranController@index');
+Route::get('/kependudukan/kelahiran/add','KelahiranController@create');
+Route::post('/kependudukan/kelahiran/create','KelahiranController@store');
 // End Kelahiran
 
 // Kematian
+Route::get('/kependudukan/kematian','KematianController@index');
+Route::get('/kependudukan/kematian/add','KematianController@create');
+Route::post('/kependudukan/kematian/create','KematianController@store');
 // End Kematian
 
 // Pendatang

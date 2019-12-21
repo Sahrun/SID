@@ -3,7 +3,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Kelahiran</h4>
+                <h4 class="page-title">Kematian</h4>
 
             </div>
             <div class="row">
@@ -11,10 +11,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">Data Kelahiran</h4>
-                                <a class="btn btn-primary btn-round ml-auto" href="{{url('kependudukan/kelahiran/add')}}">
-                                <i class="fa fa-plus"></i> Tambah Data Kelahiran
-                                </a>
+                                <h4 class="card-title">Daftar Penduduk</h4>
+                               
                             </div>
                         </div>
                         <div class="card-body">
@@ -46,37 +44,25 @@
                                             <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
                                                 <thead>
                                                     <tr role="row">
-                                                        <th>No</th>
-                                                        <th style="width: 233px;">Nama</th>
-                                                        <th style="width: 344px;">NIA</th>
-                                                        <th style="width: 344px;">NO KK</th>
-                                                        <th style="width: 344px;">Jenis Kelamin</th>
-                                                        <th style="width: 344px;">Tanggal Kelahiran</th>
-                                                        <th style="width: 344px;">Kondisi Lahir</th>
-                                                        <th style="width: 108px;">Aksi</th>
+                                                    <th  tabindex="0" aria-controls="add-row" rowspan="1" colspan="1">No</th>
+                                                        <th>NIK</th>
+                                                        <th>Nama</th>
+                                                        <th>Usia</th>
+                                                        <th>Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php $no =1 ?>
-                                                    @foreach ($kelahiran as $item)
+                                                    @foreach ($penduduk as $item)
                                                         <tr role="row" class="{{$no%2?'odd':'even'}}">
                                                             <td>{{$no++}}</td>
-                                                            <td>{{$item->full_name}}</td>
                                                             <td>{{$item->nik}}</td>
-                                                            <td>{{$item->jekel}}</td>
-                                                            <td>{{$item->no_kk}}</td>
-                                                            <td>{{$item->tanggal_lahir}}</td>
-                                                            <td>{{$item->kondisi_lahir}}</td>
+                                                            <td>{{$item->full_name}}</td>
+                                                            <td>{{date_diff(date_create($item->tanggal_lahir), date_create('now'))->y}}</td>
                                                             <td>
                                                                 <div class="form-button-action">
-                                                                    <a href="{{url('kependudukan/kelahiran/view/'.$item->kematian_id)}}" class="btn btn-link btn-primary btn-lg" title="Show">
-                                                                        <i class="fa fa-eye"></i>
-                                                                    </a> 
-                                                                    <a href="{{url('kependudukan/kelahiran/edit/'.$item->kematian_id)}}" class="btn btn-link btn-primary btn-lg" title="Edit">
-                                                                        <i class="fa fa-edit"></i>
-                                                                    </a>
-                                                                    <a title="Delete" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/kelahiran/delete/'.$item->kematian_id)}}">
-                                                                        <i class="fa fa-times"></i>
+                                                                    <a class="btn btn-link btn-danger btn-lg" title="Mati" onclick="open_form({{$item->penduduk_id}})">
+                                                                        <i class="fa fa-user-times"></i>
                                                                     </a>
                                                                 </div>
                                                             </td>
@@ -110,4 +96,90 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+<div class="modal fade" id="form_kematian" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Kematian</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form role="form" method="post"  action="{{url('kependudukan/kematian/add/')}}">
+      @csrf
+        <div class="modal-body">
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control" style="text-align:right;display:block"><b>NIK</b></label>
+                    <div class="col-md-9 p-0">
+                        <label class="col-md-3 label-control">NIK</label>
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control" style="text-align:right;display:block"><b>Nama</b></label>
+                    <div class="col-md-9 p-0">
+                        <label class="col-md-3 label-control">Nama</label>
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control" style="text-align:right;display:block"><b>Usia</b></label>
+                    <div class="col-md-9 p-0">
+                        <label class="col-md-3 label-control">Usia</label>
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control"><b>Tanggal Kematian</b></label>
+                    <div class="col-md-9 p-0">
+                        <input type="date" class="form-control input-full" name="tgl_kematian" placeholder="Tanggal Kematian">
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control"><b>Jam Kematian</b></label>
+                    <div class="col-md-9 p-0">
+                        <input type="time" class="form-control input-full" name="jam_kematian" placeholder="Jam Kematian">
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control"><b>Sebab Kematian</b></label>
+                    <div class="col-md-9 p-0">
+                        <select class="form-control" name="sebab_kematian">
+                            <option value="">- Pilih -</option>
+                            <option value="Usia Tua">Usia Tua</option>
+                            <option value="Sakit">Sakit</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control"><b>Tempat Kematian</b></label>
+                    <div class="col-md-9 p-0">
+                        <select class="form-control" name="tempat_kematian">
+                            <option value="">- Pilih -</option>
+                            <option value="Usia Tua">Rumah</option>
+                            <option value="Sakit">Rumah Sakit</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+				    </div>
+				</div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+    <script>
+      var url = "{{url('kependudukan/kematian/')}}";
+      function open_form(id){
+                $("#form_kematian").modal('show');
+                // $.get(url+"/edit-anggota/"+id, function(data, status){
+                // $('#no_kk_edit').val(data.no_kk);
+                // $('#hubungan_keluarga_edit').val(data.hubungan_keluarga);
+                // $("#form_update_anggota").attr("action", url+"/update-anggota/"+data.penduduk_id);
+                // });
+        }
+    </script>
     @stop

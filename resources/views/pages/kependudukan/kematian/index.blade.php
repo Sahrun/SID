@@ -3,7 +3,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Kelahiran</h4>
+                <h4 class="page-title">Kematian</h4>
 
             </div>
             <div class="row">
@@ -11,9 +11,9 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">Data Kelahiran</h4>
-                                <a class="btn btn-primary btn-round ml-auto" href="{{url('kependudukan/kelahiran/add')}}">
-                                <i class="fa fa-plus"></i> Tambah Data Kelahiran
+                                <h4 class="card-title">Data Kematian</h4>
+                                <a class="btn btn-primary btn-round ml-auto" href="{{url('kependudukan/kematian/add')}}">
+                                <i class="fa fa-plus"></i> Tambah Data Kematian
                                 </a>
                             </div>
                         </div>
@@ -47,35 +47,33 @@
                                                 <thead>
                                                     <tr role="row">
                                                         <th>No</th>
-                                                        <th style="width: 233px;">Nama</th>
-                                                        <th style="width: 344px;">NIA</th>
-                                                        <th style="width: 344px;">NO KK</th>
-                                                        <th style="width: 344px;">Jenis Kelamin</th>
-                                                        <th style="width: 344px;">Tanggal Kelahiran</th>
-                                                        <th style="width: 344px;">Kondisi Lahir</th>
-                                                        <th style="width: 108px;">Aksi</th>
+                                                        <th>NIK</th>
+                                                        <th>Nama</th>
+                                                        <th>Tanggal Kematian</th>
+                                                        <th>Tempat Kematian</th>
+                                                        <th>Sebab Kematian</th>
+                                                        <th>Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php $no =1 ?>
-                                                    @foreach ($kelahiran as $item)
+                                                    @foreach ($kematian as $item)
                                                         <tr role="row" class="{{$no%2?'odd':'even'}}">
                                                             <td>{{$no++}}</td>
-                                                            <td>{{$item->full_name}}</td>
                                                             <td>{{$item->nik}}</td>
-                                                            <td>{{$item->jekel}}</td>
-                                                            <td>{{$item->no_kk}}</td>
-                                                            <td>{{$item->tanggal_lahir}}</td>
-                                                            <td>{{$item->kondisi_lahir}}</td>
+                                                            <td>{{$item->full_name}}</td>
+                                                            <td>{{$item->tgl_kematian}}</td>
+                                                            <td>{{$item->tempat_kematian}}</td>
+                                                            <td>{{$item->sebab_kematian}}</td>
                                                             <td>
                                                                 <div class="form-button-action">
-                                                                    <a href="{{url('kependudukan/kelahiran/view/'.$item->kematian_id)}}" class="btn btn-link btn-primary btn-lg" title="Show">
-                                                                        <i class="fa fa-eye"></i>
-                                                                    </a> 
-                                                                    <a href="{{url('kependudukan/kelahiran/edit/'.$item->kematian_id)}}" class="btn btn-link btn-primary btn-lg" title="Edit">
+                                                                    <a href="{{url('kependudukan/penduduk/edit/'.$item->penduduk_id)}}" class="btn btn-link btn-primary btn-lg" title="Edit">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
-                                                                    <a title="Delete" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/kelahiran/delete/'.$item->kematian_id)}}">
+                                                                    <a href="{{url('kependudukan/penduduk/view/'.$item->penduduk_id)}}" class="btn btn-link btn-primary btn-lg" title="Show">
+                                                                        <i class="fa fa-eye"></i>
+                                                                    </a>
+                                                                    <a title="Delete" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/penduduk/delete/'.$item->penduduk_id)}}">
                                                                         <i class="fa fa-times"></i>
                                                                     </a>
                                                                 </div>

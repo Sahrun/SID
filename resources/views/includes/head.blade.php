@@ -4,6 +4,7 @@
   <link rel="icon" href="assets/img/icon.ico" type="image/x-icon" />
 
   <!-- Fonts and icons -->
+  <script src="{{asset('app-asset/js/core/jquery.3.2.1.min.js')}}"></script>
   <script src="{{asset('app-asset/js/plugin/webfont.min.js')}}"></script>
   <script>
     WebFont.load({
