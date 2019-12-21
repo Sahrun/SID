@@ -123,9 +123,9 @@
         </div>
       </li>
       <li class="nav-item ">
-        <a href="user/user.html">
-          <i class="fas fa-user"></i>
-          <p>User</p>
+      <a href="{{url('/staff')}}">
+          <i class="fas fa-users"></i>
+          <p>Staff Desa</p>
         </a>
       </li>
       <li class="nav-item ">
@@ -179,7 +179,7 @@
         <div class="collapse" id="pengaturan">
           <ul class="nav nav-collapse">
              <li>
-              <a href="pengaturan/lap_pindah.html">
+             <a href="{{url('/pengaturan/identitas')}}">
                 <span class="sub-item">Identitas Desa</span>
               </a>
             </li>
