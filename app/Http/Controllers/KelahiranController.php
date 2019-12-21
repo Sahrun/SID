@@ -99,7 +99,16 @@ class KelahiranController extends Controller
      */
     public function show($id)
     {
-        //
+        $kelahiran =  kelahiran::join('penduduk','penduduk.penduduk_id','=','kelahiran.penduduk_id')
+        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->join('wilayah as  rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->join('wilayah as  rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->join('penduduk as  ibu', 'penduduk.penduduk_id', '=', 'kelahiran.nik_ibu')
+        ->join('penduduk as  ayah', 'penduduk.penduduk_id', '=', 'kelahiran.nik_ayah')
+        ->select('penduduk.*','kelahiran.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT','ibu.nik as nik_ibu', 'ayah.nik as nik_ayah')
+        ->where('kelahiran.kelahiran_id',$id)->first();
+       dd($kelahiran);
+       // return view('pages.kependudukan.kelahiran.view',['kelahiran' => $kelahiran ]);
     }
 
     /**

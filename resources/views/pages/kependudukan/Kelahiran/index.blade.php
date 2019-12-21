@@ -69,10 +69,10 @@
                                                             <td>{{$item->kondisi_lahir}}</td>
                                                             <td>
                                                                 <div class="form-button-action">
-                                                                    <a href="{{url('kependudukan/kelahiran/view/'.$item->kematian_id)}}" class="btn btn-link btn-primary btn-lg" title="Show">
+                                                                    <a href="{{url('kependudukan/kelahiran/view/'.$item->kelahiran_id)}}" class="btn btn-link btn-primary btn-lg" title="Show">
                                                                         <i class="fa fa-eye"></i>
                                                                     </a> 
-                                                                    <a href="{{url('kependudukan/kelahiran/edit/'.$item->kematian_id)}}" class="btn btn-link btn-primary btn-lg" title="Edit">
+                                                                    <a href="{{url('kependudukan/kelahiran/edit/'.$item->kelahiran_id)}}" class="btn btn-link btn-primary btn-lg" title="Edit">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
                                                                     <a title="Delete" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/kelahiran/delete/'.$item->kematian_id)}}">

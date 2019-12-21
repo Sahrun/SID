@@ -101,48 +101,49 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" >Kematian</h5>
+        <h5 class="modal-title" ><b>Kematian</b></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form role="form" method="post"  action="{{url('kependudukan/kematian/add/')}}">
+      <form role="form" method="post"  action="{{url('kependudukan/kematian/create/')}}">
       @csrf
+        <input type="hidden" id="penduduk_id" name="penduduk_id"/>
         <div class="modal-body">
                 <div class="form-group form-inline">
                     <label class="col-md-3 label-control" style="text-align:right;display:block"><b>NIK</b></label>
                     <div class="col-md-9 p-0">
-                        <label class="col-md-3 label-control">NIK</label>
+                        <label class="col-md-3 label-control" style="text-align:left;display:block" id="nik"></label>
 				    </div>
 				</div>
                 <div class="form-group form-inline">
                     <label class="col-md-3 label-control" style="text-align:right;display:block"><b>Nama</b></label>
                     <div class="col-md-9 p-0">
-                        <label class="col-md-3 label-control">Nama</label>
+                        <label class="col-md-3 label-control" style="text-align:left;display:block" id="nama"></label>
 				    </div>
 				</div>
                 <div class="form-group form-inline">
                     <label class="col-md-3 label-control" style="text-align:right;display:block"><b>Usia</b></label>
                     <div class="col-md-9 p-0">
-                        <label class="col-md-3 label-control">Usia</label>
+                        <label class="col-md-3 label-control" style="text-align:left;display:block" id="usia"></label>
 				    </div>
 				</div>
                 <div class="form-group form-inline">
                     <label class="col-md-3 label-control"><b>Tanggal Kematian</b></label>
                     <div class="col-md-9 p-0">
-                        <input type="date" class="form-control input-full" name="tgl_kematian" placeholder="Tanggal Kematian">
+                        <input type="date" class="form-control" name="tgl_kematian" id="tgl_kematian" placeholder="Tanggal Kematian" required>
 				    </div>
 				</div>
                 <div class="form-group form-inline">
                     <label class="col-md-3 label-control"><b>Jam Kematian</b></label>
                     <div class="col-md-9 p-0">
-                        <input type="time" class="form-control input-full" name="jam_kematian" placeholder="Jam Kematian">
+                        <input type="time" class="form-control" name="jam_kematian" id="jam_kematian" placeholder="Jam Kematian" required>
 				    </div>
 				</div>
                 <div class="form-group form-inline">
                     <label class="col-md-3 label-control"><b>Sebab Kematian</b></label>
                     <div class="col-md-9 p-0">
-                        <select class="form-control" name="sebab_kematian">
+                        <select class="form-control" name="sebab_kematian" id="sebab_kematian" required>
                             <option value="">- Pilih -</option>
                             <option value="Usia Tua">Usia Tua</option>
                             <option value="Sakit">Sakit</option>
@@ -153,9 +154,9 @@
                 <div class="form-group form-inline">
                     <label class="col-md-3 label-control"><b>Tempat Kematian</b></label>
                     <div class="col-md-9 p-0">
-                        <select class="form-control" name="tempat_kematian">
+                        <select class="form-control" name="tempat_kematian" id="tempat_kematian" required>
                             <option value="">- Pilih -</option>
-                            <option value="Usia Tua">Rumah</option>
+                            <option value="Rumah">Rumah</option>
                             <option value="Sakit">Rumah Sakit</option>
                             <option value="Lainnya">Lainnya</option>
                         </select>
@@ -174,12 +175,27 @@
     <script>
       var url = "{{url('kependudukan/kematian/')}}";
       function open_form(id){
-                $("#form_kematian").modal('show');
-                // $.get(url+"/edit-anggota/"+id, function(data, status){
-                // $('#no_kk_edit').val(data.no_kk);
-                // $('#hubungan_keluarga_edit').val(data.hubungan_keluarga);
-                // $("#form_update_anggota").attr("action", url+"/update-anggota/"+data.penduduk_id);
-                // });
+
+                $('#nik').html(null);
+                $('#nama').html(null);
+                $('#usia').html(null);
+                $('#penduduk_id').val(null);
+                $('#tgl_kematian').val(null);
+                $('#jam_kematian').val(null);
+                $('#sebab_kematian').val(null);
+                $('#tempat_kematian').val(null);
+
+                $.get(url+"/get-data-penduduk/"+id, function(data, status){
+                    if(data !== null){
+                        $('#nik').html(data.nik);
+                        $('#nama').html(data.nama);
+                        $('#usia').html(data.usia);
+                        $('#penduduk_id').val(data.penduduk_id);
+                        $("#form_kematian").modal('show');
+                    }else{
+                        alert("Data penduduk tidak di temukan");
+                    }
+                });
         }
     </script>
     @stop

@@ -34,4 +34,4 @@
   <script src="{{asset('app-asset/js/plugin/sweetalert.min.js')}}"></script>
 
   <!-- Azzara JS -->
-  <script src="{{asset('app-asset/js/ready.min.js')}}"></script>
+  <script src="{{asset('app-asset/js/ready.js')}}"></script>

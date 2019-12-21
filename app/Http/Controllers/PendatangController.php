@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Wilayah;
+use Illuminate\Support\Facades\DB;
+use App\Pendatang;
 use App\Penduduk;
+use App\Wilayah;
 use DateTime;
 
-class PendudukController extends Controller
+class PendatangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +18,10 @@ class PendudukController extends Controller
      */
     public function index()
     {
-        $penduduk = Penduduk::all();
-        return view('pages.kependudukan.penduduk.index',['penduduk' => $penduduk]);
+        $pendatang = Pendatang::join('penduduk', 'penduduk.penduduk_id', '=', 'pendatang.penduduk_id')
+        ->select('pendatang.*','penduduk.nik','penduduk.full_name')
+        ->get();
+        return view('pages.kependudukan.pendatang.index',['pendatang' => $pendatang]);
     }
 
     /**
@@ -28,7 +32,7 @@ class PendudukController extends Controller
     public function create()
     {
         $dusun =  Wilayah::where('wilayah_part',1)->get();
-        return view('pages.kependudukan.penduduk.form',['dusun'=> $dusun]);
+        return view('pages.kependudukan.pendatang.form',['dusun'=> $dusun]);
     }
 
     /**
@@ -39,29 +43,46 @@ class PendudukController extends Controller
      */
     public function store(Request $request)
     {
-        Penduduk::create([ 
-        "nik" => $request->nik,
-        "full_name" => $request->full_name,
-        "no_kk" => $request->no_kk,
-        "tempat_lahir" => $request->tempat_lahir,
-        "tanggal_lahir" => $request->tanggal_lahir,
-        "jekel" => $request->jekel,
-        "agama" => $request->agama,
-        "pendidikan" => $request->pendidikan,
-        "pekerjaan" => $request->pekerjaan,
-        "status_perkawinan" => $request->status_perkawinan,
-        "golongan_darah" => $request->golongan_darah,
-        "status_kependudukan" => $request->status_kependudukan,
-        "keluarga_id" => null,
-        "hubungan_keluarga" => null,
-        "wilayah_dusun" => $request->wilayah_dusun,
-        "wilayah_rw" => $request->wilayah_rw,
-        "wilayah_rt" => $request->wilayah_rt,
-        "created_at" => Date("Y-m-d h:i:s"),
-        "updated_at" => Date("Y-m-d h:i:s")
-        ]);
+        $penduduk = new Penduduk;
+        $pendatang = new Pendatang;
+        DB::transaction(function () use ($penduduk,$pendatang,$request) {
 
-        return redirect()->action('PendudukController@index');
+           // Simpan data pendudduk
+    
+            $penduduk->nik = $request->nik;
+            $penduduk->full_name = $request->full_name;
+            $penduduk->no_kk = $request->no_kk;
+            $penduduk->tempat_lahir = $request->tempat_lahir;
+            $penduduk->tanggal_lahir = $request->tanggal_lahir;
+            $penduduk->jekel = $request->jekel;
+            $penduduk->agama = $request->agama;
+            $penduduk->pendidikan = $request->pendidikan;
+            $penduduk->pekerjaan = $request->pekerjaan;
+            $penduduk->status_perkawinan = $request->status_perkawinan;
+            $penduduk->golongan_darah = $request->golongan_darah;
+            $penduduk->status_kependudukan = $request->status_kependudukan;
+            $penduduk->keluarga_id = null;
+            $penduduk->hubungan_keluarga = null;
+            $penduduk->wilayah_dusun = $request->wilayah_dusun;
+            $penduduk->wilayah_rw = $request->wilayah_rw;
+            $penduduk->wilayah_rt = $request->wilayah_rt;
+            $penduduk->created_at = Date("Y-m-d h:i:s");
+            $penduduk->updated_at = Date("Y-m-d h:i:s");
+            $penduduk->save();
+
+            // Simpan Data Pendududk datang
+
+            $pendatang->tgl_datang    = $request->tgl_datang;
+            $pendatang->alamat_datang = $request->alamat_datang;
+            $pendatang->alasan_datang = $request->alasan_datang;
+            $pendatang->penduduk_id	  = $penduduk->penduduk_id;
+            $pendatang->created_at	  = Date("Y-m-d h:i:s");
+            $pendatang->updated_at    = Date("Y-m-d h:i:s");
+
+            $pendatang->save();
+        });
+
+         return redirect()->action('PendatangController@index');
     }
 
     /**
@@ -72,12 +93,13 @@ class PendudukController extends Controller
      */
     public function show($id)
     {
-        $penduduk =  Penduduk::join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        $pendatang =  Pendatang::join('penduduk','penduduk.penduduk_id','=','pendatang.penduduk_id')
+        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
         ->join('wilayah as  rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
         ->join('wilayah as  rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
-        ->select('penduduk.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
-        ->where('penduduk.penduduk_id',$id)->first();
-        return view('pages.kependudukan.penduduk.view',['penduduk' => $penduduk ]);
+        ->select('penduduk.*','pendatang.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
+        ->where('pendatang.pendatang_id',$id)->first();
+        return view('pages.kependudukan.pendatang.view',['pendatang' => $pendatang ]);
     }
 
     /**
@@ -88,12 +110,15 @@ class PendudukController extends Controller
      */
     public function edit($id)
         {
-            $penduduk = Penduduk::find($id);
-            $dusun = Wilayah::where('wilayah_part',1)->get();
-            $rw =  Wilayah::where('wilayah_part',2)->where('wilayah_dusun',$penduduk->wilayah_dusun)->get();
-            $rt = Wilayah::where('wilayah_part',3)->where('wilayah_rw',$penduduk->wilayah_rw)->get();
+        $pendatang = Pendatang::join('penduduk', 'penduduk.penduduk_id', '=', 'pendatang.penduduk_id')
+        ->where('pendatang_id',$id)
+        ->select('pendatang.*','penduduk.*')
+        ->first();
+        $dusun = Wilayah::where('wilayah_part',1)->get();
+        $rw =  Wilayah::where('wilayah_part',2)->where('wilayah_dusun',$pendatang->wilayah_dusun)->get();
+        $rt = Wilayah::where('wilayah_part',3)->where('wilayah_rw',$pendatang->wilayah_rw)->get();
 
-            return view('pages.kependudukan.penduduk.edit',['penduduk' => $penduduk, 'dusun' => $dusun,'rw' => $rw,'rt' => $rt]);
+        return view('pages.kependudukan.pendatang.edit',['pendatang'=> $pendatang, 'dusun' => $dusun,'rw' => $rw,'rt' => $rt]);
         }
 
     /**
@@ -105,24 +130,38 @@ class PendudukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $penduduk = Penduduk::find($id);
-        $penduduk->nik  = $request->nik;
-        $penduduk->wilayah_dusun   = $request->wilayah_dusun;
-        $penduduk->wilayah_rw   = $request->wilayah_rw;
-        $penduduk->wilayah_rt   = $request->wilayah_rt;
-        $penduduk->full_name   = $request->full_name;
-        $penduduk->tempat_lahir   = $request->tempat_lahir;
-        $penduduk->tanggal_lahir   = $request->tanggal_lahir;
-        $penduduk->jekel   = $request->jekel;
-        $penduduk->agama   = $request->agama;
-        $penduduk->pendidikan   = $request->pendidikan;
-        $penduduk->pekerjaan   = $request->pekerjaan;
-        $penduduk->status_perkawinan   = $request->status_perkawinan;
-        $penduduk->golongan_darah   = $request->golongan_darah;
-        $penduduk->status_kependudukan   = $request->status_kependudukan;
-        $penduduk->updated_at    = Date("Y-m-d h:i:s");
-        $penduduk->save();
-        return redirect()->action('PendudukController@index');
+        $pendatang = Pendatang::find($id);
+        $penduduk = Penduduk::find($pendatang->penduduk_id);
+        
+        DB::transaction(function () use ($penduduk,$pendatang,$request) {
+
+            $penduduk->nik  = $request->nik;
+            $penduduk->wilayah_dusun   = $request->wilayah_dusun;
+            $penduduk->wilayah_rw   = $request->wilayah_rw;
+            $penduduk->wilayah_rt   = $request->wilayah_rt;
+            $penduduk->full_name   = $request->full_name;
+            $penduduk->tempat_lahir   = $request->tempat_lahir;
+            $penduduk->tanggal_lahir   = $request->tanggal_lahir;
+            $penduduk->jekel   = $request->jekel;
+            $penduduk->agama   = $request->agama;
+            $penduduk->pendidikan   = $request->pendidikan;
+            $penduduk->pekerjaan   = $request->pekerjaan;
+            $penduduk->status_perkawinan   = $request->status_perkawinan;
+            $penduduk->golongan_darah   = $request->golongan_darah;
+            $penduduk->status_kependudukan   = $request->status_kependudukan;
+            $penduduk->updated_at    = Date("Y-m-d h:i:s");
+            $penduduk->save();
+
+            $pendatang->tgl_datang    = $request->tgl_datang;
+            $pendatang->alamat_datang = $request->alamat_datang;
+            $pendatang->alasan_datang = $request->alasan_datang;
+            $pendatang->updated_at    = Date("Y-m-d h:i:s");
+
+            $pendatang->save();
+
+
+        });
+         return redirect()->action('PendatangController@index');
     }
 
     /**
@@ -133,27 +172,12 @@ class PendudukController extends Controller
      */
     public function destroy($id)
     {
-        Wilayah::where('penduduk_id',$id)->update(['penduduk_id' => null]);
-
-        $penduduk = Penduduk::find($id);
-        $penduduk->delete();
+        $pendatang = Pendatang::find($id);
+        $penduduk = Penduduk::find($pendatang->penduduk_id);
+        DB::transaction(function () use ($penduduk,$pendatang) {
+             $pendatang->delete();
+             $penduduk->delete();
+        });
         return redirect()->back();
-    }
-    public function get_wilayah($id,$part)
-    {
-        $dusun = array();
-        if($part =="rw")
-        {
-            $dusun = Wilayah::where('wilayah_dusun',$id)
-            ->where('wilayah_part',2)->get();
-        }
-
-        if($part =="rt")
-        {
-            $dusun = Wilayah::where('wilayah_rw',$id)
-            ->where('wilayah_part',3)->get();
-        }
-         
-       return $dusun;
     }
 }

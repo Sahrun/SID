@@ -3,7 +3,7 @@
 <div class="content">
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Data Penduduk</h4>
+            <h4 class="page-title">Data Pendatang</h4>
 
         </div>
         <div class="row">
@@ -11,40 +11,40 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Tambah Data Penduduk</div>
+                        <div class="card-title">Tambah Data Pendatang</div>
                     </div>
                     <div class="card-body">
-                        <form role="form" method="post"  action="{{url('kependudukan/penduduk/create')}}" >
+                        <form role="form" method="post"  action="{{url('kependudukan/pendatang/create')}}" >
                             @csrf
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>NIK</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="nik" placeholder="NIK">
+									<input type="text" class="form-control input-full" name="nik" placeholder="NIK" required>
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Nama Lengkap</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="full_name" placeholder="Nama lengkap">
+									<input type="text" class="form-control input-full" name="full_name" placeholder="Nama lengkap" required>
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Wilayah</b></label>
 								<div class="col-md-9 p-0">
                                    <b>Dusun :  </b>
-                                    <select class="form-control" name="wilayah_dusun" onchange="GetRW(this)"> 
-                                        <option> - Pilih -</option>
+                                    <select class="form-control" name="wilayah_dusun" onchange="GetRW(this)" required> 
+                                        <option value=""> - Pilih -</option>
                                         @foreach ($dusun as $item)
                                         <option value="{{$item->wilayah_id}}">{{$item->wilayah_nama}}</option>
                                         @endforeach;
                                     </select>
                                     <b> RW  : </b>
-                                    <select class="form-control" name="wilayah_rw" id="wilayah_rw"  onchange="GetRT(this)"> 
-                                        <option> - Pilih -</option>
+                                    <select class="form-control" name="wilayah_rw" id="wilayah_rw"  onchange="GetRT(this)" required> 
+                                        <option value=""> - Pilih -</option>
                                     </select>
                                     <b> RT : </b>
-                                    <select class="form-control" name="wilayah_rt" id="wilayah_rt"> 
-                                        <option> - Pilih -</option>
+                                    <select class="form-control" name="wilayah_rt" id="wilayah_rt" required> 
+                                        <option value=""> - Pilih -</option>
                                     </select>
 								</div>
 							</div>
@@ -69,8 +69,8 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Jenis Kelamin</b></label>
 								<div class="col-md-9 p-0">
-                                    <b>Laki - Laki </b><input type="radio" class="form-control" name="jekel" value="Laki-laki">
-                                    <b>Perempuan </b><input type="radio" class="form-control" name="jekel" value="Perempuan">
+                                    <b>Laki - Laki </b><input type="radio" class="form-control" name="jekel" value="Laki-laki" required>
+                                    <b>Perempuan </b><input type="radio" class="form-control" name="jekel" value="Perempuan" required>
                                  </div>
 							</div>
                             <div class="form-group form-inline">
@@ -127,18 +127,16 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Status Kependudukan</b></label>
 								<div class="col-md-9 p-0"> 
-                                    <select name="status_kependudukan" class="form-control">
-                                        <option value="">- Pilih -</option>
-                                        <option value="Tetap">TETAP</option>
-                                        <option value="Pendatang">PENDATANG</option>
-                                        <option value="Tidak tetap">TIDAK TETAP</option>
+                                    <select class="form-control" disabled>
+                                        <option>PENDATANG</option>
                                     </select>
+                                    <input name="status_kependudukan" type="hidden" value="Pendatang" />
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Golongan Darah</b></label>
 								<div class="col-md-9 p-0">
-                                <select name="golongan_darah" class="form-control form-control-sm">
+                                <select name="golongan_darah" class="form-control">
                                     <option value="">- Pilih -</option>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
@@ -154,6 +152,29 @@
                                     <option value="O-">O-</option>
                                     <option value="TIDAK TAHU">TIDAK TAHU</option>
                                 </select>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Tanggal Datang</b></label>
+								<div class="col-md-9 p-0">
+									<input type="date" class="form-control" name="tgl_datang" required>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Alasan Datang</b></label>
+								<div class="col-md-9 p-0">
+                                    <select name="alasan_datang" class="form-control" required>
+                                        <option value="">- Pilih -</option>
+                                        <option value="Pekerjaan">Pekerjaan</option>
+                                        <option value="Transmigrasi">Transmigrasi</option>
+                                        <option value="Lainnya">Lainnya</option>
+                                    </select>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Alamat Sebelumnya</b></label>
+								<div class="col-md-9 p-0">
+                                    <textarea name="alamat_datang" class="form-control input-full" required></textarea>
 								</div>
 							</div>
                             <div class="form-group">    
@@ -178,7 +199,7 @@
             .find('option')
             .remove()
             .end()
-            .append('<option>- Pilih -</option>');
+            .append('<option value="">- Pilih -</option>');
 
             for(i=0;i < data.length;i++)
                 {   
@@ -195,7 +216,7 @@
             .find('option')
             .remove()
             .end()
-            .append('<option>- Pilih -</option>');
+            .append('<option value="">- Pilih -</option>');
             for(i=0;i < data.length;i++)
                 {   
                     $('#wilayah_rt').append(`<option value="${data[i].wilayah_id}"> 

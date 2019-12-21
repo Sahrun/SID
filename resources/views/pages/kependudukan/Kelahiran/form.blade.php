@@ -54,7 +54,7 @@
                                      <select name="nik_ibu" class="form-control">
                                         <option value=""> - Pilih -</option>
                                             @foreach ($penduduk as $item)
-                                            <option value="{{$item->nik}}">{{$item->nik}} - {{$item->full_name}}</option>
+                                            <option value="{{$item->penduduk_id}}">{{$item->nik}} - {{$item->full_name}}</option>
                                             @endforeach;
                                      </select>
 								</div>
@@ -65,7 +65,7 @@
                                      <select name="nik_ayah" class="form-control">
                                             <option value=""> - Pilih -</option>
                                             @foreach ($penduduk as $item)
-                                            <option value="{{$item->nik}}">{{$item->nik}} - {{$item->full_name}}</option>
+                                            <option value="{{$item->penduduk_id}}">{{$item->nik}} - {{$item->full_name}}</option>
                                             @endforeach;
                                      </select>
 								</div>

@@ -17,6 +17,6 @@ class Kematian extends Model
             "sebab_kematian",
             "penduduk_id",
             "created_at",
-            "updated_a"
+            "updated_at"
             ];
 }

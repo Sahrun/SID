@@ -4,31 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Penduduk extends Model
+class Pendatang extends Model
 {
     //
-    protected $table = 'penduduk';
-    protected $primaryKey ='penduduk_id';
+    protected $table = 'pendatang';
+    protected $primaryKey ='pendatang_id';
     protected $timestam = true;
     Protected $fillable = [
-                "nik",
-                "full_name",
-                "no_kk",
-                "tempat_lahir",
-                "tanggal_lahir",
-                "jekel",
-                "agama",
-                "pendidikan",
-                "pekerjaan",
-                "status_perkawinan",
-                "golongan_darah",
-                "status_kependudukan",
-                "keluarga_id",
-                "wilayah_dusun",
-                "wilayah_rt",
-                "wilayah_rw",
-                "hubungan_keluarga",
-                "created_at",
-                "updated_at",
-              ];
+            "tgl_datang",
+            "alamat_datang",
+            "alasan_datang",
+            "penduduk_id",
+            "created_at",
+            "updated_at"
+    ];
 }

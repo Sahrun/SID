@@ -69,13 +69,25 @@ Route::get('/kependudukan/penduduk/view/{id}', 'PendudukController@show');
 Route::get('/kependudukan/kelahiran','KelahiranController@index');
 Route::get('/kependudukan/kelahiran/add','KelahiranController@create');
 Route::post('/kependudukan/kelahiran/create','KelahiranController@store');
+Route::get('/kependudukan/kelahiran/view/{id}','KelahiranController@show');
 // End Kelahiran
 
 // Kematian
 Route::get('/kependudukan/kematian','KematianController@index');
 Route::get('/kependudukan/kematian/add','KematianController@create');
 Route::post('/kependudukan/kematian/create','KematianController@store');
+Route::get('kependudukan/kematian/get-data-penduduk/{id}','KematianController@get_data_penduduk');
+Route::get('kependudukan/kematian/edit/{id}','KematianController@edit');
+Route::post('kependudukan/kematian/update/{id}','KematianController@update');
+Route::get('/kependudukan/kematian/delete/{id}', 'KematianController@destroy');
 // End Kematian
 
 // Pendatang
-// P
+Route::get('/kependudukan/pendatang','PendatangController@index');
+Route::get('/kependudukan/pendatang/add','PendatangController@create');
+Route::post('/kependudukan/pendatang/create','PendatangController@store');
+Route::get('kependudukan/pendatang/edit/{id}','PendatangController@edit');
+Route::post('kependudukan/pendatang/update/{id}','PendatangController@update');
+Route::get('/kependudukan/pendatang/delete/{id}', 'PendatangController@destroy');
+Route::get('/kependudukan/pendatang/view/{id}', 'PendatangController@show');
+// End Pendatang
