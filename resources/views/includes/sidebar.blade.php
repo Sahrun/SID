@@ -129,9 +129,9 @@
         </a>
       </li>
       <li class="nav-item ">
-        <a href="staff/staff_desa.html">
-          <i class="fas fa-users"></i>
-          <p>Staff Desa</p>
+      <a href="{{url('/user')}}">
+          <i class="fas fa-user"></i>
+          <p>Users</p>
         </a>
       </li>
       <li class="nav-item">
@@ -172,7 +172,7 @@
       </li>
       <li class="nav-item">
         <a data-toggle="collapse" href="#pengaturan">
-          <i class="fas fa-bars"></i>
+          <i class="fas fa-cog"></i>
           <p>Pengaturan</p>
           <span class="caret"></span>
         </a>

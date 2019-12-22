@@ -15,7 +15,7 @@ class IdentitasController extends Controller
     public function index()
     {
         $identitas = Identitas::all();
-        return view('pages.pengaturan.identitas.index',['identitas' => $identitas]);
+       return view('pages.pengaturan.identitas.index',['identitas' => $identitas]);
     }
 
     /**
@@ -68,9 +68,14 @@ class IdentitasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        
+        foreach($request->all() as $key => $value) {
+            Identitas::where('identitas_key',$key)->update(['identitas_value' => $value]);
+
+       }
+       return redirect()->action('IdentitasController@index');
     }
 
     /**

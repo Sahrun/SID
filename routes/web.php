@@ -94,6 +94,7 @@ Route::get('/kependudukan/pendatang/view/{id}', 'PendatangController@show');
 
 // Identitas Desa
 Route::get('/pengaturan/identitas','IdentitasController@index');
+Route::post('/pengaturan/identitas/update','IdentitasController@update');
 // End Indetitas Desa
 
 // Staff
