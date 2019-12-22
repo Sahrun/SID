@@ -104,18 +104,18 @@
 								<div class="col-md-9 p-0">
 									<select name="hob" class="form-control">
                                         <option value="">- Pilih -</option>
-                                        <option value="Dockter">Dockter</option>
+                                        <option value="Dockter">Dokter</option>
                                         <option value="Bidan">Bidan</option>
                                         <option value="Dukun Beranak">Dukun Beranak</option>
-                                        <option value="Lainya">Lainya</option>
+                                        <option value="Lainya">Lainnya</option>
                                     </select>
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Kondisi Lahir</b></label>
 								<div class="col-md-9 p-0">
-                                    <b>Normal </b><input type="radio" class="form-control" name="kondisi_lahir" value="normal" checked>
-                                    <b>Cacat </b><input type="radio" class="form-control" name="kondisi_lahir" value="cacat">
+                                    <b>Normal </b><input type="radio" class="form-control" name="kondisi_lahir" value="Normal" checked>
+                                    <b>Cacat </b><input type="radio" class="form-control" name="kondisi_lahir" value="Cacat">
                                  </div>
 							</div>
                             <div class="form-group form-inline">
@@ -145,8 +145,8 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Jenis Kelahiran</b></label>
 								<div class="col-md-9 p-0">
-                                    <b>Normal </b><input type="radio" class="form-control" name="jenis_kelahiran" value="normal" checked>
-                                    <b>Caesar </b><input type="radio" class="form-control" name="jenis_kelahiran" value="caesar">
+                                <b>Normal </b><input type="radio" class="form-control" name="jenis_kelahiran" value="Normal" checked>
+                                    <b>Caesar </b><input type="radio" class="form-control" name="jenis_kelahiran" value="Caesar">
                                  </div>
 							</div>
                             <div class="form-group form-inline">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2019 at 10:42 AM
+-- Generation Time: Dec 22, 2019 at 06:21 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -82,6 +82,13 @@ CREATE TABLE `kelahiran` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `jenis_kelahiran` enum('Normal','Caesar') COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `kelahiran`
+--
+
+INSERT INTO `kelahiran` (`kelahiran_id`, `penduduk_id`, `anak_ke`, `id_penduduk_ibu`, `id_penduduk_ayah`, `tob`, `hob`, `kondisi_lahir`, `berat`, `panjang`, `created_at`, `updated_at`, `jenis_kelahiran`) VALUES
+(3, 19, 2, 4, 5, '01:22:00', 'Dukun Beranak', 'Normal', 1.3, 60, '2019-12-22 03:02:23', '2019-12-22 03:09:21', 'Normal');
 
 -- --------------------------------------------------------
 
@@ -227,7 +234,8 @@ CREATE TABLE `penduduk` (
 INSERT INTO `penduduk` (`penduduk_id`, `nik`, `no_kk`, `wilayah_dusun`, `wilayah_rt`, `wilayah_rw`, `keluarga_id`, `full_name`, `tempat_lahir`, `tanggal_lahir`, `jekel`, `agama`, `pendidikan`, `pekerjaan`, `status_perkawinan`, `golongan_darah`, `status_kependudukan`, `created_at`, `updated_at`, `hubungan_keluarga`) VALUES
 (4, '3306060208956666', NULL, 79, 85, 80, 4, 'Sahrun', NULL, '1995-08-02', NULL, '- Pilih -', NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:17', '2019-12-15 03:45:55', 'KEPALA KELUARGA'),
 (5, '2131312321', NULL, 79, 85, 80, 4, 'Rini', NULL, '1998-06-16', NULL, '- Pilih -', NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:45', '2019-12-15 03:30:31', 'MENANTU'),
-(18, '155156656', NULL, 79, 85, 80, NULL, 'Surya', NULL, '1990-07-03', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'Pindah', '2019-12-22 01:39:42', '2019-12-22 01:40:21', NULL);
+(18, '155156656', NULL, 79, 85, 80, NULL, 'Surya', NULL, '1990-07-03', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'Pindah', '2019-12-22 01:39:42', '2019-12-22 01:40:21', NULL),
+(19, '2454533232', '21412124223432', 79, 85, 80, 4, 'surti', NULL, '2019-12-06', 'Laki-laki', 'ISLAM', NULL, NULL, NULL, 'TIDAK TAHU', 'Pendatang', '2019-12-22 03:02:23', '2019-12-22 03:09:21', 'ANAK');
 
 -- --------------------------------------------------------
 
@@ -293,11 +301,11 @@ CREATE TABLE `surat` (
 --
 
 CREATE TABLE `users` (
-  `user_id` int(10) UNSIGNED NOT NULL,
-  `user_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_email_verified_at` timestamp NULL DEFAULT NULL,
-  `user_password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_picture` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_role_id` int(10) UNSIGNED DEFAULT NULL,
   `api_token` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -306,6 +314,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `user_picture`, `user_role_id`, `api_token`, `remember_token`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'sahrun', 'sahrun@admin', NULL, '$2y$10$YqplSwN26t9CexXRIuvBM.kEV/ElvTITBYUEFrEzAWYZfABrUKC7q', NULL, NULL, NULL, NULL, NULL, '2019-12-22 09:46:19', '2019-12-22 09:46:19');
 
 -- --------------------------------------------------------
 
@@ -458,7 +473,7 @@ ALTER TABLE `surat`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`),
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_api_token_unique` (`api_token`),
   ADD KEY `users_user_role_id_foreign` (`user_role_id`);
 
@@ -489,7 +504,7 @@ ALTER TABLE `identitas_desa`
 -- AUTO_INCREMENT for table `kelahiran`
 --
 ALTER TABLE `kelahiran`
-  MODIFY `kelahiran_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `kelahiran_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `keluarga`
@@ -519,7 +534,7 @@ ALTER TABLE `pendatang`
 -- AUTO_INCREMENT for table `penduduk`
 --
 ALTER TABLE `penduduk`
-  MODIFY `penduduk_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `penduduk_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `penduduk_pindah`
@@ -543,7 +558,7 @@ ALTER TABLE `surat`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_role`

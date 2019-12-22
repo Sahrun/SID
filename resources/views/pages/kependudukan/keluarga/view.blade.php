@@ -115,7 +115,7 @@
                     <label class="col-md-3 label-control"><b>Anggota Keluarga</b></label>
                     <div class="col-md-9 p-0">
                             <select class="form-control" name="penduduk_id"> 
-                                    <option> - Pilih -</option>
+                                    <option value=""> - Pilih -</option>
                                     @foreach ($penduduk_baru as $item)
                                     <option value="{{$item->penduduk_id}}">{{$item->full_name}}</option>
                                     @endforeach;

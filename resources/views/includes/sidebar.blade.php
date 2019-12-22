@@ -84,7 +84,7 @@
               </a>
             </li>
             <li>
-            <a href="{{url('kependudukan/pindah')}}">
+            <a href="{{url('kependudukan/penduduk-pindah')}}">
                 <span class="sub-item">Data Penduduk Pindah</span>
               </a>
             </li>
@@ -123,15 +123,15 @@
         </div>
       </li>
       <li class="nav-item ">
-        <a href="user/user.html">
-          <i class="fas fa-user"></i>
-          <p>User</p>
+      <a href="{{url('/staff')}}">
+          <i class="fas fa-users"></i>
+          <p>Staff Desa</p>
         </a>
       </li>
       <li class="nav-item ">
-        <a href="staff/staff_desa.html">
-          <i class="fas fa-users"></i>
-          <p>Staff Desa</p>
+        <a href="{{url('/user')}}">
+          <i class="fas fa-user"></i>
+          <p>Users</p>
         </a>
       </li>
       <li class="nav-item">
@@ -172,14 +172,14 @@
       </li>
       <li class="nav-item">
         <a data-toggle="collapse" href="#pengaturan">
-          <i class="fas fa-bars"></i>
+          <i class="fas fa-cog"></i>
           <p>Pengaturan</p>
           <span class="caret"></span>
         </a>
         <div class="collapse" id="pengaturan">
           <ul class="nav nav-collapse">
              <li>
-              <a href="pengaturan/lap_pindah.html">
+              <a href="{{url('/pengaturan/identitas')}}">
                 <span class="sub-item">Identitas Desa</span>
               </a>
             </li>

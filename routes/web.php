@@ -67,27 +67,75 @@ Route::middleware(['auth'])->group(function () {
     // End Penduduk
 
     // Kelahiran
-    Route::get('/kependudukan/kelahiran', 'KelahiranController@index');
+    Route::get('/kependudukan/kelahiran','KelahiranController@index');
+    Route::get('/kependudukan/kelahiran/add','KelahiranController@create');
+    Route::post('/kependudukan/kelahiran/create','KelahiranController@store');
+    Route::get('/kependudukan/kelahiran/edit/{id}','KelahiranController@edit');
+    Route::post('/kependudukan/kelahiran/update/{id}','KelahiranController@update');
+    Route::get('/kependudukan/kelahiran/view/{id}','KelahiranController@show');
+    Route::get('/kependudukan/kelahiran/delete/{id}','KelahiranController@destroy');
     // End Kelahiran
+
+    // Pendatang
+    Route::get('/kependudukan/pendatang','PendatangController@index');
+    Route::get('/kependudukan/pendatang/add','PendatangController@create');
+    Route::post('/kependudukan/pendatang/create','PendatangController@store');
+    Route::get('/kependudukan/pendatang/edit/{id}','PendatangController@edit');
+    Route::post('kependudukan/pendatang/update/{id}','PendatangController@update');
+    Route::get('/kependudukan/pendatang/delete/{id}', 'PendatangController@destroy');
+    Route::get('/kependudukan/pendatang/view/{id}', 'PendatangController@show');
+    // End Pendatang
+
+    // Penduduk Pindah
+    Route::get('/kependudukan/penduduk-pindah','PendudukPindahController@index');
+    Route::get('/kependudukan/penduduk-pindah/add','PendudukPindahController@create');
+    Route::post('/kependudukan/penduduk-pindah/create','PendudukPindahController@store');
+    Route::get('/kependudukan/penduduk-pindah/edit/{id}', 'PendudukPindahController@edit');
+    Route::post('/kependudukan/penduduk-pindah/update/{id}', 'PendudukPindahController@update');
+    Route::get('/kependudukan/penduduk-pindah/delete/{id}', 'PendudukPindahController@destroy');
+    Route::get('kependudukan/penduduk-pindah/get-data-penduduk/{id}','PendudukPindahController@get_data_penduduk');
+    // End Penduduk Pindah
+
+    // Kematian
+    Route::get('/kependudukan/kematian','KematianController@index');
+    Route::get('/kependudukan/kematian/add','KematianController@create');
+    Route::post('/kependudukan/kematian/create','KematianController@store');
+    Route::get('/kependudukan/kematian/get-data-penduduk/{id}','KematianController@get_data_penduduk');
+    Route::get('/kependudukan/kematian/edit/{id}','KematianController@edit');
+    Route::post('kependudukan/kematian/update/{id}','KematianController@update');
+    Route::get('/kependudukan/kematian/delete/{id}', 'KematianController@destroy');
+    // End Kematian
+
+    // Identitas Desa
+    Route::get('/pengaturan/identitas','IdentitasController@index');
+    Route::post('/pengaturan/identitas/update','IdentitasController@update');
+    // End Indetitas Desa
+
+    // Staff
+    Route::get('/staff','StaffController@index');
+    Route::get('/staff/add','StaffController@create');
+    Route::post('/staff/create','StaffController@store');
+    Route::get('/staff/edit/{id}', 'StaffController@edit');
+    Route::post('/staff/update/{id}', 'StaffController@update');
+    Route::get('/staff/delete/{id}', 'StaffController@destroy');
+    // End Staff
+    
+    // Surat
+    Route::get('/surat/format-surat','SuratController@format_surat');
+    Route::post('/surat/upload', 'SuratController@upload');
+    Route::get('/surat/download/{file}','SuratController@download');
+    // End Surat
+    
+
+
 });
 
-// Kematian
-// End Kematian
-
-// Pendatang
-// P
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-<<<<<<< HEAD
-// Surat
-Route::get('/surat/format-surat','SuratController@format_surat');
-Route::post('/surat/upload', 'SuratController@upload');
-Route::get('/surat/download/{file}','SuratController@download');
-// End Surat
-=======
 Route::get('/home', 'HomeController@index')->name('home');
->>>>>>> 6a195d750510c5ee8ea67c268adb5099140603f4
+
+

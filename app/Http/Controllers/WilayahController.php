@@ -20,14 +20,23 @@ class WilayahController extends Controller
         "rt" => "3"
     );
 
-    public function index()
+    public function index(Request $request)
     {
-        $wilayah =  DB::table('wilayah')->leftjoin('penduduk', 'wilayah.penduduk_id', '=', 'penduduk.penduduk_id')
-                    ->select('wilayah.wilayah_id', 'penduduk.full_name', 'wilayah.wilayah_nama')
-                    ->where('wilayah_part', $this->part['dusun'])
-                    ->get();
+        $wilayah = new Wilayah;
+        $wilayah = $wilayah->newQuery();
+         
+        $wilayah =  $wilayah->leftjoin('penduduk', 'wilayah.penduduk_id', '=', 'penduduk.penduduk_id')
+                    ->where('wilayah_part', $this->part['dusun']);
 
-        return view('pages.kependudukan.wilayah.wilayah',['wilayah'=>$wilayah]); 
+        if(isset($request->search))
+        {
+          $wilayah->where('wilayah_nama','like',''.$request->search.'%');
+          $wilayah->orWhere('full_name', 'like',''.$request->search.'%');
+        }
+
+        $result = $wilayah->get();
+       
+       return view('pages.kependudukan.wilayah.index',['wilayah'=>$result]); 
     }
 
     /**
