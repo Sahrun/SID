@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitdb4565924413636d086d889d3d1f3eca
+class ComposerStaticInitc94682d538db9d4205ed5c8d31fa0b01
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -99,6 +99,7 @@ class ComposerStaticInitdb4565924413636d086d889d3d1f3eca
         'L' => 
         array (
             'League\\Flysystem\\' => 17,
+            'Laravel\\Ui\\' => 11,
             'Laravel\\Tinker\\' => 15,
         ),
         'J' => 
@@ -304,6 +305,10 @@ class ComposerStaticInitdb4565924413636d086d889d3d1f3eca
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
         ),
+        'Laravel\\Ui\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/ui/src',
+        ),
         'Laravel\\Tinker\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
@@ -445,7 +450,7 @@ class ComposerStaticInitdb4565924413636d086d889d3d1f3eca
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
-        'App\\Staff' => __DIR__ . '/../..' . '/app/Staff.php',
+        'App\\Staff' => __DIR__ . '/../..' . '/app/Http/Controllers/Staff.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\Wilayah' => __DIR__ . '/../..' . '/app/Wilayah.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
@@ -2104,6 +2109,13 @@ class ComposerStaticInitdb4565924413636d086d889d3d1f3eca
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
         'Laravel\\Tinker\\TinkerServiceProvider' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerServiceProvider.php',
+        'Laravel\\Ui\\AuthCommand' => __DIR__ . '/..' . '/laravel/ui/src/AuthCommand.php',
+        'Laravel\\Ui\\Presets\\Bootstrap' => __DIR__ . '/..' . '/laravel/ui/src/Presets/Bootstrap.php',
+        'Laravel\\Ui\\Presets\\Preset' => __DIR__ . '/..' . '/laravel/ui/src/Presets/Preset.php',
+        'Laravel\\Ui\\Presets\\React' => __DIR__ . '/..' . '/laravel/ui/src/Presets/React.php',
+        'Laravel\\Ui\\Presets\\Vue' => __DIR__ . '/..' . '/laravel/ui/src/Presets/Vue.php',
+        'Laravel\\Ui\\UiCommand' => __DIR__ . '/..' . '/laravel/ui/src/UiCommand.php',
+        'Laravel\\Ui\\UiServiceProvider' => __DIR__ . '/..' . '/laravel/ui/src/UiServiceProvider.php',
         'League\\Flysystem\\AdapterInterface' => __DIR__ . '/..' . '/league/flysystem/src/AdapterInterface.php',
         'League\\Flysystem\\Adapter\\AbstractAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractAdapter.php',
         'League\\Flysystem\\Adapter\\AbstractFtpAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractFtpAdapter.php',
@@ -4298,10 +4310,10 @@ class ComposerStaticInitdb4565924413636d086d889d3d1f3eca
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitdb4565924413636d086d889d3d1f3eca::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitdb4565924413636d086d889d3d1f3eca::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitdb4565924413636d086d889d3d1f3eca::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitdb4565924413636d086d889d3d1f3eca::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc94682d538db9d4205ed5c8d31fa0b01::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc94682d538db9d4205ed5c8d31fa0b01::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc94682d538db9d4205ed5c8d31fa0b01::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitc94682d538db9d4205ed5c8d31fa0b01::$classMap;
 
         }, null, ClassLoader::class);
     }

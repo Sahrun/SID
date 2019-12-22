@@ -10,16 +10,17 @@ class Kelahiran extends Model
     protected $primaryKey ='kelahiran_id';
     protected $timestam = true;
     Protected $fillable = [
-        "penduduk_id",
-        "id_penduduk_ibu",
-        "id_penduduk_ayah",
+        "nama_anak",
+        "nik_ibu",
+        "nik_ayah",
+        "dob",
+        "pob",
         "tob",
         "hob",
         "kondisi_lahir",
         "berat",
-        "panjang",
-        "anak_ke",
-        "jenis_kelahiran",
+        "tinggi",
+        "keluarga_id",
         "created_at",
         "updated_at"
     ];

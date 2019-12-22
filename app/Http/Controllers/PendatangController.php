@@ -172,10 +172,11 @@ class PendatangController extends Controller
      */
     public function destroy($id)
     {
-        $penduduk = new Penduduk;
         $pendatang = Pendatang::find($id);
+        $penduduk = Penduduk::find($pendatang->penduduk_id);
         DB::transaction(function () use ($penduduk,$pendatang) {
-            $penduduk->deletePendudukWithRelasion($pendatang->penduduk_id);
+             $pendatang->delete();
+             $penduduk->delete();
         });
         return redirect()->back();
     }

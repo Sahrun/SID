@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Wilayah;
-use Illuminate\Support\Facades\DB;
 use App\Penduduk;
 use DateTime;
 
@@ -17,7 +16,7 @@ class PendudukController extends Controller
      */
     public function index()
     {
-        $penduduk = Penduduk::where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
+        $penduduk = Penduduk::all();
         return view('pages.kependudukan.penduduk.index',['penduduk' => $penduduk]);
     }
 
@@ -134,11 +133,11 @@ class PendudukController extends Controller
      */
     public function destroy($id)
     {
-            $penduduk = new Penduduk;
-            DB::transaction(function () use ($penduduk,$id) {
-                $penduduk->deletePendudukWithRelasion($id);
-            });
-            return redirect()->back();
+        Wilayah::where('penduduk_id',$id)->update(['penduduk_id' => null]);
+
+        $penduduk = Penduduk::find($id);
+        $penduduk->delete();
+        return redirect()->back();
     }
     public function get_wilayah($id,$part)
     {
@@ -158,4 +157,3 @@ class PendudukController extends Controller
        return $dusun;
     }
 }
-
