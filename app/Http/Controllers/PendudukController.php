@@ -16,7 +16,7 @@ class PendudukController extends Controller
      */
     public function index()
     {
-        $penduduk = Penduduk::where('status_kependudukan','!=',"Meninggal")->orWhereNull('status_kependudukan')->get();
+        $penduduk = Penduduk::where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
         return view('pages.kependudukan.penduduk.index',['penduduk' => $penduduk]);
     }
 
@@ -157,3 +157,4 @@ class PendudukController extends Controller
        return $dusun;
     }
 }
+

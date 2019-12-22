@@ -1,209 +1,193 @@
-@extends('layouts.default') 
-@section('content')
-<div class="content">
-    <div class="page-inner">
-        <div class="page-header">
-            <h4 class="page-title">Data Penduduk</h4>
+@extends('layouts.default')
+    @section('content')
+    <div class="content">
+        <div class="page-inner">
+            <div class="page-header">
+                <h4 class="page-title">Kematian</h4>
 
-        </div>
-        <div class="row">
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title">Daftar Penduduk</h4>
+                               
+                            </div>
+                        </div>
+                        <div class="card-body">
 
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Tambah Data Penduduk</div>
-                    </div>
-                    <div class="card-body">
-                        <form role="form" method="post"  action="{{url('kependudukan/penduduk/create')}}" >
-                            @csrf
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>NIK</b></label>
-								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="nik" placeholder="NIK">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Nama Lengkap</b></label>
-								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="full_name" placeholder="Nama lengkap">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Wilayah</b></label>
-								<div class="col-md-9 p-0">
-                                   <b>Dusun :  </b>
-                                    <select class="form-control" name="wilayah_dusun" onchange="GetRW(this)"> 
-                                        <option> - Pilih -</option>
-                                        @foreach ($dusun as $item)
-                                        <option value="{{$item->wilayah_id}}">{{$item->wilayah_nama}}</option>
-                                        @endforeach;
-                                    </select>
-                                    <b> RW  : </b>
-                                    <select class="form-control" name="wilayah_rw" id="wilayah_rw"  onchange="GetRT(this)"> 
-                                        <option> - Pilih -</option>
-                                    </select>
-                                    <b> RT : </b>
-                                    <select class="form-control" name="wilayah_rt" id="wilayah_rt"> 
-                                        <option> - Pilih -</option>
-                                    </select>
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>No Kartu Keluarga</b></label>
-								<div class="col-md-9 p-0">
-                                     <input type="text" class="form-control input-full" name="no_kk" placeholder="No kartu keluarga">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Tempat Lahir</b></label>
-								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="tempat_lahir" placeholder="Tempat lahir">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Tanggal Lahir</b></label>
-								<div class="col-md-9 p-0">
-									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Jenis Kelamin</b></label>
-								<div class="col-md-9 p-0">
-                                    <b>Laki - Laki </b><input type="radio" class="form-control" name="jekel" value="Laki-laki">
-                                    <b>Perempuan </b><input type="radio" class="form-control" name="jekel" value="Perempuan">
-                                 </div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Agama</b></label>
-								<div class="col-md-9 p-0">
-                                    <select class="form-control" name="agama"> 
-                                        <option value=""> - Pilih -</option>
-                                        <option value="ISLAM">ISLAM</option>
-										<option value="KRISTEN">KRISTEN</option>
-										<option value="KATHOLIK">KATHOLIK</option>
-										<option value="HINDU">HINDU</option>
-										<option value="BUDHA">BUDHA</option>
-										<option value="KHONGHUCU">KHONGHUCU</option>
-										<option value="Kepercayaan Terhadap Tuhan YME / Lainnya">Kepercayaan Terhadap Tuhan YME / Lainnya</option>
-                                    </select>
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Pendidikan</b></label>
-								<div class="col-md-9 p-0">
-                                    <select name="pendidikan" class="form-control">
-                                        <option value="">- Pilih -</option>
-                                        <option value="TIDAK / BELUM SEKOLAH">TIDAK / BELUM SEKOLAH</option>
-                                        <option value="BELUM TAMAT SD/SEDERAJAT">BELUM TAMAT SD/SEDERAJAT</option>
-                                        <option value="TAMAT SD / SEDERAJAT">TAMAT SD / SEDERAJAT</option>
-                                        <option value="SLTP/SEDERAJAT">SLTP/SEDERAJAT</option>
-                                        <option value="SLTA / SEDERAJAT">SLTA / SEDERAJAT</option>
-                                        <option value="DIPLOMA I / II">DIPLOMA I / II</option>
-                                        <option value="AKADEMI/ DIPLOMA III/S. MUDA">AKADEMI/ DIPLOMA III/S. MUDA</option>
-                                        <option value="DIPLOMA IV/ STRATA I">DIPLOMA IV/ STRATA I</option>
-                                        <option value="STRATA II9">STRATA II</option>
-                                        <option value="STRATA III">STRATA III</option>
-                                    </select>
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Pekerjaan</b></label>
-								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="pekerjaan" placeholder="Pekerjaan">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Status Perkawinan</b></label>
-								<div class="col-md-9 p-0">
-                                    <select name="status_perkawinan" class="form-control">
-                                        <option value="">- Pilih -</option>
-                                        <option value="BELUM KAWIN">BELUM KAWIN</option>
-                                        <option value="KAWIN">KAWIN</option>
-                                        <option value="CERAI HIDUP">CERAI HIDUP</option>
-                                        <option value="CERAI MATI">CERAI MATI</option>
-                                    </select>
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Status Kependudukan</b></label>
-								<div class="col-md-9 p-0"> 
-                                    <select name="status_kependudukan" class="form-control">
-                                        <option value="">- Pilih -</option>
-                                        <option value="Tetap">TETAP</option>
-                                        <option value="Pendatang">PENDATANG</option>
-                                        <option value="Tidak tetap">TIDAK TETAP</option>
-                                    </select>
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Golongan Darah</b></label>
-								<div class="col-md-9 p-0">
-                                <select name="golongan_darah" class="form-control form-control-sm">
-                                    <option value="">- Pilih -</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="AB">AB</option>
-                                    <option value="O">O</option>
-                                    <option value="A+">A+</option>
-                                    <option value="A-">A-</option>
-                                    <option value="B+">B+</option>
-                                    <option value="B-">B-</option>
-                                    <option value="AB+">AB+</option>
-                                    <option value="AB-">AB-</option>
-                                    <option value="O+">O+</option>
-                                    <option value="O-">O-</option>
-                                    <option value="TIDAK TAHU">TIDAK TAHU</option>
-                                </select>
-								</div>
-							</div>
-                            <div class="form-group">    
-                                <div class="col-md-3 col-md-offset-9">
-                                    <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
-                                    <a href="{{url('kependudukan/penduduk/')}}" class="btn btn-danger">Kembali</a>
+                            <div class="table-responsive">
+                                <div id="add-row_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="add-row_length">
+                                                <label>Show
+                                                    <select name="add-row_length" aria-controls="add-row" class="form-control form-control-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                        <option value="100">100</option>
+                                                    </select> entries</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div id="add-row_filter" class="dataTables_filter">
+                                                <label>Search:
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="add-row">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
+                                                <thead>
+                                                    <tr role="row">
+                                                    <th  tabindex="0" aria-controls="add-row" rowspan="1" colspan="1">No</th>
+                                                        <th>NIK</th>
+                                                        <th>Nama</th>
+                                                        <th>Usia</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php $no =1 ?>
+                                                    @foreach ($penduduk as $item)
+                                                        <tr role="row" class="{{$no%2?'odd':'even'}}">
+                                                            <td>{{$no++}}</td>
+                                                            <td>{{$item->nik}}</td>
+                                                            <td>{{$item->full_name}}</td>
+                                                            <td>{{date_diff(date_create($item->tanggal_lahir), date_create('now'))->y}}</td>
+                                                            <td>
+                                                                <div class="form-button-action">
+                                                                    <a class="btn btn-link btn-danger btn-lg" title="Pindah" onclick="open_form({{$item->penduduk_id}})">
+                                                                        <i class="fa fa-plane"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="add-row_info" role="status" aria-live="polite">Showing 1 to 5 of 10 entries
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="add-row_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item previous disabled" id="add-row_previous"><a href="#" aria-controls="add-row" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                                                    <li class="paginate_button page-item active"><a href="#" aria-controls="add-row" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                                    <li class="paginate_button page-item "><a href="#" aria-controls="add-row" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                                    <li class="paginate_button page-item next" id="add-row_next"><a href="#" aria-controls="add-row" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-12" style="text-align:right">
+                        <a href="{{url('kependudukan/penduduk-pindah')}}" class="btn btn-danger">Kembali</a>
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
+    
+    <!-- Modal -->
+<div class="modal fade" id="form_penduduk_pindah" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" ><b>Penduduk Pindah</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form role="form" method="post"  action="{{url('kependudukan/penduduk-pindah/create/')}}">
+      @csrf
+        <input type="hidden" id="penduduk_id" name="penduduk_id"/>
+        <div class="modal-body">
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control" style="text-align:right;display:block"><b>NIK</b></label>
+                    <div class="col-md-9 p-0">
+                        <label class="col-md-3 label-control" style="text-align:left;display:block" id="nik"></label>
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control" style="text-align:right;display:block"><b>Nama</b></label>
+                    <div class="col-md-9 p-0">
+                        <label class="col-md-3 label-control" style="text-align:left;display:block" id="nama"></label>
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control" style="text-align:right;display:block"><b>Usia</b></label>
+                    <div class="col-md-9 p-0">
+                        <label class="col-md-3 label-control" style="text-align:left;display:block" id="usia"></label>
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control"><b>Tanggal Pindah</b></label>
+                    <div class="col-md-9 p-0">
+                        <input type="date" class="form-control" name="tgl_pindah" id="tgl_pindah" placeholder="Tanggal Pindah" required>
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control"><b>Alasan Pindah</b></label>
+                    <div class="col-md-9 p-0">
+                            <select name="alasan_pindah" class="form-control" required>
+                                <option value="">- Pilih -</option>
+                                <option value="Pekerjaan">Pekerjaan</option>
+                                <option value="Transmigrasi">Transmigrasi</option>
+                                <option value="Lainnya">Lainnya</option>
+                             </select>
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control"><b>Alamat Pindah</b></label>
+                    <div class="col-md-9 p-0">
+                        <textarea name="alamat_pindah" class="form-control input-full" required></textarea>
+				    </div>
+				</div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
-<script>
-   var url = "{{url('kependudukan/penduduk/')}}";
-   function GetRW(evnt){
-        $.get(url+"/get_wilayah/"+evnt.value+"/rw", function(data, status){
-           
-            $('#wilayah_rw')
-            .find('option')
-            .remove()
-            .end()
-            .append('<option>- Pilih -</option>');
+    <script>
+      var url = "{{url('kependudukan/penduduk-pindah/')}}";
+      function open_form(id){
 
-            for(i=0;i < data.length;i++)
-                {   
-                    $('#wilayah_rw').append(`<option value="${data[i].wilayah_id}"> 
-                                            ${data[i].wilayah_nama} 
-                                        </option>`); 
-                }
-        
-        });
-   }
-   function GetRT(evnt){
-        $.get(url+"/get_wilayah/"+evnt.value+"/rt", function(data, status){
-            $('#wilayah_rt')
-            .find('option')
-            .remove()
-            .end()
-            .append('<option>- Pilih -</option>');
-            for(i=0;i < data.length;i++)
-                {   
-                    $('#wilayah_rt').append(`<option value="${data[i].wilayah_id}"> 
-                                            ${data[i].wilayah_nama} 
-                                        </option>`); 
-                }
-        
-        });
-   }
-</script>
-@stop
+                $('#nik').html(null);
+                $('#nama').html(null);
+                $('#usia').html(null);
+                $('#penduduk_id').val(null);
+                $('#tgl_pindah').val(null);
+                $('#alasan_pindah').val(null);
+                $('#alamat_pindah').val(null);
+
+                $.get(url+"/get-data-penduduk/"+id, function(data, status){
+                    if(data !== null){
+                        $('#nik').html(data.nik);
+                        $('#nama').html(data.nama);
+                        $('#usia').html(data.usia);
+                        $('#penduduk_id').val(data.penduduk_id);
+                        $("#form_penduduk_pindah").modal('show');
+                    }else{
+                        alert("Data penduduk tidak di temukan");
+                    }
+                });
+        }
+    </script>
+    @stop

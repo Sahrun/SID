@@ -19,7 +19,7 @@ class KelahiranController extends Controller
     {
         $kelahiran = Kelahiran::leftjoin('penduduk', 'penduduk.penduduk_id','=','kelahiran.penduduk_id')
         ->leftjoin('keluarga', 'penduduk.keluarga_id', '=', 'keluarga.keluarga_id')
-        ->select('kelahiran.*', 'keluarga.no_kk','penduduk.nik','penduduk.tanggal_lahir','penduduk.full_name','penduduk.jekel')->get();
+        ->get();
         return view('pages.kependudukan.kelahiran.index',['kelahiran' => $kelahiran]);
     }
 
@@ -30,10 +30,10 @@ class KelahiranController extends Controller
      */
     public function create()
     {
-        $dusun =  Wilayah::where('wilayah_part',1)->get();
+       // $dusun =  Wilayah::where('wilayah_part',1)->get();
         $penduduk = Penduduk::all();
-        $keluarga = Keluarga::all();
-        return view('pages.kependudukan.kelahiran.form',['dusun'=> $dusun,'penduduk' => $penduduk,'keluarga' => $keluarga]);
+       // $keluarga = Keluarga::all();
+       // return view('pages.kependudukan.kelahiran.form',['dusun'=> $dusun,'penduduk' => $penduduk,'keluarga' => $keluarga]);
     }
 
     /**
@@ -74,8 +74,8 @@ class KelahiranController extends Controller
 
             // Insert To table Kelahiran
             $kelahiran->penduduk_id = $penduduk->penduduk_id;
-            $kelahiran->nik_ibu = $request->nik_ibu;
-            $kelahiran->nik_ayah = $request->nik_ayah;
+            $kelahiran->id_penduduk_ibu = $request->id_penduduk_ibu;
+            $kelahiran->id_penduduk_ayah = $request->id_penduduk_ayah;
             $kelahiran->tob = $request->tob;
             $kelahiran->hob = $request->hob;
             $kelahiran->kondisi_lahir = $request->kondisi_lahir;
@@ -103,12 +103,11 @@ class KelahiranController extends Controller
         ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
         ->join('wilayah as  rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
         ->join('wilayah as  rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
-        ->join('penduduk as  ibu', 'penduduk.penduduk_id', '=', 'kelahiran.nik_ibu')
-        ->join('penduduk as  ayah', 'penduduk.penduduk_id', '=', 'kelahiran.nik_ayah')
-        ->select('penduduk.*','kelahiran.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT','ibu.nik as nik_ibu', 'ayah.nik as nik_ayah')
+        ->leftjoin('penduduk as ibu','ibu.penduduk_id','=','kelahiran.id_penduduk_ibu')
+        ->leftjoin('penduduk as ayah','ibu.penduduk_id','=','kelahiran.id_penduduk_ayah')
+        ->select('penduduk.*','kelahiran.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT','ibu.nik as nik_ibu','ayah.nik as nik_ayah')
         ->where('kelahiran.kelahiran_id',$id)->first();
-       dd($kelahiran);
-       // return view('pages.kependudukan.kelahiran.view',['kelahiran' => $kelahiran ]);
+       return view('pages.kependudukan.kelahiran.view',['kelahiran' => $kelahiran ]);
     }
 
     /**
@@ -142,6 +141,13 @@ class KelahiranController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kelahiran = Kelahiran::find($id);
+        $penduduk = new Penduduk;
+        DB::transaction(function () use ($penduduk,$kelahiran) {
+            $kelahiran->delete();
+            $penduduk->deletePendudukWithRelasion($kelahiran->penduduk_id);
+        });
+
+        return redirect()->back();
     }
 }
