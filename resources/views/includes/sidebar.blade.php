@@ -105,7 +105,7 @@
         <div class="collapse" id="surat">
           <ul class="nav nav-collapse">
             <li>
-              <a href="surat/format_surat.html">
+              <a href="{{url('surat/format-surat')}}">
                 <span class="sub-item">Format Surat</span>
               </a>
             </li>

@@ -158,7 +158,7 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Berat Lahir (Kg)</b></label>
 								<div class="col-md-9 p-0">
-                                    <input type="number" class="form-control" name="berat" placeholder="Berat" value="{{$kelahiran->berat}}" required>
+                                    <input type="number" step="0.25" class="form-control" name="berat" placeholder="Berat" value="{{$kelahiran->berat}}" required>
                                  </div>
 							</div>
                             <div class="form-group form-inline">

@@ -122,5 +122,7 @@ Route::get('/staff/delete/{id}', 'StaffController@destroy');
 
 
 // Surat
-Route::get('/surat/daftar-surat','SuratController@daftar_surat');
+Route::get('/surat/format-surat','SuratController@format_surat');
+Route::post('/surat/upload', 'SuratController@upload');
+Route::get('/surat/download/{file}','SuratController@download');
 // End Surat

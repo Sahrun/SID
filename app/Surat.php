@@ -20,31 +20,41 @@ class Surat extends Model
                 "updated_at"
     ];
 
-    public $master_surat = array(
+    public $format_surat = array(
             array(
                 "kode" => "S01",
                 "title" => "Surat Keterangan Kelahiran",
-                "template" => ""
+                "template" => "surat_ket_kelahiran.rtf"
             ),
             array(
                 "kode" => "S02",
                 "title" => "Surat Keterangan Kematian",
-                "template" => ""
+                "template" => "surat_ket_kematian.rtf"
             ),
             array(
                 "kode" => "S03",
                 "title" => "Surat Keterangan Kurang Mampu",
-                "template" => ""
+                "template" => "surat_ket_kurang_mampu.rtf"
             ),
             array(
                 "kode" => "S04",
                 "title" => "Surat Pengantar ",
-                "template" => ""
+                "template" => "surat_ket_pengantar.rtf"
             ),
             array(
                 "kode" => "S05",
                 "title" => "Surat Keterangan Pindah Penduduk",
-                "template" => ""
+                "template" => "surat_ket_pindah_penduduk.rtf"
             )
     );
+
+    public function getNameFile($kode)
+    {
+        foreach ($this->format_surat as $key => $val) {
+            if ($val['kode'] === $kode) {
+                return $val['template'];
+            }
+        }
+        return null;
+    }
 }

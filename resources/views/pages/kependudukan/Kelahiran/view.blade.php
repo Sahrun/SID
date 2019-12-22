@@ -138,7 +138,7 @@
 							</div>
                             <div class="form-group">    
                                 <div class="col-md-3 col-md-offset-9">
-                                    <a href="{{url('kependudukan/pendatang')}}" class="btn btn-danger">Kembali</a>
+                                    <a href="{{url('kependudukan/kelahiran')}}" class="btn btn-danger">Kembali</a>
                                 </div>
                             </div>
                     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Surat;
 
 class SuratController extends Controller
 {
@@ -82,4 +83,26 @@ class SuratController extends Controller
     {
         //
     }
+
+    public function format_surat()
+    {
+        $surat = new Surat;
+        $result =   $surat->format_surat;
+        return View("pages.surat.format_surat",['surat' => $result]);
+    }
+    public function download($file)
+    {
+        return response()->download(public_path('master_surat/'.$file));
+    }
+    public function upload(Request $request)
+    {
+        $surat = new Surat;
+
+		$file = $request->file('file');
+        
+        $to_folder = 'master_surat';
+        $file->move($to_folder,$surat->getnamefile($request->kode));
+        return redirect()->back();
+    }
+
 }
