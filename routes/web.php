@@ -119,3 +119,8 @@ Route::get('/staff/edit/{id}', 'StaffController@edit');
 Route::post('/staff/update/{id}', 'StaffController@update');
 Route::get('/staff/delete/{id}', 'StaffController@destroy');
 // End Staff
+
+
+// Surat
+Route::get('/surat/daftar-surat','SuratController@daftar_surat');
+// End Surat

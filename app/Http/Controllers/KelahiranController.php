@@ -30,10 +30,10 @@ class KelahiranController extends Controller
      */
     public function create()
     {
-       // $dusun =  Wilayah::where('wilayah_part',1)->get();
+       $dusun =  Wilayah::where('wilayah_part',1)->get();
         $penduduk = Penduduk::all();
-       // $keluarga = Keluarga::all();
-       // return view('pages.kependudukan.kelahiran.form',['dusun'=> $dusun,'penduduk' => $penduduk,'keluarga' => $keluarga]);
+       $keluarga = Keluarga::all();
+       return view('pages.kependudukan.kelahiran.form',['dusun'=> $dusun,'penduduk' => $penduduk,'keluarga' => $keluarga]);
     }
 
     /**
