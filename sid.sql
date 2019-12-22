@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2019 at 03:03 PM
+-- Generation Time: Dec 22, 2019 at 07:53 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -47,8 +47,8 @@ CREATE TABLE `kelahiran` (
   `kelahiran_id` int(10) UNSIGNED NOT NULL,
   `penduduk_id` int(10) UNSIGNED NOT NULL,
   `anak_ke` int(11) DEFAULT NULL,
-  `nik_ibu` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nik_ayah` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_penduduk_ibu` int(10) UNSIGNED DEFAULT NULL,
+  `id_penduduk_ayah` int(10) UNSIGNED DEFAULT NULL,
   `tob` time DEFAULT NULL,
   `hob` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `kondisi_lahir` enum('normal','cacat') COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -63,9 +63,8 @@ CREATE TABLE `kelahiran` (
 -- Dumping data for table `kelahiran`
 --
 
-INSERT INTO `kelahiran` (`kelahiran_id`, `penduduk_id`, `anak_ke`, `nik_ibu`, `nik_ayah`, `tob`, `hob`, `kondisi_lahir`, `berat`, `panjang`, `created_at`, `updated_at`, `jenis_kelahiran`) VALUES
-(1, 12, 1, '3306060208956666', '2131312321', '01:01:00', 'Dockter', 'normal', 13, 40, '2019-12-21 03:09:28', '2019-12-21 03:09:28', 'normal'),
-(2, 13, 3, '3306060208956666', '2131312321', '01:01:00', 'Dockter', 'normal', 34, 40, '2019-12-21 03:12:53', '2019-12-21 03:12:53', 'normal');
+INSERT INTO `kelahiran` (`kelahiran_id`, `penduduk_id`, `anak_ke`, `id_penduduk_ibu`, `id_penduduk_ayah`, `tob`, `hob`, `kondisi_lahir`, `berat`, `panjang`, `created_at`, `updated_at`, `jenis_kelahiran`) VALUES
+(2, 13, 3, 4, 4, '01:01:00', 'Dockter', 'normal', 34, 40, '2019-12-21 03:12:53', '2019-12-21 03:12:53', 'normal');
 
 -- --------------------------------------------------------
 
@@ -114,7 +113,7 @@ CREATE TABLE `kematian` (
 --
 
 INSERT INTO `kematian` (`kematian_id`, `tgl_kematian`, `jam_kematian`, `tempat_kematian`, `sebab_kematian`, `penduduk_id`, `created_at`, `updated_at`) VALUES
-(1, '2019-12-26', '12:08:07', 'Rumah', 'Usia Tua', 12, '2019-12-24 17:00:00', '2019-12-20 17:00:00');
+(2, '2019-12-21', '01:04:00', 'Rumah', 'Sakit', 13, '2019-12-20 19:54:28', '2019-12-20 20:39:39');
 
 -- --------------------------------------------------------
 
@@ -167,13 +166,22 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `pendatang` (
   `pendatang_id` int(10) UNSIGNED NOT NULL,
-  `tgl_datang` datetime NOT NULL,
+  `tgl_datang` date NOT NULL,
   `alamat_datang` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alasan_datang` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alasan_datang` enum('Pekerjaan','Transmigrasi','Lainnya') COLLATE utf8mb4_unicode_ci NOT NULL,
   `penduduk_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `pendatang`
+--
+
+INSERT INTO `pendatang` (`pendatang_id`, `tgl_datang`, `alamat_datang`, `alasan_datang`, `penduduk_id`, `created_at`, `updated_at`) VALUES
+(1, '2019-12-21', 'ddsdsdsd', 'Pekerjaan', 14, '2019-12-20 21:27:55', '2019-12-20 22:15:59'),
+(2, '2019-12-13', 'asaaaaaaaaaaaaaaa', 'Transmigrasi', 15, '2019-12-20 21:53:00', '2019-12-20 22:16:07'),
+(3, '2019-12-21', 'sdsfd', 'Pekerjaan', 16, '2019-12-20 21:54:17', '2019-12-20 21:54:17');
 
 -- --------------------------------------------------------
 
@@ -198,7 +206,7 @@ CREATE TABLE `penduduk` (
   `pekerjaan` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_perkawinan` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `golongan_darah` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status_kependudukan` enum('Tetap','Pendatang','Tidak tetap','Mati','Pindah') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status_kependudukan` enum('Tetap','Pendatang','Tidak tetap','Meninggal','Pindah') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `hubungan_keluarga` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -211,8 +219,10 @@ CREATE TABLE `penduduk` (
 INSERT INTO `penduduk` (`penduduk_id`, `nik`, `no_kk`, `wilayah_dusun`, `wilayah_rt`, `wilayah_rw`, `keluarga_id`, `full_name`, `tempat_lahir`, `tanggal_lahir`, `jekel`, `agama`, `pendidikan`, `pekerjaan`, `status_perkawinan`, `golongan_darah`, `status_kependudukan`, `created_at`, `updated_at`, `hubungan_keluarga`) VALUES
 (4, '3306060208956666', NULL, 79, 85, 80, 4, 'Sahrun', NULL, '1995-08-02', NULL, '- Pilih -', NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:17', '2019-12-15 03:45:55', 'KEPALA KELUARGA'),
 (5, '2131312321', NULL, 79, 85, 80, 4, 'Rini', NULL, '1998-06-16', NULL, '- Pilih -', NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:45', '2019-12-15 03:30:31', 'MENANTU'),
-(12, '3343423', '21412124223432', 79, 85, 80, 4, 'asas', 'asasas', '2019-12-27', 'Laki-laki', 'ISLAM', NULL, NULL, NULL, 'AB+', 'Mati', '2019-12-21 03:09:28', '2019-12-21 03:09:28', 'ANAK'),
-(13, '2454533232', '21412124223432', 79, 86, 80, 4, 'Joko', 'asasas', '2019-12-26', 'Laki-laki', 'ISLAM', NULL, NULL, NULL, 'B', NULL, '2019-12-21 03:12:53', '2019-12-21 03:12:53', 'ANAK');
+(13, '2454533232', '21412124223432', 79, 86, 80, 4, 'Joko', 'asasas', '2019-12-26', 'Laki-laki', 'ISLAM', NULL, NULL, NULL, 'B', 'Meninggal', '2019-12-21 03:12:53', '2019-12-21 07:54:28', 'ANAK'),
+(14, '2454533232', '12323', 79, 85, 80, NULL, 'Paijo', 'asasas', '2019-12-20', 'Laki-laki', 'ISLAM', 'TIDAK / BELUM SEKOLAH', 'sass', 'BELUM KAWIN', 'AB-', 'Pendatang', '2019-12-20 21:27:55', '2019-12-20 22:15:59', NULL),
+(15, '111111111111', '444444444444', 79, 85, 80, NULL, 'Sara', 'rewee', '1999-02-02', 'Laki-laki', NULL, 'TIDAK / BELUM SEKOLAH', 'saaaaaa', 'KAWIN', 'A', 'Pendatang', '2019-12-20 21:53:00', '2019-12-20 22:16:07', NULL),
+(16, '2454533232', NULL, 79, 81, 80, NULL, 'asas', NULL, NULL, 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'Pindah', '2019-12-20 21:54:17', '2019-12-21 21:55:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -222,13 +232,20 @@ INSERT INTO `penduduk` (`penduduk_id`, `nik`, `no_kk`, `wilayah_dusun`, `wilayah
 
 CREATE TABLE `penduduk_pindah` (
   `pindah_id` int(10) UNSIGNED NOT NULL,
-  `tgl_pindah` datetime NOT NULL,
+  `tgl_pindah` date NOT NULL,
   `alamat_pindah` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alasan_pindah` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alasan_pindah` enum('Pekerjaan','Transmigrasi','Lainnya') COLLATE utf8mb4_unicode_ci NOT NULL,
   `penduduk_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `penduduk_pindah`
+--
+
+INSERT INTO `penduduk_pindah` (`pindah_id`, `tgl_pindah`, `alamat_pindah`, `alasan_pindah`, `penduduk_id`, `created_at`, `updated_at`) VALUES
+(3, '2019-12-22', 'teddd', 'Transmigrasi', 16, '2019-12-21 21:55:50', '2019-12-21 22:18:52');
 
 -- --------------------------------------------------------
 
@@ -479,7 +496,7 @@ ALTER TABLE `keluarga`
 -- AUTO_INCREMENT for table `kematian`
 --
 ALTER TABLE `kematian`
-  MODIFY `kematian_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `kematian_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -491,19 +508,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pendatang`
 --
 ALTER TABLE `pendatang`
-  MODIFY `pendatang_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `pendatang_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `penduduk`
 --
 ALTER TABLE `penduduk`
-  MODIFY `penduduk_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `penduduk_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `penduduk_pindah`
 --
 ALTER TABLE `penduduk_pindah`
-  MODIFY `pindah_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `pindah_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `staff`
