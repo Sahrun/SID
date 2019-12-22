@@ -71,7 +71,7 @@ Route::get('/kependudukan/kelahiran','KelahiranController@index');
 Route::get('/kependudukan/kelahiran/add','KelahiranController@create');
 Route::post('/kependudukan/kelahiran/create','KelahiranController@store');
 Route::get('/kependudukan/kelahiran/edit/{id}','KelahiranController@edit');
-Route::get('/kependudukan/kelahiran/update/{id}','KelahiranController@update');
+Route::post('/kependudukan/kelahiran/update/{id}','KelahiranController@update');
 Route::get('/kependudukan/kelahiran/view/{id}','KelahiranController@show');
 Route::get('/kependudukan/kelahiran/delete/{id}','KelahiranController@destroy');
 // End Kelahiran
