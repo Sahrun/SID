@@ -138,7 +138,42 @@ class KelahiranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kelahiran = Kelahiran::find($id);
+        $penduduk = Penduduk::find($kelahiran->penduduk_id);
+        
+        DB::transaction(function () use ($penduduk,$kelahiran,$request) {
+
+            $penduduk->nik  = $request->nik;
+            $penduduk->wilayah_dusun   = $request->wilayah_dusun;
+            $penduduk->wilayah_rw   = $request->wilayah_rw;
+            $penduduk->wilayah_rt   = $request->wilayah_rt;
+            $penduduk->full_name   = $request->full_name;
+            $penduduk->tempat_lahir   = $request->tempat_lahir;
+            $penduduk->tanggal_lahir   = $request->tanggal_lahir;
+            $penduduk->jekel   = $request->jekel;
+            $penduduk->agama   = $request->agama;
+            $penduduk->pendidikan   = $request->pendidikan;
+            $penduduk->pekerjaan   = $request->pekerjaan;
+            $penduduk->status_perkawinan   = $request->status_perkawinan;
+            $penduduk->golongan_darah   = $request->golongan_darah;
+            $penduduk->status_kependudukan   = $request->status_kependudukan;
+            $penduduk->updated_at    = Date("Y-m-d h:i:s");
+            $penduduk->save();
+
+            $kelahiran->tob             = $request->tob;
+            $kelahiran->hob             = $request->hob;
+            $kelahiran->kondisi_lahir   = $request->kondisi_lahir;
+            $kelahiran->anak_ke         = $request->anak_ke;
+            $kelahiran->berat           = $request->berat;
+            $kelahiran->panjang         = $request->panjang;
+            $kelahiran->jenis_kelahiran = $request->jenis_kelahiran;
+            $kelahiran->updated_at      = Date("Y-m-d h:i:s");
+
+            $kelahiran->save();
+
+
+        });
+         return redirect()->action('KelahiranController@index');
     }
 
     /**

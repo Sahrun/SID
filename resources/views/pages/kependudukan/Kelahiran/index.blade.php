@@ -63,8 +63,8 @@
                                                             <td>{{$no++}}</td>
                                                             <td>{{$item->full_name}}</td>
                                                             <td>{{$item->nik}}</td>
-                                                            <td>{{$item->jekel}}</td>
                                                             <td>{{$item->no_kk}}</td>
+                                                            <td>{{$item->jekel}}</td>
                                                             <td>{{$item->tanggal_lahir}}</td>
                                                             <td>{{$item->kondisi_lahir}}</td>
                                                             <td>

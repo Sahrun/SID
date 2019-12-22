@@ -14,7 +14,7 @@
                         <div class="card-title">Edit Data Kelahiran</div>
                     </div>
                     <div class="card-body">
-                        <form role="form" method="post"  action="{{url('kependudukan/pendatang/update/'.$kelahiran->pendatang_id)}}" method="POST" >
+                        <form role="form" method="post"  action="{{url('kependudukan/kelahiran/update/'.$kelahiran->kelahiran_id)}}" method="POST" >
                             @csrf
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>NIK</b></label>
@@ -127,8 +127,52 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Jam Lahir</b></label>
 								<div class="col-md-9 p-0">
-									<input type="time" class="form-control" name="tob" placeholder="Tempat lahir">
+									<input type="time" class="form-control" name="tob" required value="{{$kelahiran->tob}}">
 								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Penolong Kelahiran </b></label>
+								<div class="col-md-9 p-0">
+									<select name="hob" class="form-control" required>
+                                        <option value="">- Pilih -</option>
+                                        <option value="Dokter" {{$kelahiran->hob == "Dokter"?"selected":""}}>Dokter</option>
+                                        <option value="Bidan" {{$kelahiran->hob == "Bidan"?"selected":""}}>Bidan</option>
+                                        <option value="Dukun Beranak" {{$kelahiran->hob == "Dukun Beranak"?"selected":""}}>Dukun Beranak</option>
+                                        <option value="Lainnya" {{$kelahiran->hob == "Lainnya"?"selected":""}}>Lainnya</option>
+                                    </select>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Kondisi Lahir</b></label>
+								<div class="col-md-9 p-0">
+                                    <b>Normal </b><input type="radio" class="form-control" name="kondisi_lahir" value="Normal" required  {{$kelahiran->kondisi_lahir == 'Normal' ? 'checked':''}}>
+                                    <b>Cacat </b><input type="radio" class="form-control" name="kondisi_lahir" value="Cacat" required  {{$kelahiran->kondisi_lahir == 'Cacat' ? 'checked':''}}>
+                                 </div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Anak Ke</b></label>
+								<div class="col-md-9 p-0">
+                                 <input type="number" class="form-control" name="anak_ke" placeholder="Anak ke" value="{{$kelahiran->anak_ke}}" required>                                 
+                                 </div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Berat Lahir (Kg)</b></label>
+								<div class="col-md-9 p-0">
+                                    <input type="number" class="form-control" name="berat" placeholder="Berat" value="{{$kelahiran->berat}}" required>
+                                 </div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Panjang Lahir (Cm)</b></label>
+								<div class="col-md-9 p-0">
+                                    <input type="number" class="form-control" name="panjang" placeholder="Panjang" value="{{$kelahiran->panjang}}" required>
+                                 </div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Jenis Kelahiran</b></label>
+								<div class="col-md-9 p-0">
+                                    <b>Normal </b><input type="radio" class="form-control" name="jenis_kelahiran" value="Normal" checked>
+                                    <b>Caesar </b><input type="radio" class="form-control" name="jenis_kelahiran" value="Caesar">
+                                 </div>
 							</div>
                             <div class="form-group">    
                                 <div class="col-md-3 col-md-offset-9">
