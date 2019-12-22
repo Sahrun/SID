@@ -51,7 +51,7 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>NIK Ibu</b></label>
 								<div class="col-md-9 p-0">
-                                     <select name="nik_ibu" class="form-control">
+                                     <select name="id_penduduk_ibu" class="form-control">
                                         <option value=""> - Pilih -</option>
                                             @foreach ($penduduk as $item)
                                             <option value="{{$item->penduduk_id}}">{{$item->nik}} - {{$item->full_name}}</option>
@@ -62,7 +62,7 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>NIK Ayah</b></label>
 								<div class="col-md-9 p-0">
-                                     <select name="nik_ayah" class="form-control">
+                                     <select name="id_penduduk_ayah" class="form-control">
                                             <option value=""> - Pilih -</option>
                                             @foreach ($penduduk as $item)
                                             <option value="{{$item->penduduk_id}}">{{$item->nik}} - {{$item->full_name}}</option>

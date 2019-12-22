@@ -84,7 +84,7 @@
               </a>
             </li>
             <li>
-            <a href="{{url('kependudukan/pindah')}}">
+            <a href="{{url('kependudukan/penduduk-pindah')}}">
                 <span class="sub-item">Data Penduduk Pindah</span>
               </a>
             </li>

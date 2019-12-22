@@ -11,8 +11,8 @@ class Kelahiran extends Model
     protected $timestam = true;
     Protected $fillable = [
         "penduduk_id",
-        "nik_ibu",
-        "nik_ayah",
+        "id_penduduk_ibu",
+        "id_penduduk_ayah",
         "tob",
         "hob",
         "kondisi_lahir",

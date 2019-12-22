@@ -41,8 +41,9 @@ Route::post('/kependudukan/wilayah/update-rt/{id}', 'WilayahController@update_rt
 // End Wilayah
 
 // Keluarga
-Route::get('/kependudukan/keluarga', 'KeluargaController@index');
+
 Route::get('/kependudukan/keluarga/add', 'KeluargaController@create');
+Route::get('/kependudukan/keluarga', 'KeluargaController@index');
 Route::post('/kependudukan/keluarga/create', 'KeluargaController@store');
 Route::get('/kependudukan/keluarga/edit/{id}', 'KeluargaController@edit');
 Route::post('/kependudukan/keluarga/update/{id}', 'KeluargaController@update');
@@ -70,6 +71,7 @@ Route::get('/kependudukan/kelahiran','KelahiranController@index');
 Route::get('/kependudukan/kelahiran/add','KelahiranController@create');
 Route::post('/kependudukan/kelahiran/create','KelahiranController@store');
 Route::get('/kependudukan/kelahiran/view/{id}','KelahiranController@show');
+Route::get('/kependudukan/kelahiran/delete/{id}','KelahiranController@destroy');
 // End Kelahiran
 
 // Kematian
@@ -91,6 +93,16 @@ Route::post('kependudukan/pendatang/update/{id}','PendatangController@update');
 Route::get('/kependudukan/pendatang/delete/{id}', 'PendatangController@destroy');
 Route::get('/kependudukan/pendatang/view/{id}', 'PendatangController@show');
 // End Pendatang
+
+// Penduduk Pindah
+Route::get('/kependudukan/penduduk-pindah','PendudukPindahController@index');
+Route::get('/kependudukan/penduduk-pindah/add','PendudukPindahController@create');
+Route::post('/kependudukan/penduduk-pindah/create','PendudukPindahController@store');
+Route::get('/kependudukan/penduduk-pindah/edit/{id}', 'PendudukPindahController@edit');
+Route::post('/kependudukan/penduduk-pindah/update/{id}', 'PendudukPindahController@update');
+Route::get('/kependudukan/penduduk-pindah/delete/{id}', 'PendudukPindahController@destroy');
+Route::get('kependudukan/penduduk-pindah/get-data-penduduk/{id}','PendudukPindahController@get_data_penduduk');
+// End Penduduk Pindah
 
 // Identitas Desa
 Route::get('/pengaturan/identitas','IdentitasController@index');

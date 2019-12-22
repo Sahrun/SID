@@ -3,7 +3,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Penduduk</h4>
+                <h4 class="page-title">Penduduk Pindah</h4>
 
             </div>
             <div class="row">
@@ -11,9 +11,9 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">Data Penduduk</h4>
-                                <a class="btn btn-primary btn-round ml-auto" href="{{url('kependudukan/penduduk/add')}}">
-                                <i class="fa fa-plus"></i> Tambah Penduduk
+                                <h4 class="card-title">Data Penduduk Pindah</h4>
+                                <a class="btn btn-primary btn-round ml-auto" href="{{url('kependudukan/penduduk-pindah/add')}}">
+                                <i class="fa fa-plus"></i> Tambah Data Penduduk Pindah
                                 </a>
                             </div>
                         </div>
@@ -46,30 +46,31 @@
                                             <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
                                                 <thead>
                                                     <tr role="row">
-                                                    <th  tabindex="0" aria-controls="add-row" rowspan="1" colspan="1">No</th>
-                                                        <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 233px;">NIK</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 344px;">Nama</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 344px;">Usia</th>
-                                                        <th style="width: 108px;" class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending">Aksi</th>
+                                                        <th>No</th>
+                                                        <th>NIK</th>
+                                                        <th>Nama</th>
+                                                        <th>Tanggal Pindah</th>
+                                                        <th>Alasan Pindah</th>
+                                                        <th>Alamat Pindah</th>
+                                                        <th>Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php $no =1 ?>
-                                                    @foreach ($penduduk as $item)
+                                                    @foreach ($penduduk_pindah as $item)
                                                         <tr role="row" class="{{$no%2?'odd':'even'}}">
-                                                            <td class="sorting_1">{{$no++}}</td>
-                                                            <td class="sorting_1">{{$item->nik}}</td>
+                                                            <td>{{$no++}}</td>
+                                                            <td>{{$item->nik}}</td>
                                                             <td>{{$item->full_name}}</td>
-                                                            <td>{{date_diff(date_create($item->tanggal_lahir), date_create('now'))->y}}</td>
+                                                            <td>{{$item->tgl_pindah}}</td>
+                                                            <td>{{$item->alasan_pindah}}</td>
+                                                            <td>{{$item->alamat_pindah}}</td>
                                                             <td>
                                                                 <div class="form-button-action">
-                                                                    <a href="{{url('kependudukan/penduduk/edit/'.$item->penduduk_id)}}" class="btn btn-link btn-primary btn-lg" title="Edit">
+                                                                    <a onclick="open_form({{$item->pindah_id}})" class="btn btn-link btn-primary btn-lg" title="Edit">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
-                                                                    <a href="{{url('kependudukan/penduduk/view/'.$item->penduduk_id)}}" class="btn btn-link btn-primary btn-lg" title="Show">
-                                                                        <i class="fa fa-eye"></i>
-                                                                    </a>
-                                                                    <a title="Delete" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/penduduk/delete/'.$item->penduduk_id)}}">
+                                                                    <a title="Delete" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/penduduk-pindah/delete/'.$item->pindah_id)}}">
                                                                         <i class="fa fa-times"></i>
                                                                     </a>
                                                                 </div>
@@ -104,4 +105,87 @@
             </div>
         </div>
     </div>
+<!-- Modal -->
+<div class="modal fade" id="popup_form_edit_penduduk_pindah" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" ><b>Edit Data Penduduk Pindah</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form role="form" method="post" id="form_edit_penduduk_pindah" action="{{url('kependudukan/penduduk-pindah/update/')}}">
+      @csrf
+        <div class="modal-body">
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control" style="text-align:right;display:block"><b>NIK</b></label>
+                    <div class="col-md-9 p-0">
+                        <label class="col-md-3 label-control" style="text-align:left;display:block" id="nik"></label>
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control" style="text-align:right;display:block"><b>Nama</b></label>
+                    <div class="col-md-9 p-0">
+                        <label class="col-md-3 label-control" style="text-align:left;display:block" id="nama"></label>
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control"><b>Tanggal Pindah</b></label>
+                    <div class="col-md-9 p-0">
+                        <input type="date" class="form-control" name="tgl_pindah" id="tgl_pindah" required>
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control"><b>Alasan Pindah</b></label>
+                    <div class="col-md-9 p-0">
+                            <select name="alasan_pindah"  id="alasan_pindah" class="form-control" required>
+                                <option value="">- Pilih -</option>
+                                <option value="Pekerjaan">Pekerjaan</option>
+                                <option value="Transmigrasi">Transmigrasi</option>
+                                <option value="Lainnya">Lainnya</option>
+                             </select>
+				    </div>
+				</div>
+                <div class="form-group form-inline">
+                    <label class="col-md-3 label-control"><b>Alamat Pindah</b></label>
+                    <div class="col-md-9 p-0">
+                        <textarea name="alamat_pindah" class="form-control input-full" id="alamat_pindah" required></textarea>
+				    </div>
+				</div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+    <script>
+      var url = "{{url('kependudukan/penduduk-pindah/')}}";
+      function open_form(id){
+                $('#nik').html(null);
+                $('#nama').html(null);
+                $('#usia').html(null);
+                $('#tgl_pindah').val(null);
+                $('#alasan_pindah').val(null);
+                $('#alamat_pindah').val(null);
+                
+                $.get(url+"/edit/"+id, function(data, status){
+                    if(data !== null){
+                        $('#nik').html(data.nik);
+                        $('#nama').html(data.nama);
+                        $('#tgl_pindah').val(data.tgl_pindah);
+                        $('#alasan_pindah').val(data.alasan_pindah);
+                        $('#alamat_pindah').val(data.alamat_pindah);
+                        $("#form_edit_penduduk_pindah").attr("action", url+"/update/"+data.pindah_id);
+                        $("#popup_form_edit_penduduk_pindah").modal('show');
+                    }else{
+                        alert("Data penduduk tidak di temukan");
+                    }
+                });
+        }
+    </script>
     @stop
