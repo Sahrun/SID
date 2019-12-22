@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2019 at 07:53 AM
+-- Generation Time: Dec 22, 2019 at 08:45 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -36,6 +36,30 @@ CREATE TABLE `identitas_desa` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `identitas_desa`
+--
+
+INSERT INTO `identitas_desa` (`identitas_id`, `identitas_key`, `identitas_titel`, `identitas_value`, `created_at`, `updated_at`) VALUES
+(1, 'nama_prov', 'Nama Provinsi', 'Sumatera Selatan', NULL, '2019-12-22 00:18:43'),
+(2, 'sebutan_kabupaten', 'Sebutan Kabupaten', 'Kabupaten', NULL, '2019-12-22 00:18:43'),
+(3, 'sebutan_kabupaten_singkat', 'Singkatan Sebutan Kabupatan', 'Kab.', NULL, '2019-12-22 00:18:43'),
+(4, 'nama_kab', 'Nama Kabupaten', 'Musi Banyuasin', NULL, '2019-12-22 00:18:43'),
+(5, 'sebutan_kecamatan', 'Sebutan Kecamatan', 'Kecamatan', NULL, '2019-12-22 00:18:43'),
+(6, 'sebutan_kecamatan_singkat', 'Singkatan Sebutan Kecamatan', 'Kec.', NULL, '2019-12-22 00:18:43'),
+(7, 'nama_kec', 'Nama Kecamatan', 'Sungai Lilin', NULL, '2019-12-22 00:18:43'),
+(8, 'sebutan_desa', 'Sebutan Desa', 'Desa', NULL, '2019-12-22 00:18:43'),
+(9, 'nama_desa', 'Nama Desa', 'Mekar Jadi', NULL, '2019-12-22 00:18:43'),
+(10, 'alamat_desa', 'Alamat Kantor Desa', 'Jalan poros', NULL, '2019-12-22 00:18:43'),
+(11, 'sebutan_dusun', 'Sebutan Dusun', 'Dusun', NULL, '2019-12-22 00:18:43'),
+(12, 'sebutan_camat', 'Sebutan Camat', 'Camat', NULL, '2019-12-22 00:18:43'),
+(13, 'nama_bupati', 'Nama Bupati', 'Dodi Reza Alex Noerdin', NULL, '2019-12-22 00:18:43'),
+(14, 'nama_wakil_bupati', 'Nama Wakil Bupati', 'Beni Hernedi', NULL, '2019-12-22 00:18:43'),
+(15, 'nama_kades', 'Nama Kepala Desa', 'Sadrin', NULL, '2019-12-22 00:18:43'),
+(16, 'nama_camat', 'Nama Camat', 'Marco', NULL, '2019-12-22 00:18:43'),
+(17, 'nip_camat', 'NIP Camat', '4545454545454', NULL, '2019-12-22 00:18:43'),
+(18, 'kode_pos', 'Kode Pos', '54113', NULL, '2019-12-22 00:18:43');
 
 -- --------------------------------------------------------
 
@@ -179,8 +203,6 @@ CREATE TABLE `pendatang` (
 --
 
 INSERT INTO `pendatang` (`pendatang_id`, `tgl_datang`, `alamat_datang`, `alasan_datang`, `penduduk_id`, `created_at`, `updated_at`) VALUES
-(1, '2019-12-21', 'ddsdsdsd', 'Pekerjaan', 14, '2019-12-20 21:27:55', '2019-12-20 22:15:59'),
-(2, '2019-12-13', 'asaaaaaaaaaaaaaaa', 'Transmigrasi', 15, '2019-12-20 21:53:00', '2019-12-20 22:16:07'),
 (3, '2019-12-21', 'sdsfd', 'Pekerjaan', 16, '2019-12-20 21:54:17', '2019-12-20 21:54:17');
 
 -- --------------------------------------------------------
@@ -220,8 +242,6 @@ INSERT INTO `penduduk` (`penduduk_id`, `nik`, `no_kk`, `wilayah_dusun`, `wilayah
 (4, '3306060208956666', NULL, 79, 85, 80, 4, 'Sahrun', NULL, '1995-08-02', NULL, '- Pilih -', NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:17', '2019-12-15 03:45:55', 'KEPALA KELUARGA'),
 (5, '2131312321', NULL, 79, 85, 80, 4, 'Rini', NULL, '1998-06-16', NULL, '- Pilih -', NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:45', '2019-12-15 03:30:31', 'MENANTU'),
 (13, '2454533232', '21412124223432', 79, 86, 80, 4, 'Joko', 'asasas', '2019-12-26', 'Laki-laki', 'ISLAM', NULL, NULL, NULL, 'B', 'Meninggal', '2019-12-21 03:12:53', '2019-12-21 07:54:28', 'ANAK'),
-(14, '2454533232', '12323', 79, 85, 80, NULL, 'Paijo', 'asasas', '2019-12-20', 'Laki-laki', 'ISLAM', 'TIDAK / BELUM SEKOLAH', 'sass', 'BELUM KAWIN', 'AB-', 'Pendatang', '2019-12-20 21:27:55', '2019-12-20 22:15:59', NULL),
-(15, '111111111111', '444444444444', 79, 85, 80, NULL, 'Sara', 'rewee', '1999-02-02', 'Laki-laki', NULL, 'TIDAK / BELUM SEKOLAH', 'saaaaaa', 'KAWIN', 'A', 'Pendatang', '2019-12-20 21:53:00', '2019-12-20 22:16:07', NULL),
 (16, '2454533232', NULL, 79, 81, 80, NULL, 'asas', NULL, NULL, 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'Pindah', '2019-12-20 21:54:17', '2019-12-21 21:55:50', NULL);
 
 -- --------------------------------------------------------
@@ -478,7 +498,7 @@ ALTER TABLE `wilayah`
 -- AUTO_INCREMENT for table `identitas_desa`
 --
 ALTER TABLE `identitas_desa`
-  MODIFY `identitas_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `identitas_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `kelahiran`

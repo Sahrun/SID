@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Wilayah;
+use Illuminate\Support\Facades\DB;
 use App\Penduduk;
 use DateTime;
 
@@ -133,11 +134,11 @@ class PendudukController extends Controller
      */
     public function destroy($id)
     {
-        Wilayah::where('penduduk_id',$id)->update(['penduduk_id' => null]);
-
-        $penduduk = Penduduk::find($id);
-        $penduduk->delete();
-        return redirect()->back();
+            $penduduk = new Penduduk;
+            DB::transaction(function () use ($penduduk,$id) {
+                $penduduk->deletePendudukWithRelasion($id);
+            });
+            return redirect()->back();
     }
     public function get_wilayah($id,$part)
     {
