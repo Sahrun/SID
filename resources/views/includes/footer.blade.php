@@ -1,4 +1,5 @@
     <!--   Core JS Files   -->
+   <script src="{{asset('app-asset/js/core/jquery.3.2.1.min.js')}}"></script>
    <script src="{{asset('app-asset/js/core/popper.min.js')}}"></script> 
    <script src="{{asset('app-asset/js/core/bootstrap.min.js')}}"></script> 
 
@@ -34,4 +35,4 @@
   <script src="{{asset('app-asset/js/plugin/sweetalert.min.js')}}"></script>
 
   <!-- Azzara JS -->
-  <script src="{{asset('app-asset/js/ready.js')}}"></script>
+  <script src="{{asset('app-asset/js/ready.min.js')}}"></script>

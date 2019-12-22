@@ -165,7 +165,7 @@
                             <div class="form-group">    
                                 <div class="col-md-3 col-md-offset-9">
                                     <button type="submit" value="Submit" class="btn btn-primary">Update</button>
-                                    <a href="{{url('kependudukan/penduduk')}}" class="btn btn-danger">Kembali</a>
+                                    <a href="{{redirect()->back()->getTargetUrl()}}" class="btn btn-danger">Kembali</a>
                                 </div>
                             </div>
                         </form>
