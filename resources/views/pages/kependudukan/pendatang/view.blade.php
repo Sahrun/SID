@@ -3,7 +3,7 @@
 <div class="content">
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Data Penduduk</h4>
+            <h4 class="page-title">Data Pendatang</h4>
 
         </div>
         <div class="row">
@@ -86,7 +86,7 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Status Kependudukan</b></label>
+								<label class="col-md-3 label-control"><b>Status Kependudukan Sekarang</b></label>
 								<div class="col-md-9 p-0"> 
                                 <label class="col-md-3 label-control">{{$pendatang->status_kependudukan}}</label>
 								</div>

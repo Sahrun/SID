@@ -118,7 +118,15 @@ class KelahiranController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kelahiran = kelahiran::join('penduduk', 'penduduk.penduduk_id', '=', 'kelahiran.penduduk_id')
+        ->where('kelahiran_id',$id)
+        ->select('kelahiran.*','penduduk.*')
+        ->first();
+        $dusun = Wilayah::where('wilayah_part',1)->get();
+        $rw =  Wilayah::where('wilayah_part',2)->where('wilayah_dusun',$kelahiran->wilayah_dusun)->get();
+        $rt = Wilayah::where('wilayah_part',3)->where('wilayah_rw',$kelahiran->wilayah_rw)->get();
+
+        return view('pages.kependudukan.kelahiran.edit',['kelahiran'=> $kelahiran, 'dusun' => $dusun,'rw' => $rw,'rt' => $rt]);
     }
 
     /**
