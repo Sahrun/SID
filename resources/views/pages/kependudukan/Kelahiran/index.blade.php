@@ -48,7 +48,7 @@
                                                     <tr role="row">
                                                         <th>No</th>
                                                         <th style="width: 233px;">Nama</th>
-                                                        <th style="width: 344px;">NIA</th>
+                                                        <th style="width: 344px;">KIA</th>
                                                         <th style="width: 344px;">NO KK</th>
                                                         <th style="width: 344px;">Jenis Kelamin</th>
                                                         <th style="width: 344px;">Tanggal Kelahiran</th>
@@ -61,6 +61,7 @@
                                                     @foreach ($kelahiran as $item)
                                                         <tr role="row" class="{{$no%2?'odd':'even'}}">
                                                             <td>{{$no++}}</td>
+                                                            <td>{{$item->full_name}}</td>
                                                             <td>{{$item->nik}}</td>
                                                             <td>{{$item->no_kk}}</td>
                                                             <td>{{$item->jekel}}</td>
