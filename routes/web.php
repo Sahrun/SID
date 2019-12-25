@@ -126,8 +126,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/surat/download/{file}','SuratController@download');
     // End Surat
     
-
-
+    //region Export Excel
+    Route::get('/lap/penduduk-pindah', 'LaporanController@penduduk_pindah');
+    Route::get('/lap/penduduk-pindah/{tgl_awal}/{tgl_akhir}', 'LaporanController@penduduk_pindah_filter');
+    Route::get('/lap/excel-penduduk-pindah', 'LaporanController@excel_penduduk_pindah');
+    Route::get('/lap/excel-penduduk-pindah/{tgl_awal}/{tgl_akhir}', 'LaporanController@excel_penduduk_pindah_filter');
+    //endregion Export Excel
 });
 
 Auth::routes();
