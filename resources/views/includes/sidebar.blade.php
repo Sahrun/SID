@@ -163,7 +163,7 @@
               </a>
             </li>
             <li>
-              <a href="laporan/lap_pindah.html">
+              <a href="{{url('lap/penduduk-pindah')}}">
                 <span class="sub-item">Laporan Data Penduduk Pindah</span>
               </a>
             </li>
