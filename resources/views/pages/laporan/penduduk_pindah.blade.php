@@ -109,9 +109,8 @@
 
     <script>
     const url = "{{url('lap/penduduk-pindah/')}}"
-    const pathUrl = window.location.pathname.split("/")
-    const tglAwalUrl = pathUrl.length >= 5 ? [pathUrl.length - 1] : null
-    const tglAkhirUrl = pathUrl.length >= 5 ? pathUrl[pathUrl.length - 1] : null
+    const tglAwalUrl = "{{Request::segment(3)}}"
+    const tglAkhirUrl = "{{Request::segment(4)}}"
 
     $("#filter-btn").click(function(e) {
         e.preventDefault()
@@ -125,12 +124,12 @@
     })
 
     $(document).ready(function() {
-        if (tglAwalUrl !== null && tglAkhirUrl !== null) {
+        if (tglAwalUrl !== "" && tglAkhirUrl !== "") {
             $("input[name=tgl-awal]").val(tglAwalUrl)
             $("input[name=tgl-akhir]").val(tglAkhirUrl)
 
-            const btnUrl = $("#excel-btn").attr("href")
-            
+            const btnUrl = $("#excel-btn").attr("href") + "/" + tglAwalUrl + "/" + tglAkhirUrl
+            $("#excel-btn").attr("href", btnUrl)
         }
     })
     </script>
