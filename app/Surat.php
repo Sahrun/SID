@@ -57,4 +57,13 @@ class Surat extends Model
         }
         return null;
     }
+    public function getTitleFile($kode)
+    {
+        foreach ($this->format_surat as $key => $val) {
+            if ($val['kode'] === $kode) {
+                return $val['title'];
+            }
+        }
+        return null;
+    }
 }
