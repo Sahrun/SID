@@ -15,7 +15,11 @@ class PendudukPindahExport implements FromView, ShouldAutoSize
     public function view(): View
     {
         $pnd_pindah = PendudukPindah::join('penduduk', 'penduduk.penduduk_id', '=', 'penduduk_pindah.penduduk_id')
-        ->select('penduduk_pindah.*','penduduk.nik','penduduk.full_name')
+        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->select('penduduk_pindah.*','penduduk.nik','penduduk.full_name','penduduk.no_kk','penduduk.jekel',
+            'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
         ->get();
         return view('pages.laporan.penduduk_pindah_def', ['pnd_pindah' => $pnd_pindah]);
     }

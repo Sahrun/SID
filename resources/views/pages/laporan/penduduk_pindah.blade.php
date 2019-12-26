@@ -58,9 +58,12 @@
                                             <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
                                                 <thead>
                                                     <tr role="row">
-                                                        <th>No</th>
+                                                        <th>No.</th>
                                                         <th>NIK</th>
+                                                        <th>No. KK</th>
                                                         <th>Nama</th>
+                                                        <th>Jenis Kelamin</th>
+                                                        <th>Wilayah</th>
                                                         <th>Tanggal Pindah</th>
                                                         <th>Alasan Pindah</th>
                                                         <th>Alamat Pindah</th>
@@ -72,7 +75,13 @@
                                                         <tr role="row" class="{{$no%2?'odd':'even'}}">
                                                             <td>{{$no++}}</td>
                                                             <td>{{$item->nik}}</td>
+                                                            <td>{{$item->no_kk}}</td>
                                                             <td>{{$item->full_name}}</td>
+                                                            <td>{{$item->jekel}}</td>
+                                                            <td>Dusun {{$item->DUSUN}} 
+                                                                RT {{$item->RT}}
+                                                                RW {{$item->RW}}
+                                                            </td>
                                                             <td>{{$item->tgl_pindah}}</td>
                                                             <td>{{$item->alasan_pindah}}</td>
                                                             <td>{{$item->alamat_pindah}}</td>
@@ -107,6 +116,15 @@
         </div>
     </div>
 
+    <style>
+        .pulse-button {
+            box-shadow: 0 0 0 0 rgba(61, 90, 232, 0.7);
+            animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+        }
+
+        @keyframes pulse {to {box-shadow: 0 0 0 10px rgba(61, 90, 232, 0);}}
+    </style>
+
     <script>
     const url = "{{url('lap/penduduk-pindah/')}}"
     const tglAwalUrl = "{{Request::segment(3)}}"
@@ -120,6 +138,12 @@
 
         if (tglAwal && tglAkhir) {
             window.location.assign(`${url}/${tglAwal}/${tglAkhir}`)
+        }
+    })
+
+    $("input[name=tgl-awal], input[name=tgl-akhir]").change(function() {
+        if ($("input[name=tgl-awal]").val() !== "" && $("input[name=tgl-akhir]").val() !== "") {
+            $("#filter-btn").addClass("pulse-button")
         }
     })
 
