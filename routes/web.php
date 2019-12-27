@@ -135,6 +135,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/lap/penduduk-pindah/{tgl_awal}/{tgl_akhir}', 'LaporanController@penduduk_pindah_filter');
     Route::get('/lap/excel-penduduk-pindah', 'LaporanController@excel_penduduk_pindah');
     Route::get('/lap/excel-penduduk-pindah/{tgl_awal}/{tgl_akhir}', 'LaporanController@excel_penduduk_pindah_filter');
+
+    Route::get('/lap/pendatang', 'LaporanController@pendatang');
+    Route::get('/lap/pendatang/{tgl_awal}/{tgl_akhir}', 'LaporanController@pendatang_filter');
+    Route::get('/lap/excel-pendatang', 'LaporanController@excel_pendatang');
+    Route::get('/lap/excel-pendatang/{tgl_awal}/{tgl_akhir}', 'LaporanController@excel_pendatang_filter');
+
+    Route::get('/lap/kelahiran', 'LaporanController@kelahiran');
+    Route::get('/lap/kelahiran/{tgl_awal}/{tgl_akhir}', 'LaporanController@kelahiran_filter');
+    Route::get('/lap/excel-kelahiran', 'LaporanController@excel_kelahiran');
+    Route::get('/lap/excel-kelahiran/{tgl_awal}/{tgl_akhir}', 'LaporanController@excel_kelahiran_filter');
     //endregion Export Excel
 });
 
