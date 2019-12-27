@@ -148,7 +148,7 @@
               </a>
             </li>
             <li>
-              <a href="laporan/lap_kelahiran.html">
+              <a href="{{url('lap/kelahiran')}}">
                 <span class="sub-item">Laporan Data Kelahiran</span>
               </a>
             </li>

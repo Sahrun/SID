@@ -14,6 +14,10 @@ use App\Pendatang;
 use App\Exports\PendatangExport;
 use App\Exports\PendatangFilterExport;
 
+use App\Kelahiran;
+use App\Exports\KelahiranExport;
+use App\Exports\KelahiranFilterExport;
+
 class LaporanController extends Controller
 {
     //region Laporan Penduduk Pindah
@@ -95,4 +99,51 @@ class LaporanController extends Controller
         
     }
     //endregion Laporan Pendatang
+
+    //region Laporan Kelahiran
+    public function kelahiran()
+    {
+        $kelahiran = Kelahiran::join('penduduk', 'penduduk.penduduk_id', '=', 'kelahiran.penduduk_id')
+        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->leftjoin('penduduk as ibu','ibu.penduduk_id','=','kelahiran.id_penduduk_ibu')
+        ->leftjoin('penduduk as ayah','ayah.penduduk_id','=','kelahiran.id_penduduk_ayah')
+        ->select('kelahiran.*','penduduk.nik','penduduk.full_name','penduduk.no_kk','penduduk.jekel',
+            'penduduk.tanggal_lahir', 'penduduk.agama', 'penduduk.pekerjaan',
+            'ibu.full_name as IBU', 'ayah.full_name as AYAH',
+            'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
+        ->get();
+        return view('pages.laporan.kelahiran', ['kelahiran' => $kelahiran]);
+    }
+
+    public function kelahiran_filter($tgl_awal, $tgl_akhir)
+    {
+        $kelahiran = Kelahiran::join('penduduk', 'penduduk.penduduk_id', '=', 'kelahiran.penduduk_id')
+        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->leftjoin('penduduk as ibu','ibu.penduduk_id','=','kelahiran.id_penduduk_ibu')
+        ->leftjoin('penduduk as ayah','ayah.penduduk_id','=','kelahiran.id_penduduk_ayah')
+        ->select('kelahiran.*','penduduk.nik','penduduk.full_name','penduduk.no_kk','penduduk.jekel',
+            'penduduk.tanggal_lahir', 'penduduk.agama', 'penduduk.pekerjaan',
+            'ibu.full_name as IBU', 'ayah.full_name as AYAH',
+            'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
+        ->whereBetween('penduduk.tanggal_lahir', [$tgl_awal, $tgl_akhir])
+        ->get();
+        return view('pages.laporan.kelahiran', ['kelahiran' => $kelahiran]);
+    }
+
+    public function excel_kelahiran()
+    {
+        return Excel::download(new KelahiranExport, 'kelahiran_'.date("YmdHis").'.xlsx');
+    }
+
+    public function excel_kelahiran_filter(Request $request)
+    {
+        return Excel::download(new KelahiranFilterExport($request->tgl_awal, $request->tgl_akhir), 
+            'kelahiran_'.date("YmdHis").'.xlsx');
+        
+    }
+    //endregion Laporan Kelahiran
 }
