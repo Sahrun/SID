@@ -124,8 +124,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/surat/format-surat','SuratController@format_surat');
     Route::post('/surat/upload', 'SuratController@upload');
     Route::get('/surat/download/{file}','SuratController@download');
-    Route::get('/surat/cetak-surat-kematian/{file_kode}','SuratController@cetak_surat_kematian');
+    Route::post('/surat/cetak-surat-kematian/','SuratController@cetak_surat_kematian');
     Route::get('/surat/daftar-cetak-surat','SuratController@daftar_cetak_surat');
+    Route::get('/surat/form-cetak-surat/{kode_surat}','SuratController@form_cetak_surat');
+    Route::get('surat/get-surat/{id}','SuratController@get_surat');
     // End Surat
     
     //region Export Excel

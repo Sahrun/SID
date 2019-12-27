@@ -110,7 +110,7 @@
               </a>
             </li>
             <li>
-              <a href="surat/cetak_surat.html">
+              <a href="{{url('surat/daftar-cetak-surat')}}">
                 <span class="sub-item">Cetak Surat</span>
               </a>
             </li>
