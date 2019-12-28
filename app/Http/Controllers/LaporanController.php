@@ -18,6 +18,10 @@ use App\Kelahiran;
 use App\Exports\KelahiranExport;
 use App\Exports\KelahiranFilterExport;
 
+use App\Kematian;
+use App\Exports\KematianExport;
+use App\Exports\KematianFilterExport;
+
 class LaporanController extends Controller
 {
     //region Laporan Penduduk Pindah
@@ -146,4 +150,43 @@ class LaporanController extends Controller
         
     }
     //endregion Laporan Kelahiran
+
+    //region Laporan Kematian
+    public function kematian()
+    {
+        $kematian = Kematian::join('penduduk', 'penduduk.penduduk_id', '=', 'kematian.penduduk_id')
+        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->select('kematian.*','penduduk.nik','penduduk.full_name','penduduk.no_kk',
+            'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
+        ->get();
+        return view('pages.laporan.kematian', ['kematian' => $kematian]);
+    }
+
+    public function kematian_filter($tgl_awal, $tgl_akhir)
+    {
+        $kematian = Kematian::join('penduduk', 'penduduk.penduduk_id', '=', 'kematian.penduduk_id')
+        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->select('kematian.*','penduduk.nik','penduduk.full_name','penduduk.no_kk',
+            'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
+            ->whereBetween('tgl_kematian', [$tgl_awal, $tgl_akhir])
+        ->get();
+        return view('pages.laporan.kematian', ['kematian' => $kematian]);
+    }
+
+    public function excel_kematian()
+    {
+        return Excel::download(new KematianExport, 'kematian_'.date("YmdHis").'.xlsx');
+    }
+
+    public function excel_kematian_filter(Request $request)
+    {
+        return Excel::download(new KematianFilterExport($request->tgl_awal, $request->tgl_akhir), 
+            'kematian_'.date("YmdHis").'.xlsx');
+        
+    }
+    //endregion Laporan Kematian
 }

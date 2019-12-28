@@ -143,6 +143,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/lap/kelahiran/{tgl_awal}/{tgl_akhir}', 'LaporanController@kelahiran_filter');
     Route::get('/lap/excel-kelahiran', 'LaporanController@excel_kelahiran');
     Route::get('/lap/excel-kelahiran/{tgl_awal}/{tgl_akhir}', 'LaporanController@excel_kelahiran_filter');
+
+    Route::get('/lap/kematian', 'LaporanController@kematian');
+    Route::get('/lap/kematian/{tgl_awal}/{tgl_akhir}', 'LaporanController@kematian_filter');
+    Route::get('/lap/excel-kematian', 'LaporanController@excel_kematian');
+    Route::get('/lap/excel-kematian/{tgl_awal}/{tgl_akhir}', 'LaporanController@excel_kematian_filter');
     //endregion Export Excel
 });
 

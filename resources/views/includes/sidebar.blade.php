@@ -153,7 +153,7 @@
               </a>
             </li>
             <li>
-              <a href="laporan/lap_kematian.html">
+              <a href="{{url('lap/kematian')}}">
                 <span class="sub-item">Laporan Data Kematian</span>
               </a>
             </li>
