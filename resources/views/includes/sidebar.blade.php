@@ -10,7 +10,7 @@
       <div class="info">
         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
           <span>
-            Hizrian
+          <h4>{{ Auth::user()->name }}</h4>
             <span class="user-level">Administrator</span>
             <span class="caret"></span>
           </span>
@@ -27,11 +27,6 @@
             <li>
               <a href="#edit">
                 <span class="link-collapse">Edit Profile</span>
-              </a>
-            </li>
-            <li>
-              <a href="#settings">
-                <span class="link-collapse">Settings</span>
               </a>
             </li>
           </ul>
