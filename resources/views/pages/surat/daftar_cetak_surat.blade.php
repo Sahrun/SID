@@ -38,7 +38,7 @@
                                                         <td>{{$item['title']}}</td>
                                                         <td>
                                                             <div class="form-button-action">
-                                                                    <a href="{{url('surat/download/'.$item['template'])}}" target="_blank" class="btn btn-link btn-success btn-sm" title="Cetak" >
+                                                                    <a href="{{url('surat/form-cetak-surat/'.$item['kode'])}}" class="btn btn-link btn-success btn-sm" title="Cetak" >
                                                                         <i class="fa fa-print"></i>
                                                                     </a>
                                                             </div>
