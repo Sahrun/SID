@@ -157,7 +157,7 @@
                         <select class="form-control" name="tempat_kematian" id="tempat_kematian" required>
                             <option value="">- Pilih -</option>
                             <option value="Rumah">Rumah</option>
-                            <option value="Sakit">Rumah Sakit</option>
+                            <option value="Rumah Sakit">Rumah Sakit</option>
                             <option value="Lainnya">Lainnya</option>
                         </select>
 				    </div>
