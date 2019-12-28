@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Exports\\PendudukPindahExport' => $baseDir . '/app/Exports/PendudukPindahExport.php',
+    'App\\Exports\\PendudukPindahFilterExport' => $baseDir . '/app/Exports/PendudukPindahFilterExport.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
@@ -20,6 +22,7 @@ return array(
     'App\\Http\\Controllers\\KelahiranController' => $baseDir . '/app/Http/Controllers/KelahiranController.php',
     'App\\Http\\Controllers\\KeluargaController' => $baseDir . '/app/Http/Controllers/KeluargaController.php',
     'App\\Http\\Controllers\\KematianController' => $baseDir . '/app/Http/Controllers/KematianController.php',
+    'App\\Http\\Controllers\\LaporanController' => $baseDir . '/app/Http/Controllers/LaporanController.php',
     'App\\Http\\Controllers\\PendatangController' => $baseDir . '/app/Http/Controllers/PendatangController.php',
     'App\\Http\\Controllers\\PendudukController' => $baseDir . '/app/Http/Controllers/PendudukController.php',
     'App\\Http\\Controllers\\PendudukPindahController' => $baseDir . '/app/Http/Controllers/PendudukPindahController.php',
