@@ -34,6 +34,7 @@ class Penduduk extends Model
                 "wilayah_rt",
                 "wilayah_rw",
                 "hubungan_keluarga",
+                "alamat",
                 "created_at",
                 "updated_at",
               ];

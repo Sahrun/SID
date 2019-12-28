@@ -20,6 +20,7 @@ class SuratController extends Controller
      */
     protected $path_folder="master_surat";
     protected $identitas = array();
+    protected $timezone ="Asia/Jakarta";
 
     public function index()
     {
@@ -329,9 +330,17 @@ class SuratController extends Controller
     }
     public function cetak_surat_kelahiran(Request $request)
     {
-         $surat = new Surat;
+        $surat = new Surat;
         
-         $staff = Staff::find($request->staf_id);
+        $staff = Staff::find($request->staf_id);
+
+        $kelahiran = Kelahiran::join('penduduk', 'penduduk.penduduk_id', '=', 'kelahiran.penduduk_id')
+        ->select('kelahiran.*','penduduk.nik','penduduk.full_name','penduduk.tanggal_lahir','penduduk.tempat_lahir','penduduk.jekel')
+        ->get();
+
+        $ibu = Penduduk::find($kelahiran->id_penduduk_ibu);
+
+        $ayah = Penduduk::find($kelahiran->id_penduduk_ayah);
 
         $this->getIdentitalDesaAll();
         $document =  file_get_contents(public_path('master_surat').'\\'.$surat->getnamefile($request->kode_surat));
@@ -362,8 +371,138 @@ class SuratController extends Controller
         $document = str_replace("[nama_provinsi]", $this->getIdentitas("nama_prov"), $document);
         
         
-      
+        // data anak
+        $document = str_replace("[form_hari]",date("d",strtotime($kelahiran->tanggal_lahir. ' '.$this->timezone)), $document);
+        $document = str_replace("[form_tanggallahir]",date("d-m-Y",strtotime($kelahiran->tanggal_lahir)), $document);
+        $document = str_replace("[form_waktu_lahir]",$kelahiran->tob, $document);
+        $document = str_replace("[form_tempatlahir]",$kelahiran->tempat_lahir, $document);
+        $document = str_replace("[form_nama_sex]",$kelahiran->jekel, $document);
+        $document = str_replace("[form_nama_bayi]",$kelahiran->full_name, $document);
+        //
+
+        // data Ibu
+        $document = str_replace("[form_nama_ibu]",$ibu->full_name, $document);
+        $document = str_replace("[nik_ibu]",$ibu->nik, $document);
+        $document = str_replace("[umur_ibu]",date_diff(date_create($ibu->tanggal_lahir), date_create('now'))->y, $document);
+        $document = str_replace("[pekerjaanibu]",$ibu->pekerjaan, $document);
+        $document = str_replace("[alamat_ibu]",$ibu->alamat, $document);
+        $document = str_replace("[sebutan_desa]",$this->getIdentitas("sebutan_desa"), $document);
+        $document = str_replace("[desaibu]",$this->getIdentitas("nama_desa"), $document);
+        $document = str_replace("[kecibu]",$this->getIdentitas("nama_kec"), $document);
+        $document = str_replace("[kabibu]",$this->getIdentitas("nama_kab"), $document);
+        //
+
+        //data Ayah
+        $document = str_replace("[form_nama_ayah]",$ayah->full_name, $document); 
+        $document = str_replace("[nik_ayah]",$ayah->nik, $document);
+        $document = str_replace("[umur_ayah]",date_diff(date_create($ayah->tanggal_lahir), date_create('now'))->y, $document);
+        $document = str_replace("[pekerjaanayah]",$ayah->pekerjaan, $document);
+        $document = str_replace("[alamat_ayah]",$ayah->alamat, $document); 
+        $document = str_replace("[sebutan_desa]",$this->getIdentitas("sebutan_desa"), $document);
+        $document = str_replace("[desaayah]",$this->getIdentitas("nama_desa"), $document);
+        $document = str_replace("[kecayah]",$this->getIdentitas("nama_kec"), $document); 
+        $document = str_replace("[kabayah]",$this->getIdentitas("nama_kab"), $document);
+        //
+
+        // data pelapor
+        $document = str_replace("[form_nama_pelapor]",$request->nama_pelapor, $document); 
+        $document = str_replace("[form_nik_pelapor]",$request->nik_pelapor, $document);
+        $document = str_replace("[form_umur_pelapor]",date_diff(date_create($request->tanggal_lahir), date_create('now'))->y, $document);
+        $document = str_replace("[form_pekerjaanpelapor]",$request->pekerjaan_pelapor, $document);
+        $document = str_replace("[form_desapelapor]",$request->desa_pelapor, $document); 
+        $document = str_replace("[form_kecpelapor]",$request->kec_pelapor, $document); 
+        $document = str_replace("[form_kabpelapor]",$request->kab_pelapor, $document); 
+        $document = str_replace("[form_provinsipelapor]",$request->provinsi_pelapor, $document);
+        $document = str_replace("[form_hubunganpelapor]",$request->hubungan_pelapor, $document);
+
+        $document = str_replace("[nama_des]",$this->getIdentitas("nama_desa"), $document);
+        $document = str_replace("[tgl_surat]",Date("d-m-Y"), $document);
+        $document = str_replace("[jabatan]","", $document); 
+        $document = str_replace("[nama_des]","", $document);
+        $document = str_replace("[nama_pamong]","", $document);
+
+        // prihal
+        $document = str_replace("[nama_kab]","", $document);
+        $document = str_replace("[lokasi_disdukcapil]","", $document);
+        $document = str_replace("[nik_pelapor]","", $document);
+        $document = str_replace("[nama_pelapor]","", $document);
+        $document = str_replace("[tempat_lahir_pelapor]","", $document);
+        $document = str_replace("[tanggal_lahir_pelapor]","", $document); 
+        $document = str_replace("[umur_pelapor]","", $document); 
+        $document = str_replace("[pekerjaanpelapor]","", $document);
+        $document = str_replace("[form_desapelapor]","", $document); 
+        $document = str_replace("[form_kecpelapor]","", $document); 
+        $document = str_replace("[form_kabpelapor]","", $document); 
+        $document = str_replace("[form_provinsipelapor]","", $document);
+        //
         
+        // Akte
+        $document = str_replace("[form_nama_bayi]","", $document); 
+        $document = str_replace("[form_nama_sex]","", $document);
+            
+        $document = str_replace("[form_tempatlahir]","", $document);	
+        $document = str_replace("[form_tanggallahir]","", $document);	
+        $document = str_replace("[form_kelahiran_anak_ke]","", $document);	
+        //
+
+        // ibu
+        $document = str_replace("[form_nama_ibu]","", $document);
+        $document = str_replace("[nik_ibu]","", $document);
+        $document = str_replace("[tempat_lahir_ibu]","", $document);
+        $document = str_replace("[tanggal_lahir_ibu]","", $document);
+        $document = str_replace("[umur_ibu]","", $document);
+        $document = str_replace("[pekerjaanibu]","", $document);
+        $document = str_replace("[alamat_ibu]","", $document); 
+        $document = str_replace("[desaibu]","", $document);
+        $document = str_replace("[kecibu]","", $document);
+        $document = str_replace("[kabibu]","", $document);
+        //
+
+
+        // Ayah
+        $document = str_replace("[form_nama_ayah]","", $document);
+        $document = str_replace("[nik_ayah]","", $document);
+        $document = str_replace("[umur_ayah]","", $document);
+        $document = str_replace("[pekerjaanayah]","", $document);
+        $document = str_replace("[alamat_ayah]","", $document); 
+        $document = str_replace("[desaayah]","", $document);
+        $document = str_replace("[kecayah]","", $document);
+        $document = str_replace("[kabayah]","", $document);
+        //
+
+
+        // saksi 1
+        $document = str_replace("[nama_saksi1]","", $document);
+        $document = str_replace("[nik_saksi1]","", $document);
+        $document = str_replace("[tempat_lahir_saksi1]","", $document);
+        $document = str_replace("[tanggal_lahir_saksi1]","", $document); 
+        $document = str_replace("[umur_saksi1]","", $document);
+        $document = str_replace("[pekerjaansaksi1]","", $document);
+        $document = str_replace("[form_desasaksi1]","", $document);
+        $document = str_replace("[form_kecsaksi1]","", $document);
+        $document = str_replace("[form_kabsaksi1]","", $document);
+        $document = str_replace("[form_provinsisaksi1]","", $document);
+        //
+
+
+        // Saksi 2
+        $document = str_replace("[nama_saksi2]","", $document);
+        $document = str_replace("[nik_saksi2]","", $document);
+        $document = str_replace("[tempat_lahir_saksi2]","", $document);
+        $document = str_replace("[tanggal_lahir_saksi2]","", $document);
+        $document = str_replace("[umur_saksi2]","", $document);
+        $document = str_replace("[pekerjaansaksi2]","", $document);
+        $document = str_replace("[form_desasaksi2]","", $document); 
+        $document = str_replace("[form_kecsaksi2]","", $document);
+        $document = str_replace("[form_kabsaksi2]","", $document); 
+        $document = str_replace("[form_provinsisaksi2]","", $document);
+        //
+
+        // footer
+        $document = str_replace("[nama_des]","", $document);
+        $document = str_replace("[tgl_surat]","", $document);
+        $document = str_replace("[form_nama_pelapor]","", $document);
+        //
         $filename = $surat->getTitleFile($request->kode_surat)."_".Date("Ymdhis").".doc";
         $filepath = public_path('data_surat')."\\".$filename;
         
