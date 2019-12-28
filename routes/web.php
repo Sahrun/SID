@@ -127,6 +127,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/surat/cetak-surat-kematian/','SuratController@cetak_surat_kematian');
     Route::get('/surat/daftar-cetak-surat','SuratController@daftar_cetak_surat');
     Route::get('/surat/form-cetak-surat/{kode_surat}','SuratController@form_cetak_surat');
+    Route::post('/surat/cetak-surat-pengantar/','SuratController@cetak_surat_pengantar');
+    Route::post('/surat/cetak-surat-kelahiran/','SuratController@cetak_surat_kelahiran');
     Route::get('surat/get-surat/{id}','SuratController@get_surat');
     // End Surat
     

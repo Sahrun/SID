@@ -25,7 +25,7 @@ class Surat extends Model
                 "kode" => "S01",
                 "title" => "Surat Keterangan Kelahiran",
                 "template" => "surat_ket_kelahiran.rtf",
-                "page" => "pages.surat.form_surat_kematian"
+                "page" => "pages.surat.form_surat_kelahiran"
             ),
             array(
                 "kode" => "S02",
@@ -43,7 +43,7 @@ class Surat extends Model
                 "kode" => "S04",
                 "title" => "Surat Pengantar ",
                 "template" => "surat_ket_pengantar.rtf",
-                "page" => "pages.surat.form_surat_kematian"
+                "page" => "pages.surat.form_surat_pengantar"
             ),
             array(
                 "kode" => "S05",

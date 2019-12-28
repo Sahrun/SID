@@ -11,10 +11,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Surat Kematian</div>
+                        <div class="card-title">Surat Kelahiran</div>
                     </div>
                     <div class="card-body">
-                        <form role="form" method="post"  action="{{url('surat/cetak-surat-kematian/')}}" >
+                        <form role="form" method="post"  action="{{url('surat/cetak-surat-kelahiran/')}}" >
                             @csrf
                             <input type="hidden" value="{{$kode_surat}}" name="kode_surat" />
                             <div class="form-group form-inline">
@@ -35,30 +35,11 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Nama Pelapor</b></label>
-								<div class="col-md-9 p-0">
-                                     <input type="text" class="form-control input-full" name="nama_pelapor" placeholder="Nama Pelapor" required>
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>NIK</b></label>
-								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="nik_pelapor" placeholder="NIK">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Tanggal Lahir</b></label>
-								<div class="col-md-9 p-0">
-									<input type="date" class="form-control" name="tanggal_lahir_pelapor">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Keperluan</b></label>
 								<div class="col-md-9 p-0">
-                                    <input type="text" class="form-control" name="hal" required>
+                                    <input type="text" class="form-control input-full" name="hal" required>
                                  </div>
 							</div>
-                           
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Staf  Desa</b></label>
 								<div class="col-md-9 p-0">

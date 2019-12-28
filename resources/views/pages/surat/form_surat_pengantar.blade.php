@@ -11,10 +11,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Surat Kematian</div>
+                        <div class="card-title">Surat Pengantar</div>
                     </div>
                     <div class="card-body">
-                        <form role="form" method="post"  action="{{url('surat/cetak-surat-kematian/')}}" >
+                        <form role="form" method="post"  action="{{url('surat/cetak-surat-pengantar/')}}" >
                             @csrf
                             <input type="hidden" value="{{$kode_surat}}" name="kode_surat" />
                             <div class="form-group form-inline">
@@ -35,30 +35,51 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Nama Pelapor</b></label>
+								<label class="col-md-3 label-control"><b>NO KTP</b></label>
 								<div class="col-md-9 p-0">
-                                     <input type="text" class="form-control input-full" name="nama_pelapor" placeholder="Nama Pelapor" required>
+									<input type="text" class="form-control input-full" name="no_ktp" placeholder="NO KTP">
 								</div>
 							</div>
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>NIK</b></label>
+								<label class="col-md-3 label-control"><b>NO KK</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="nik_pelapor" placeholder="NIK">
+									<input type="text" class="form-control input-full" name="no_kk" placeholder="NO KK">
 								</div>
 							</div>
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Tanggal Lahir</b></label>
+								<label class="col-md-3 label-control"><b>Berlaku</b></label>
 								<div class="col-md-9 p-0">
-									<input type="date" class="form-control" name="tanggal_lahir_pelapor">
+									<input type="date" class="form-control" name="berlaku_mulai">
+                                    <b>s/d</b> <input type="date" class="form-control" name="berlaku_sampai">
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Keperluan</b></label>
 								<div class="col-md-9 p-0">
-                                    <input type="text" class="form-control" name="hal" required>
+                                    <input type="text" class="form-control input-full" name="hal" required>
                                  </div>
 							</div>
-                           
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Gologan Darah</b></label>
+								<div class="col-md-9 p-0">
+                                <select name="golongan_darah" class="form-control">
+                                    <option value="">- Pilih -</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="AB">AB</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="TIDAK TAHU">TIDAK TAHU</option>
+                                </select>
+                                 </div>
+							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Staf  Desa</b></label>
 								<div class="col-md-9 p-0">
