@@ -18,7 +18,7 @@
                             @csrf
                             <input type="hidden" value="{{$kode_surat}}" name="kode_surat" />
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Penduduk</b></label>
+								<label class="col-md-3 label-control"><b>Anak</b></label>
 								<div class="col-md-9 p-0">
                                     <select class="form-control" name="penduduk_id" required> 
                                         <option value=""> - Pilih -</option>
