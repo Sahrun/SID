@@ -40,6 +40,12 @@
                                    
 								</div>
 							</div>
+							<div class="form-group form-inline">
+							<label class="col-md-3 label-control" style="text-align:left;display:block"><b>Alamat</b></label>
+								<div class="col-md-9 p-0">
+								<label class="col-md-3 label-control" style="text-align:left;display:block">: {{$kelahiran->alamat}}</label>
+								</div>
+							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control" style="text-align:left;display:block"><b>No Kartu Keluarga</b></label>
 								<div class="col-md-9 p-0">

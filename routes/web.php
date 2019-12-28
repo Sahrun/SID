@@ -106,6 +106,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kependudukan/kematian/delete/{id}', 'KematianController@destroy');
     // End Kematian
 
+    // Daftar Pemilih
+    Route::get('/kependudukan/dpt/daftar-pemilih', 'DaftarpemilihController@index');
+    // End Daftar Pemilih
+
     // Identitas Desa
     Route::get('/pengaturan/identitas','IdentitasController@index');
     Route::post('/pengaturan/identitas/update','IdentitasController@update');
