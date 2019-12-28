@@ -110,7 +110,7 @@
               </a>
             </li>
             <li>
-              <a href="surat/cetak_surat.html">
+              <a href="{{url('surat/daftar-cetak-surat')}}">
                 <span class="sub-item">Cetak Surat</span>
               </a>
             </li>
@@ -148,17 +148,17 @@
               </a>
             </li>
             <li>
-              <a href="laporan/lap_kelahiran.html">
+              <a href="{{url('lap/kelahiran')}}">
                 <span class="sub-item">Laporan Data Kelahiran</span>
               </a>
             </li>
             <li>
-              <a href="laporan/lap_kematian.html">
+              <a href="{{url('lap/kematian')}}">
                 <span class="sub-item">Laporan Data Kematian</span>
               </a>
             </li>
             <li>
-              <a href="laporan/lap_pendatang.html">
+              <a href="{{url('lap/pendatang')}}">
                 <span class="sub-item">Laporan Data Pendatang</span>
               </a>
             </li>

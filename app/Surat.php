@@ -24,27 +24,32 @@ class Surat extends Model
             array(
                 "kode" => "S01",
                 "title" => "Surat Keterangan Kelahiran",
-                "template" => "surat_ket_kelahiran.rtf"
+                "template" => "surat_ket_kelahiran.rtf",
+                "page" => "pages.surat.form_surat_kematian"
             ),
             array(
                 "kode" => "S02",
                 "title" => "Surat Keterangan Kematian",
-                "template" => "surat_ket_kematian.rtf"
+                "template" => "surat_ket_kematian.rtf",
+                "page" => "pages.surat.form_surat_kematian"
             ),
             array(
                 "kode" => "S03",
                 "title" => "Surat Keterangan Kurang Mampu",
-                "template" => "surat_ket_kurang_mampu.rtf"
+                "template" => "surat_ket_kurang_mampu.rtf",
+                "page" => "pages.surat.form_surat_kematian"
             ),
             array(
                 "kode" => "S04",
                 "title" => "Surat Pengantar ",
-                "template" => "surat_ket_pengantar.rtf"
+                "template" => "surat_ket_pengantar.rtf",
+                "page" => "pages.surat.form_surat_kematian"
             ),
             array(
                 "kode" => "S05",
                 "title" => "Surat Keterangan Pindah Penduduk",
-                "template" => "surat_ket_pindah_penduduk.rtf"
+                "template" => "surat_ket_pindah_penduduk.rtf",
+                "page" => "pages.surat.form_surat_kematian"
             )
     );
 
@@ -53,6 +58,24 @@ class Surat extends Model
         foreach ($this->format_surat as $key => $val) {
             if ($val['kode'] === $kode) {
                 return $val['template'];
+            }
+        }
+        return null;
+    }
+    public function getTitleFile($kode)
+    {
+        foreach ($this->format_surat as $key => $val) {
+            if ($val['kode'] === $kode) {
+                return $val['title'];
+            }
+        }
+        return null;
+    }
+    public function getsuratValue($kode_surat,$param_key)
+    {
+        foreach ($this->format_surat as $key => $val) {
+            if ($val['kode'] === $kode_surat) {
+                return $val[$param_key];
             }
         }
         return null;

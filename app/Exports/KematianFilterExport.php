@@ -2,13 +2,13 @@
 
 namespace App\Exports;
 
-use App\PendudukPindah;
+use App\Kematian;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class PendudukPindahFilterExport implements FromView, ShouldAutoSize
+class KematianFilterExport implements FromView, ShouldAutoSize
 {
     use Exportable;
 
@@ -23,14 +23,14 @@ class PendudukPindahFilterExport implements FromView, ShouldAutoSize
 
     public function view(): View
     {
-        $pnd_pindah = PendudukPindah::join('penduduk', 'penduduk.penduduk_id', '=', 'penduduk_pindah.penduduk_id')
+        $kematian = Kematian::join('penduduk', 'penduduk.penduduk_id', '=', 'kematian.penduduk_id')
         ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
         ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
         ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
-        ->select('penduduk_pindah.*','penduduk.nik','penduduk.full_name','penduduk.no_kk','penduduk.jekel',
+        ->select('kematian.*','penduduk.nik','penduduk.full_name','penduduk.no_kk',
             'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
-        ->whereBetween('tgl_pindah', [$this->tgl_awal, $this->tgl_akhir])
+        ->whereBetween('tgl_kematian', [$this->tgl_awal, $this->tgl_akhir])
         ->get();
-        return view('pages.laporan.penduduk_pindah_def', ['pnd_pindah' => $pnd_pindah]);
+        return view('pages.laporan.kematian_def', ['kematian' => $kematian]);
     }
 }

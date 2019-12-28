@@ -3,7 +3,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Laporan Penduduk Pindah</h4>
+                <h4 class="page-title">Laporan Kelahiran</h4>
 
             </div>
             <div class="row">
@@ -11,7 +11,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">Data Penduduk Pindah</h4>
+                                <h4 class="card-title">Data Kelahiran</h4>
 
                                 <div class="form-group ml-auto">
                                     <label for="">Tanggal awal</label>
@@ -24,7 +24,7 @@
                                 <a class="btn btn-round ml-auto" id="filter-btn" href="javascript:void(0)">
                                     <i class="fas fa-file-excel"></i> Terapkan tanggal
                                 </a>
-                                <a class="btn btn-primary btn-round ml-auto" id="excel-btn" href="{{url('lap/excel-penduduk-pindah')}}" target="_blank">
+                                <a class="btn btn-primary btn-round ml-auto" id="excel-btn" href="{{url('lap/excel-kelahiran')}}" target="_blank">
                                     <i class="fas fa-file-excel"></i> Unduh sbg Excel
                                 </a>
                             </div>
@@ -59,32 +59,42 @@
                                                 <thead>
                                                     <tr role="row">
                                                         <th>No.</th>
-                                                        <th>NIK</th>
+                                                        <th>KIA</th>
                                                         <th>No. KK</th>
                                                         <th>Nama</th>
-                                                        <th>Jenis Kelamin</th>
                                                         <th>Wilayah</th>
-                                                        <th>Tanggal Pindah</th>
-                                                        <th>Alasan Pindah</th>
-                                                        <th>Alamat Pindah</th>
+                                                        <th>Tanggal Lahir</th>
+                                                        <th>Jenis Kelamin</th>
+                                                        <th>Nama Ayah</th>
+                                                        <th>Nama Ibu</th>
+                                                        <th>Penolong Kelahiran</th>
+                                                        <th>Kondisi Lahir</th>
+                                                        <th>Berat</th>
+                                                        <th>Panjang</th>
+                                                        <th>Jenis Kelahiran</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php $no =1 ?>
-                                                    @foreach ($pnd_pindah as $item)
+                                                    @foreach ($kelahiran as $item)
                                                         <tr role="row" class="{{$no%2?'odd':'even'}}">
                                                             <td>{{$no++}}</td>
                                                             <td>{{$item->nik}}</td>
                                                             <td>{{$item->no_kk}}</td>
                                                             <td>{{$item->full_name}}</td>
-                                                            <td>{{$item->jekel}}</td>
                                                             <td>Dusun {{$item->DUSUN}} 
                                                                 RT {{$item->RT}}
                                                                 RW {{$item->RW}}
                                                             </td>
-                                                            <td>{{$item->tgl_pindah}}</td>
-                                                            <td>{{$item->alasan_pindah}}</td>
-                                                            <td>{{$item->alamat_pindah}}</td>
+                                                            <td>{{$item->tanggal_lahir}}</td>
+                                                            <td>{{$item->jekel}}</td>
+                                                            <td>{{$item->AYAH}}</td>
+                                                            <td>{{$item->IBU}}</td>
+                                                            <td>{{$item->hob}}</td>
+                                                            <td>{{$item->kondisi_lahir}}</td>
+                                                            <td>{{$item->berat}}</td>
+                                                            <td>{{$item->panjang}}</td>
+                                                            <td>{{$item->jenis_kelahiran}}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -126,7 +136,7 @@
     </style>
 
     <script>
-    const url = "{{url('lap/penduduk-pindah/')}}"
+    const url = "{{url('lap/kelahiran/')}}"
     const tglAwalUrl = "{{Request::segment(3)}}"
     const tglAkhirUrl = "{{Request::segment(4)}}"
 
