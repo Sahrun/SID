@@ -53,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/kependudukan/keluarga/tambah-anggota/{id}', 'KeluargaController@store_keluarga');
     Route::get('/kependudukan/keluarga/edit-anggota/{id}', 'KeluargaController@edit_keluarga');
     Route::post('/kependudukan/keluarga/update-anggota/{id}', 'KeluargaController@update_keluarga');
+    Route::get('/kependudukan/keluarga/get-data-keluarga/{id}', 'KeluargaController@get_data_keluarga');
     // End Keluarga
 
     // Penduduk
@@ -133,6 +134,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/surat/form-cetak-surat/{kode_surat}','SuratController@form_cetak_surat');
     Route::post('/surat/cetak-surat-pengantar/','SuratController@cetak_surat_pengantar');
     Route::post('/surat/cetak-surat-kelahiran/','SuratController@cetak_surat_kelahiran');
+    Route::post('/surat/cetak-surat-penduduk-pindah/','SuratController@cetak_surat_penduduk_pindah');
+    Route::post('/surat/cetak-surat-kurang-mampu/','SuratController@cetak_surat_kurang_mampu');
     Route::get('surat/get-surat/{id}','SuratController@get_surat');
     // End Surat
     

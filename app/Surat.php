@@ -37,7 +37,7 @@ class Surat extends Model
                 "kode" => "S03",
                 "title" => "Surat Keterangan Kurang Mampu",
                 "template" => "surat_ket_kurang_mampu.rtf",
-                "page" => "pages.surat.form_surat_kematian"
+                "page" => "pages.surat.form_surat_kurang_mampu"
             ),
             array(
                 "kode" => "S04",
@@ -49,7 +49,7 @@ class Surat extends Model
                 "kode" => "S05",
                 "title" => "Surat Keterangan Pindah Penduduk",
                 "template" => "surat_ket_pindah_penduduk.rtf",
-                "page" => "pages.surat.form_surat_kematian"
+                "page" => "pages.surat.form_surat_penduduk_pindah"
             )
     );
 
