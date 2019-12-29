@@ -157,6 +157,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/lap/excel-kematian', 'LaporanController@excel_kematian');
     Route::get('/lap/excel-kematian/{tgl_awal}/{tgl_akhir}', 'LaporanController@excel_kematian_filter');
     //endregion Export Excel
+
+    // User
+    Route::get('/user', 'UserController@index');
+    Route::get('/user/add','UserController@create');
+    // End User
 });
 
 Auth::routes();

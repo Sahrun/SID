@@ -34,7 +34,8 @@
               <div class="user-box">
                 <div class="u-text">
                   <h4>{{ Auth::user()->name }}</h4>
-                  <p class="text-muted">{{ Auth::user()->email }}</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+                  <p class="text-muted">{{ Auth::user()->email }}</p>
+                  <a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
                 </div>
               </div>
             </li>
