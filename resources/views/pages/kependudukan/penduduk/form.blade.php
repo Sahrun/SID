@@ -14,37 +14,38 @@
                         <div class="card-title">Tambah Data Penduduk</div>
                     </div>
                     <div class="card-body">
-                        <form role="form" method="post"  action="{{url('kependudukan/penduduk/create')}}" >
+                        <form role="form" method="post"  action="{{url('kependudukan/penduduk/create')}}" onsubmit="return Submit(this)" >
                             @csrf
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>NIK</b></label>
-								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="nik" placeholder="NIK">
-								</div>
+								<div class="col-md-3 p-0">
+									<input type="text" class="form-control input-full" name="nik" placeholder="NIK" minlength="16" maxlength="16" required id="nik">
+                                    <span id="error_nik" class="text-danger"></span>
+                                </div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Nama Lengkap</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="full_name" placeholder="Nama lengkap">
+									<input type="text" class="form-control input-full" name="full_name" placeholder="Nama lengkap" required>
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Wilayah</b></label>
 								<div class="col-md-9 p-0">
                                    <b>Dusun :  </b>
-                                    <select class="form-control" name="wilayah_dusun" onchange="GetRW(this)"> 
-                                        <option> - Pilih -</option>
+                                    <select class="form-control" name="wilayah_dusun" onchange="GetRW(this)" required> 
+                                        <option value=""> - Pilih -</option>
                                         @foreach ($dusun as $item)
                                         <option value="{{$item->wilayah_id}}">{{$item->wilayah_nama}}</option>
                                         @endforeach;
                                     </select>
                                     <b> RW  : </b>
                                     <select class="form-control" name="wilayah_rw" id="wilayah_rw"  onchange="GetRT(this)"> 
-                                        <option> - Pilih -</option>
+                                        <option value=""> - Pilih -</option>
                                     </select>
                                     <b> RT : </b>
-                                    <select class="form-control" name="wilayah_rt" id="wilayah_rt"> 
-                                        <option> - Pilih -</option>
+                                    <select class="form-control" name="wilayah_rt" id="wilayah_rt" required> 
+                                        <option value=""> - Pilih -</option>
                                     </select>
 								</div>
 							</div>
@@ -63,14 +64,14 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Tanggal Lahir</b></label>
 								<div class="col-md-9 p-0">
-									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir">
+									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir" required>
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Jenis Kelamin</b></label>
 								<div class="col-md-9 p-0">
-                                    <b>Laki - Laki </b><input type="radio" class="form-control" name="jekel" value="Laki-laki">
-                                    <b>Perempuan </b><input type="radio" class="form-control" name="jekel" value="Perempuan">
+                                    <b>Laki - Laki </b><input type="radio" class="form-control" name="jekel" value="Laki-laki" required>
+                                    <b>Perempuan </b><input type="radio" class="form-control" name="jekel" value="Perempuan" required>
                                  </div>
 							</div>
                             <div class="form-group form-inline">
@@ -144,7 +145,7 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Golongan Darah</b></label>
 								<div class="col-md-9 p-0">
-                                <select name="golongan_darah" class="form-control form-control-sm">
+                                <select name="golongan_darah" class="form-control">
                                     <option value="">- Pilih -</option>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
@@ -210,6 +211,20 @@
                 }
         
         });
+   }
+   function Submit(e)
+   {
+       var nik = $("#nik").val();
+       $.get(url+"/validation-nik/"+nik+"/null", function(data, status){
+            if(data['response'] == false)
+            {
+                e.submit();
+            }else
+            {
+                $("#error_nik").text('NIK '+nik+' Sudah ada');
+            }
+       });
+        return false;
    }
 </script>
 @stop

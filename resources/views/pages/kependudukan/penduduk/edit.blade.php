@@ -14,40 +14,41 @@
                         <div class="card-title">Edit Data Penduduk</div>
                     </div>
                     <div class="card-body">
-                        <form role="form" method="post"  action="{{url('kependudukan/penduduk/update/'.$penduduk->penduduk_id)}}" method="POST" >
+                        <form role="form" method="post"  action="{{url('kependudukan/penduduk/update/'.$penduduk->penduduk_id)}}" method="POST" onsubmit="return Submit(this)" >
                             @csrf
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>NIK</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="nik" placeholder="NIK" value="{{$penduduk->nik}}">
+									<input type="text" class="form-control input-full" name="nik" placeholder="NIK" value="{{$penduduk->nik}}" minlength="16" maxlength="16" required id="nik">
+                                    <span id="error_nik" class="text-danger"></span>
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Nama Lengkap</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="full_name" placeholder="Nama lengkap" value="{{$penduduk->full_name}}">
+									<input type="text" class="form-control input-full" name="full_name" placeholder="Nama lengkap" value="{{$penduduk->full_name}}" required>
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Wilayah</b></label>
 								<div class="col-md-9 p-0">
                                    <b>Dusun :  </b>
-                                    <select class="form-control" name="wilayah_dusun" onchange="GetRW(this)"> 
-                                        <option> - Pilih -</option>
+                                    <select class="form-control" name="wilayah_dusun" onchange="GetRW(this)" required> 
+                                        <option value=""> - Pilih -</option>
                                         @foreach ($dusun as $item)
                                         <option value="{{$item->wilayah_id}}" {{$penduduk->wilayah_dusun == $item->wilayah_id?"selected":""}}>{{$item->wilayah_nama}}</option>
                                         @endforeach;
                                     </select>
                                     <b> RW  : </b>
-                                    <select class="form-control" name="wilayah_rw" id="wilayah_rw"  onchange="GetRT(this)"> 
-                                        <option> - Pilih -</option>
+                                    <select class="form-control" name="wilayah_rw" id="wilayah_rw"  onchange="GetRT(this)" required> 
+                                        <option value=""> - Pilih -</option>
                                         @foreach ($rw as $item)
                                             <option value="{{$item->wilayah_id}}" {{$penduduk->wilayah_rw == $item->wilayah_id?"selected":""}}>{{$item->wilayah_nama}}</option>
                                         @endforeach;
                                     </select>
                                     <b> RT : </b>
-                                    <select class="form-control" name="wilayah_rt" id="wilayah_rt"> 
-                                        <option> - Pilih -</option>
+                                    <select class="form-control" name="wilayah_rt" id="wilayah_rt" required> 
+                                        <option value=""> - Pilih -</option>
                                         @foreach ($rt as  $item)
                                             <option value="{{$item->wilayah_id}}" {{$penduduk->wilayah_rt == $item->wilayah_id?"selected":""}}>{{$item->wilayah_nama}}</option>
                                         @endforeach;
@@ -63,20 +64,20 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Tempat Lahir</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="tempat_lahir" placeholder="Tempat lahir" value="{{$penduduk->tempat_lahir}}">
+									<input type="text" class="form-control input-full" name="tempat_lahir" placeholder="Tempat lahir" value="{{$penduduk->tempat_lahir}}" >
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Tanggal Lahir</b></label>
 								<div class="col-md-9 p-0">
-									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir" value="{{$penduduk->tanggal_lahir}}">
+									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir" value="{{$penduduk->tanggal_lahir}}" required>
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Jenis Kelamin {{$penduduk->jekel == 'Perempuan' ? 'checked':''}}</b></label>
 								<div class="col-md-9 p-0">
-                                    <b>Laki - Laki </b><input type="radio" class="form-control" name="jekel" value="Laki-laki"  {{$penduduk->jekel == 'Laki-laki' ? 'checked':''}}>
-                                    <b>Perempuan </b><input type="radio" class="form-control" name="jekel" value="Perempuan" {{$penduduk->jekel == 'Perempuan' ? 'checked':''}}>
+                                    <b>Laki - Laki </b><input type="radio" class="form-control" name="jekel" value="Laki-laki" required  {{$penduduk->jekel == 'Laki-laki' ? 'checked':''}}>
+                                    <b>Perempuan </b><input type="radio" class="form-control" name="jekel" value="Perempuan" required {{$penduduk->jekel == 'Perempuan' ? 'checked':''}}>
                                  </div>
 							</div>
                             <div class="form-group form-inline">
@@ -183,6 +184,7 @@
 </div>
 <script>
    var url = "{{url('kependudukan/penduduk/')}}";
+   var id_penduduk = "{{$penduduk->penduduk_id}}";
    function GetRW(evnt){
         $.get(url+"/get_wilayah/"+evnt.value+"/rw", function(data, status){
             $('#wilayah_rw')
@@ -217,6 +219,20 @@
                 }
         
         });
+   }
+   function Submit(e)
+   {
+       var nik = $("#nik").val();
+       $.get(url+"/validation-nik/"+nik+"/"+id_penduduk, function(data, status){
+            if(data['response'] == false)
+            {
+                e.submit();
+            }else
+            {
+                $("#error_nik").text('NIK '+nik+' Sudah ada');
+            }
+       });
+        return false;
    }
 </script>
 @stop

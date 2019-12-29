@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/kependudukan/penduduk/update/{id}', 'PendudukController@update');
     Route::get('/kependudukan/penduduk/delete/{id}', 'PendudukController@destroy');
     Route::get('/kependudukan/penduduk/view/{id}', 'PendudukController@show');
+    Route::get('/kependudukan/penduduk/validation-nik/{nik}/{id}','PendudukController@validation_nik');
     // End Penduduk
 
     // Kelahiran

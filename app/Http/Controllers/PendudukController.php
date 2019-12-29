@@ -157,4 +157,30 @@ class PendudukController extends Controller
          
        return $dusun;
     }
+    public function validation_nik($nik,$id)
+    {
+
+        $penduduk = new Penduduk;
+        $penduduk = $penduduk->newQuery();
+
+        $is_exis = false;
+
+        $penduduk = Penduduk::where('nik','=',$nik);
+
+        if($id !== "null")
+        {
+           
+            $penduduk->where('penduduk_id','!=',$id);
+        }
+    
+        $res = $penduduk->first();
+
+        if($res !== null)
+        {
+            $is_exis = true;
+        }
+        
+        return array('response' => $is_exis);
+    }   
+
 }
