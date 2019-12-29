@@ -70,7 +70,8 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Tanggal Lahir</b></label>
 								<div class="col-md-9 p-0">
-									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir" value="{{$penduduk->tanggal_lahir}}" required>
+									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir" id="tanggal_lahir" value="{{$penduduk->tanggal_lahir}}" required onchange="validasitanggal()">
+                                    <span id="error_tgl_lahir" class="text-danger"></span>
 								</div>
 							</div>
                             <div class="form-group form-inline">
@@ -151,7 +152,7 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Golongan Darah</b></label>
 								<div class="col-md-9 p-0">
-                                <select name="golongan_darah" class="form-control form-control-sm">
+                                <select name="golongan_darah" class="form-control">
                                     <option value="">- Pilih -</option>
                                     <option value="A" {{$penduduk->golongan_darah == "A"?"selected":""}}>A</option>
                                     <option value="B" {{$penduduk->golongan_darah == "B"?"selected":""}}>B</option>
@@ -185,6 +186,7 @@
 <script>
    var url = "{{url('kependudukan/penduduk/')}}";
    var id_penduduk = "{{$penduduk->penduduk_id}}";
+   var ToDate = new Date();
    function GetRW(evnt){
         $.get(url+"/get_wilayah/"+evnt.value+"/rw", function(data, status){
             $('#wilayah_rw')
@@ -233,6 +235,17 @@
             }
        });
         return false;
+   }
+   function validasitanggal() {
+        var tanggal = $("#tanggal_lahir").val();
+        if (new Date(tanggal).getTime() > ToDate.getTime()) {
+            $("#error_tgl_lahir").text("Tanggal lahir harus kurang dari hari ini");
+            $("#tanggal_lahir").val(null);
+            return false;
+        }else{
+            $("#error_tgl_lahir").text(null);
+        }
+        return true;
    }
 </script>
 @stop
