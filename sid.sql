@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2019 at 06:21 PM
+-- Generation Time: Dec 29, 2019 at 10:25 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -224,18 +224,19 @@ CREATE TABLE `penduduk` (
   `status_kependudukan` enum('Tetap','Pendatang','Tidak tetap','Meninggal','Pindah') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `hubungan_keluarga` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `hubungan_keluarga` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `alamat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `penduduk`
 --
 
-INSERT INTO `penduduk` (`penduduk_id`, `nik`, `no_kk`, `wilayah_dusun`, `wilayah_rt`, `wilayah_rw`, `keluarga_id`, `full_name`, `tempat_lahir`, `tanggal_lahir`, `jekel`, `agama`, `pendidikan`, `pekerjaan`, `status_perkawinan`, `golongan_darah`, `status_kependudukan`, `created_at`, `updated_at`, `hubungan_keluarga`) VALUES
-(4, '3306060208956666', NULL, 79, 85, 80, 4, 'Sahrun', NULL, '1995-08-02', NULL, '- Pilih -', NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:17', '2019-12-15 03:45:55', 'KEPALA KELUARGA'),
-(5, '2131312321', NULL, 79, 85, 80, 4, 'Rini', NULL, '1998-06-16', NULL, '- Pilih -', NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:45', '2019-12-15 03:30:31', 'MENANTU'),
-(18, '155156656', NULL, 79, 85, 80, NULL, 'Surya', NULL, '1990-07-03', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'Pindah', '2019-12-22 01:39:42', '2019-12-22 01:40:21', NULL),
-(19, '2454533232', '21412124223432', 79, 85, 80, 4, 'surti', NULL, '2019-12-06', 'Laki-laki', 'ISLAM', NULL, NULL, NULL, 'TIDAK TAHU', 'Pendatang', '2019-12-22 03:02:23', '2019-12-22 03:09:21', 'ANAK');
+INSERT INTO `penduduk` (`penduduk_id`, `nik`, `no_kk`, `wilayah_dusun`, `wilayah_rt`, `wilayah_rw`, `keluarga_id`, `full_name`, `tempat_lahir`, `tanggal_lahir`, `jekel`, `agama`, `pendidikan`, `pekerjaan`, `status_perkawinan`, `golongan_darah`, `status_kependudukan`, `created_at`, `updated_at`, `hubungan_keluarga`, `alamat`) VALUES
+(4, '3306060208956666', NULL, 79, 85, 80, 4, 'Sahrun', NULL, '1995-08-02', NULL, '- Pilih -', NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:17', '2019-12-15 03:45:55', 'KEPALA KELUARGA', NULL),
+(5, '2131312321', NULL, 79, 85, 80, 4, 'Rini', NULL, '1998-06-16', NULL, '- Pilih -', NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:45', '2019-12-15 03:30:31', 'MENANTU', NULL),
+(18, '155156656', NULL, 79, 85, 80, NULL, 'Surya', NULL, '1990-07-03', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'Pindah', '2019-12-22 01:39:42', '2019-12-22 01:40:21', NULL, NULL),
+(19, '2454533232', '21412124223432', 79, 85, 80, 4, 'surti', NULL, '2019-12-06', 'Laki-laki', 'ISLAM', NULL, NULL, NULL, 'TIDAK TAHU', 'Pendatang', '2019-12-22 03:02:23', '2019-12-22 03:09:21', 'ANAK', NULL);
 
 -- --------------------------------------------------------
 
