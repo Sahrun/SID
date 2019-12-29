@@ -75,6 +75,7 @@ class KeluargaController extends Controller
         ->join('wilayah as rw','rw.wilayah_id', '=','keluarga.wilayah_rw')
         ->join('wilayah as rt','rt.wilayah_id', '=','keluarga.wilayah_rt')
         ->leftjoin('penduduk', 'penduduk.penduduk_id', '=', 'keluarga.kepala_keluarga')
+        ->where('keluarga.keluarga_id','=',$id)
         ->select('keluarga.*', 'penduduk.full_name','dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')->first();
       
         $penduduk = Penduduk::where('keluarga_id',$keluarga->keluarga_id)->get();
@@ -229,5 +230,59 @@ class KeluargaController extends Controller
 
         
     }
+    public function get_data_keluarga($id)
+    {
+        $result = array();
+
+        $penduduk = Penduduk::find($id);
+
+        $kepala_keluarga = Penduduk::where('status_kependudukan','!=',"Meninggal")
+        ->where('status_kependudukan','!=',"Pindah")
+        ->where('keluarga_id','=', $penduduk->keluarga_id)
+        ->where('penduduk_id','!=',$penduduk->penduduk_id)
+        ->where('hubungan_keluarga','=','KEPALA KELUARGA')
+        ->orWhereNull('status_kependudukan')->first();
+
+        $keluarga = Penduduk::where('status_kependudukan','!=',"Meninggal")
+        ->where('status_kependudukan','!=',"Pindah")
+        ->where('keluarga_id','=', $penduduk->keluarga_id)
+        ->where('penduduk_id','!=',$penduduk->penduduk_id)
+        ->where('hubungan_keluarga','!=','KEPALA KELUARGA')
+        ->orWhereNull('status_kependudukan')->get();
+
+        if($kepala_keluarga != null){
+            array_push($result,array(
+                "kepala_keluarga" => true,
+                "hubungan_keluarga" => $kepala_keluarga->hubungan_keluarga,
+                "penduduk_id" =>$kepala_keluarga->penduduk_id,
+                "kelamin" =>$kepala_keluarga->jekel,
+                "nik" => $kepala_keluarga->nik,
+                "nama" => $kepala_keluarga->full_name,
+                "kelamin" => $kepala_keluarga->jekel,
+                "tanggal_lahir" => $kepala_keluarga->tanggal_lahir,
+                "umur" => date_diff(date_create($kepala_keluarga->tanggal_lahir), date_create('now'))->y
+            ));
+        }
+
+       foreach($keluarga as $key => $val)
+       {
+
+        array_push($result,array(
+                "kepala_keluarga" => false,
+                "hubungan_keluarga" => $val->hubungan_keluarga,
+                "kelamin" =>$val->jekel,
+                "nik" => $val->nik,
+                "penduduk_id" =>$val->penduduk_id,
+                "nama" => $val->full_name,
+                "kelamin" => $val->jekel,
+                "tanggal_lahir" => $val->tanggal_lahir,
+                "umur" => date_diff(date_create($val->tanggal_lahir), date_create('now'))->y
+            ));
+       }
+
+       return $result;
+
+    }
+
 
 }
