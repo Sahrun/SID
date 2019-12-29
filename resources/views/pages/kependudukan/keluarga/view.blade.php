@@ -47,7 +47,11 @@
                                         <div class="card-header">
                                          <div class="card-title"><b>Anggota Keluarga :</b> 
                                          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambah_anggota"> 
-                                         <b style="color:white">Tambah Anggota Keluarga</b></button>
+                                         <b style="color:white">Tambah Anggota Keluarga</b>
+                                         </button>
+                                         <a class="btn btn-success btn-sm" href="{{url('/surat/salinan-kk/'.$keluarga->keluarga_id)}}" target="_blank">
+                                            <b style="color:white">Export KK</b>
+                                         </a>
                                          </div>
                                         </div>
                                         <table class="display table table-striped table-hover dataTable" >

@@ -10,6 +10,7 @@ use App\Kematian;
 use App\Staff;
 use App\Penduduk;
 use App\Kelahiran;
+use App\Keluarga;
 
 class SuratController extends Controller
 {
@@ -910,7 +911,209 @@ class SuratController extends Controller
         return response()->download($document);
        
     }
+
+    public function salinan_kk($id)
+    {
+        $Daftarkeluarga = array();
+        $this->getIdentitalDesaAll();
+
+        $keluarga = Keluarga::find($id);
+
+        $kepala_keluarga = Penduduk::join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+            ->join('wilayah as  rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+            ->join('wilayah as  rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+            ->where('hubungan_keluarga','=','KEPALA KELUARGA')
+            ->where('keluarga_id','=',$id)
+            ->select('penduduk.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
+            ->first();
+
+        $suami = Penduduk::where('keluarga_id','=',$id)
+            ->where('hubungan_keluarga','=','SUAMI')->first();
+
+        $istri = Penduduk::where('keluarga_id','=',$id)
+            ->where('hubungan_keluarga','=','ISTRI')->get();
+
+        $lainya = Penduduk::leftjoin('kelahiran as  klh', 'klh.penduduk_id', '=', 'penduduk.penduduk_id')
+                ->leftjoin('penduduk as  ayah', 'ayah.penduduk_id', '=', 'klh.id_penduduk_ayah')
+                ->leftjoin('penduduk as  ibu', 'ibu.penduduk_id', '=', 'klh.id_penduduk_ibu')
+                ->where('penduduk.keluarga_id','=',$id)
+                ->where('penduduk.hubungan_keluarga','!=','ISTRI')
+                ->where('penduduk.hubungan_keluarga','!=','KEPALA KELUARGA')
+                ->where('penduduk.hubungan_keluarga','!=','SUAMI')
+                ->select('penduduk.*', 'ayah.full_name as AYAH','ibu.full_name as IBU')
+                ->get();
+
+        if($kepala_keluarga !== null){
+            array_push($Daftarkeluarga,array(
+            'nik' => $kepala_keluarga->nik,
+            'nama' => $kepala_keluarga->full_name,
+            'jk' => $kepala_keluarga->jekel,
+            't_lahir' => $kepala_keluarga->tempat_lahir,
+            'tgl_lahir' => $kepala_keluarga->tanggal_lahir,
+            'hubungan' => $kepala_keluarga->hubungan_keluarga,
+            'agama' => $kepala_keluarga->agama,
+            'pendidikan' => $kepala_keluarga->pendidikan,
+            'pekerjaan' => $kepala_keluarga->pekerjaan, 
+            'status'  =>  $kepala_keluarga->status_perkawinan,
+            'ayah' => '',
+            'ibu' => '',
+            'darah' =>  $kepala_keluarga->golongan_darah
+
+            ));
+        }
+
+        if($suami !== null){
+            array_push($Daftarkeluarga,array(
+            'nik' => $suami->nik,
+            'nama' => $suami->full_name,
+            'jk' => $suami->jekel,
+            't_lahir' => $suami->tempat_lahir,
+            'tgl_lahir' => $suami->tanggal_lahir,
+            'hubungan' => $suami->hubungan_keluarga,
+            'agama' => $suami->agama,
+            'pendidikan' => $suami->pendidikan,
+            'pekerjaan' => $suami->pekerjaan, 
+            'status'  =>  $suami->status_perkawinan, 
+            'ayah' => '',
+            'ibu' => '',
+            'darah' =>  $suami->golongan_darah
+            ));
+        }
+
+        foreach($istri as $key => $val)
+        {
+            array_push($Daftarkeluarga,array(
+            'nik' => $val->nik,
+            'nama' => $val->full_name,
+            'jk' => $val->jekel,
+            't_lahir' => $val->tempat_lahir,
+            'tgl_lahir' => $val->tanggal_lahir,
+            'hubungan' => $val->hubungan_keluarga ,
+            'agama' => $val->agama,
+            'pendidikan' => $val->pendidikan,
+            'pekerjaan' => $val->pekerjaan,
+            'status'  =>  $val->status_perkawinan, 
+            'ayah' => '',
+            'ibu' => '',
+            'darah' =>  $val->golongan_darah
+            ));
+        }
+
+        foreach($lainya as $key => $val)
+        {
+            array_push($Daftarkeluarga,array(
+            'nik' => $val->nik,
+            'nama' => $val->full_name,
+            'jk' => $val->jekel,
+            't_lahir' => $val->tempat_lahir,
+            'tgl_lahir' => $val->tanggal_lahir,
+            'hubungan' => $val->hubungan_keluarga,
+            'agama' => $val->agama,
+            'pendidikan' => $val->pendidikan,
+            'pekerjaan' => $val->pekerjaan,
+            'status'  =>  $val->status_perkawinan,
+            'ayah' => $val->AYAH,
+            'ibu' => $val->IBU,
+            'darah' =>  $val->golongan_darah
+            ));
+        }
+
+        $no ="";
+        $nama ="";
+        $nik ="";
+        $sex ="";
+        $t_lahir ="";
+        $tgl_lahir ="";
+        $agama ="";
+        $pendidikan ="";
+        $pekerjaan ="";
+
+
+        $kawin ="";
+        $hubungan ="";
+        $warga_negra ="";
+        $pasport ="";
+        $kitas ="";
+        $ayah ="";
+        $ibu ="";
+        $darah ="";
+
+        foreach($Daftarkeluarga as $key => $val)
+        {
+            $no .= ($key + 1)." \line ";
+            $nama .= $this->CheckValue($Daftarkeluarga[$key]['nama'])." \line ";
+            $nik .= $this->CheckValue($Daftarkeluarga[$key]['nik'])." \line ";
+            $sex .= $this->CheckValue($Daftarkeluarga[$key]['jk'])." \line ";
+            $t_lahir .= $this->CheckValue($Daftarkeluarga[$key]['t_lahir'])." \line ";
+            $tgl_lahir .= $this->CheckValue(date("d-m-Y",strtotime($Daftarkeluarga[$key]['tgl_lahir'])))." \line ";
+            $agama .= $this->CheckValue($Daftarkeluarga[$key]['agama'])." \line ";
+            $pendidikan .= $this->CheckValue($Daftarkeluarga[$key]['pendidikan'])." \line ";
+            $pekerjaan .= $this->CheckValue($Daftarkeluarga[$key]['pekerjaan'])." \line ";
+
+
+            $kawin .= $this->CheckValue($Daftarkeluarga[$key]['status'])." \line ";
+            $hubungan .= $this->CheckValue($Daftarkeluarga[$key]['hubungan'])." \line ";
+            $warga_negra .=  "WNI \line ";
+            $pasport .=  $this->CheckValue("")." \line ";
+            $kitas .=  $this->CheckValue("")." \line ";
+            $ayah .= $this->CheckValue($Daftarkeluarga[$key]['ayah'])." \line ";
+            $ibu .= $this->CheckValue($Daftarkeluarga[$key]['ibu'])." \line ";
+            $darah .= $this->CheckValue($Daftarkeluarga[$key]['darah'])." \line ";
+        }
+
+        $document =  file_get_contents(public_path('master_surat').'\\'."kk.rtf");
+ 
+        $document = str_replace("*kk",$kepala_keluarga->full_name, $document);
+        $document = str_replace("alamat_plus_dusun",$kepala_keluarga->alamat." : ".$kepala_keluarga->DUSUN, $document);
+        $document = str_replace("*rt",$kepala_keluarga->RT, $document);
+        $document = str_replace("*rw", $kepala_keluarga->RW, $document);
+        $document = str_replace("desa",$this->getIdentitas("nama_desa"), $document);
+        $document = str_replace("no_kk",$keluarga->no_kk, $document);
+
+        $document = str_replace("kec",$this->getIdentitas("nama_kec"), $document);
+        $document = str_replace("kab",$this->getIdentitas("nama_kab"), $document);
+        $document = str_replace("pos",$this->getIdentitas("kode_pos"), $document);
+        $document = str_replace("prop",$this->getIdentitas("nama_prov"), $document);
+
+        $document = str_replace("[no]",$no, $document);
+        $document = str_replace("[nama]",$nama, $document);
+        $document = str_replace("[nik]",$nik, $document);
+        $document = str_replace("[sex]",$sex, $document);
+        $document = str_replace("[tempatlahir]",$t_lahir, $document);
+        $document = str_replace("[tanggallahir]",$tgl_lahir, $document);
+        $document = str_replace("[agama]",$agama, $document);
+        $document = str_replace("[pendidikan]",$pendidikan, $document);
+        $document = str_replace("[pekerjaan]",$pekerjaan, $document);
+
+        $document = str_replace("[kawin]",$kawin, $document);
+        $document = str_replace("[hubungan]",$hubungan, $document);
+        $document = str_replace("[warganegara]",$warga_negra, $document);
+        $document = str_replace("[pasport]",$pasport, $document);
+        $document = str_replace("[kitas]",$kitas, $document);
+        $document = str_replace("[ayah]",$ayah, $document);
+        $document = str_replace("[ibu]",$ibu, $document);
+        $document = str_replace("[darah]",$darah, $document);
+
+        $document = str_replace("*camat",$this->getIdentitas("nama_camat"), $document);
+        $document = str_replace("*nip_camat",$this->getIdentitas("nip_camat"), $document);
+        $document = str_replace("*kades",$this->getIdentitas("nama_kades"), $document);
+        $document = str_replace("*kk", $kepala_keluarga->full_name, $document);
+        $document = str_replace("*tertanda","", $document);
+     
+
+        header("Content-type: application/msword");
+        header("Content-disposition: inline; filename=Salinan_KK.doc");
+        header("Content-length: " . strlen($document));
+
+        echo $document;
+    }
     
+    public function CheckValue($val)
+    {
+        return $val == "" || $val == null? "-": $val;
+
+    }
+
     public function getIdentitalDesaAll()
     {
         
