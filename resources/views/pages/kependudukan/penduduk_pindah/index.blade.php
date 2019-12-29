@@ -70,7 +70,7 @@
                                                                     <a onclick="open_form({{$item->pindah_id}})" class="btn btn-link btn-primary btn-lg" title="Edit">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
-                                                                    <a title="Delete" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/penduduk-pindah/delete/'.$item->pindah_id)}}">
+                                                                    <a title="Hapus" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/penduduk-pindah/delete/'.$item->pindah_id)}}">
                                                                         <i class="fa fa-times"></i>
                                                                     </a>
                                                                 </div>

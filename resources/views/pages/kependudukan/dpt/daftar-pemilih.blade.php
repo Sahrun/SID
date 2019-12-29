@@ -3,7 +3,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Keluarga</h4>
+                <h4 class="page-title">Daftar Pemilih</h4>
 
             </div>
             <div class="row">
@@ -11,9 +11,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">Data Keluarga</h4>
-                                <a class="btn btn-primary btn-round ml-auto" href="{{url('kependudukan/keluarga/add')}}">
-                                <i class="fa fa-plus"></i> Tambah Keluarga
+                                <h4 class="card-title">Data Penduduk</h4>
                                 </a>
                             </div>
                         </div>
@@ -47,36 +45,21 @@
                                                 <thead>
                                                     <tr role="row">
                                                     <th  tabindex="0" aria-controls="add-row" rowspan="1" colspan="1">No</th>
-                                                        <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 233px;">No.KK</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 344px;">Kepala Keluarga</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 344px;">Alamat</th>
-                                                        <th style="width: 108px;" tabindex="0">Aksi</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 233px;">NIK</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 344px;">Nama</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 344px;">Usia</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <?php $no =1 ?>
-                                                @foreach ($keluarga as $item)
-                                                    <tr role="row" class="{{$no%2?'odd':'even'}}">
-                                                        <td class="sorting_1">{{$no++}}</td>
-                                                        <td class="sorting_1">{{$item->no_kk}}</td>
-                                                        <td>{{$item->full_name}}</td>
-                                                        <td>{{$item->alamat_keluarga}}</td>
-                                                        <td>
-                                                            <div class="form-button-action">
-                                                            
-                                                            <a href="{{url('kependudukan/keluarga/view/'.$item->keluarga_id)}}" class="btn btn-link btn-primary btn-lg" title="Lihat">
-                                                                    <i class="fa fa-eye"></i>
-                                                                </a>
-                                                                <a href="{{url('kependudukan/keluarga/edit/'.$item->keluarga_id)}}" class="btn btn-link btn-primary btn-lg" title="Edit">
-                                                                    <i class="fa fa-edit"></i>
-                                                                </a>
-                                                                <a title="Hapus" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/keluarga/delete/'.$item->keluarga_id)}}">
-                                                                    <i class="fa fa-times"></i>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                                    <?php $no =1 ?>
+                                                    @foreach ($penduduk as $item)
+                                                        <tr role="row" class="{{$no%2?'odd':'even'}}">
+                                                            <td class="sorting_1">{{$no++}}</td>
+                                                            <td class="sorting_1">{{$item->nik}}</td>
+                                                            <td>{{$item->full_name}}</td>
+                                                            <td>{{date_diff(date_create($item->tanggal_lahir), date_create('now'))->y}}</td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -89,10 +72,10 @@
                                         <div class="col-sm-12 col-md-7">
                                             <div class="dataTables_paginate paging_simple_numbers" id="add-row_paginate">
                                                 <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled" id="add-row_previous"><a href="#" aria-controls="add-row" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                                                    <li class="paginate_button page-item previous disabled" id="add-row_previous"><a href="#" aria-controls="add-row" data-dt-idx="0" tabindex="0" class="page-link"><</a></li>
                                                     <li class="paginate_button page-item active"><a href="#" aria-controls="add-row" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
                                                     <li class="paginate_button page-item "><a href="#" aria-controls="add-row" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                                    <li class="paginate_button page-item next" id="add-row_next"><a href="#" aria-controls="add-row" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
+                                                    <li class="paginate_button page-item next" id="add-row_next"><a href="#" aria-controls="add-row" data-dt-idx="3" tabindex="0" class="page-link">></a></li>
                                                 </ul>
                                             </div>
                                         </div>

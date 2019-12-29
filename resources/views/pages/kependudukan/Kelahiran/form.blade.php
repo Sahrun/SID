@@ -94,6 +94,12 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Alamat</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="alamat" placeholder="Alamat">
+								</div>
+							</div>
+                            <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Jam Lahir</b></label>
 								<div class="col-md-9 p-0">
 									<input type="time" class="form-control" name="tob" placeholder="Tempat lahir">

@@ -63,13 +63,13 @@
                                                             <td>{{date_diff(date_create($item->tanggal_lahir), date_create('now'))->y}}</td>
                                                             <td>
                                                                 <div class="form-button-action">
+                                                                <a href="{{url('kependudukan/penduduk/view/'.$item->penduduk_id)}}" class="btn btn-link btn-primary btn-lg" title="Lihat">
+                                                                        <i class="fa fa-eye"></i>
+                                                                    </a>
                                                                     <a href="{{url('kependudukan/penduduk/edit/'.$item->penduduk_id)}}" class="btn btn-link btn-primary btn-lg" title="Edit">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
-                                                                    <a href="{{url('kependudukan/penduduk/view/'.$item->penduduk_id)}}" class="btn btn-link btn-primary btn-lg" title="Show">
-                                                                        <i class="fa fa-eye"></i>
-                                                                    </a>
-                                                                    <a title="Delete" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/penduduk/delete/'.$item->penduduk_id)}}">
+                                                                    <a title="Hapus" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/penduduk/delete/'.$item->penduduk_id)}}">
                                                                         <i class="fa fa-times"></i>
                                                                     </a>
                                                                 </div>

@@ -52,7 +52,7 @@
                                                                     href="{{url('kependudukan/wilayah/edit-rt/'.$row->wilayah_id)}}">
                                                                     <i class="fa fa-edit"></i>
                                                                 </a>
-                                                                <a title="Delete" class="btn btn-link btn-danger btn-sm"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/wilayah/delete/'.$row->wilayah_id)}}">
+                                                                <a title="Hapus" class="btn btn-link btn-danger btn-sm"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/wilayah/delete/'.$row->wilayah_id)}}">
                                                                     <i class="fa fa-times"></i>
                                                                 </a>
                                                             </div>

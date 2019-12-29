@@ -10,7 +10,7 @@
       <div class="info">
         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
           <span>
-            Hizrian
+          <h4>{{ Auth::user()->name }}</h4>
             <span class="user-level">Administrator</span>
             <span class="caret"></span>
           </span>
@@ -27,11 +27,6 @@
             <li>
               <a href="#edit">
                 <span class="link-collapse">Edit Profile</span>
-              </a>
-            </li>
-            <li>
-              <a href="#settings">
-                <span class="link-collapse">Settings</span>
               </a>
             </li>
           </ul>
@@ -89,7 +84,7 @@
               </a>
             </li>
             <li>
-            <a href="{{url('kependudukan/daftar-pemilih')}}">
+            <a href="{{url('kependudukan/dpt/daftar-pemilih')}}">
                 <span class="sub-item">Daftar Pemilih Tetap</span>
               </a>
             </li>

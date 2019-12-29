@@ -11,7 +11,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Tambah Data Penduduk</div>
+                        <div class="card-title">Edit Data Penduduk</div>
                     </div>
                     <div class="card-body">
                         <form role="form" method="post"  action="{{url('kependudukan/penduduk/update/'.$penduduk->penduduk_id)}}" method="POST" >
@@ -79,6 +79,12 @@
                                     <b>Perempuan </b><input type="radio" class="form-control" name="jekel" value="Perempuan" {{$penduduk->jekel == 'Perempuan' ? 'checked':''}}>
                                  </div>
 							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Alamat</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="alamat" placeholder="Alamat" value="{{$penduduk->alamat}}">
+								</div>
+                            </div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Agama</b></label>
 								<div class="col-md-9 p-0">

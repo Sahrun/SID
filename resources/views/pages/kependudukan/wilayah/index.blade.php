@@ -41,13 +41,14 @@
                                                         <td>{{$item->full_name}}</td>
                                                         <td>
                                                             <div class="form-button-action">
+                                                            
+                                                            <a href="{{url('kependudukan/wilayah/view/'.$item->wilayah_id)}}" class="btn btn-link btn-primary btn-lg" title="Lihat">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </a>
                                                                 <a href="{{url('kependudukan/wilayah/edit/'.$item->wilayah_id)}}" class="btn btn-link btn-primary btn-lg" title="Edit">
                                                                     <i class="fa fa-edit"></i>
                                                                 </a>
-                                                                <a href="{{url('kependudukan/wilayah/view/'.$item->wilayah_id)}}" class="btn btn-link btn-primary btn-lg" title="Show">
-                                                                    <i class="fa fa-eye"></i>
-                                                                </a>
-                                                                <a title="Delete" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/wilayah/delete/'.$item->wilayah_id)}}">
+                                                                <a title="Hapus" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/wilayah/delete/'.$item->wilayah_id)}}">
                                                                     <i class="fa fa-times"></i>
                                                                 </a>
                                                             </div>

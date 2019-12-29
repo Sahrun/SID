@@ -49,6 +49,12 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Alamat</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="alamat" placeholder="Alamat">
+								</div>
+							</div>
+                            <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>No Kartu Keluarga</b></label>
 								<div class="col-md-9 p-0">
                                      <input type="text" class="form-control input-full" name="no_kk" placeholder="No kartu keluarga">

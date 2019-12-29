@@ -65,13 +65,14 @@
                                                             <td>{{$item->alasan_datang}}</td>
                                                             <td>
                                                                 <div class="form-button-action">
+                                                                
+                                                                <a href="{{url('kependudukan/pendatang/view/'.$item->pendatang_id)}}" class="btn btn-link btn-primary btn-lg" title="Lihat">
+                                                                        <i class="fa fa-eye"></i>
+                                                                    </a>
                                                                     <a href="{{url('kependudukan/pendatang/edit/'.$item->pendatang_id)}}" class="btn btn-link btn-primary btn-lg" title="Edit">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
-                                                                    <a href="{{url('kependudukan/pendatang/view/'.$item->pendatang_id)}}" class="btn btn-link btn-primary btn-lg" title="Show">
-                                                                        <i class="fa fa-eye"></i>
-                                                                    </a>
-                                                                    <a title="Delete" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/pendatang/delete/'.$item->pendatang_id)}}">
+                                                                    <a title="Hapus" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/pendatang/delete/'.$item->pendatang_id)}}">
                                                                         <i class="fa fa-times"></i>
                                                                     </a>
                                                                 </div>

@@ -48,7 +48,7 @@
                                                                     <a href="{{url('staff/edit/'.$item->staff_id)}}" class="btn btn-link btn-primary btn-lg" title="Edit">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
-                                                                    <a title="Delete" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('staff/delete/'.$item->staff_id)}}">
+                                                                    <a title="Hapus" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('staff/delete/'.$item->staff_id)}}">
                                                                         <i class="fa fa-times"></i>
                                                                     </a>
                                                                 </div>

@@ -43,18 +43,18 @@
                                                         <td>{{$row->full_name == null?'-':$row->full_name}}</td>
                                                         <td>
                                                             <div class="form-button-action">
+                                                            <a  class="btn btn-link btn-success btn-sm"
+                                                                    title="Lihat"
+                                                                    href="{{url('kependudukan/wilayah/view-rw/'.$row->wilayah_id)}}"
+                                                                    >
+                                                                    <i class="fa fa-eye"></i>
+                                                                </a>
                                                                 <a  class="btn btn-link btn-warning btn-sm" 
                                                                     title="Edit"
                                                                     href="{{url('kependudukan/wilayah/edit-rw/'.$row->wilayah_id)}}">
                                                                     <i class="fa fa-edit"></i>
                                                                 </a>
-                                                                <a  class="btn btn-link btn-success btn-sm"
-                                                                    title="Show"
-                                                                    href="{{url('kependudukan/wilayah/view-rw/'.$row->wilayah_id)}}"
-                                                                    >
-                                                                    <i class="fa fa-eye"></i>
-                                                                </a>
-                                                                <a title="Delete" class="btn btn-link btn-danger btn-sm"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/wilayah/delete/'.$row->wilayah_id)}}">
+                                                                <a title="Hapus" class="btn btn-link btn-danger btn-sm"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/wilayah/delete/'.$row->wilayah_id)}}">
                                                                     <i class="fa fa-times"></i>
                                                                 </a>
                                                             </div>
