@@ -4,13 +4,22 @@ namespace App\Exports;
 
 use App\Kelahiran;
 use Illuminate\Contracts\View\View;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class KelahiranExport implements FromView, ShouldAutoSize
+class KelahiranExport implements WithColumnFormatting, FromView, ShouldAutoSize
 {
     use Exportable;
+
+    public function columnFormats(): array
+    {
+        return [
+            'C' => NumberFormat::FORMAT_TEXT
+        ];
+    }
 
     public function view(): View
     {
