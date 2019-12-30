@@ -49,7 +49,7 @@
                                             <div class="col-md-9 p-0">
                                                 <select class="form-control input-pelapor-desa" name="penduduk_pelapor" required>
                                                     <option value=""> - Pilih -</option>
-                                                    @foreach ($penduduk as $item)
+                                                    @foreach ($pendudukAll as $item)
                                                     <option value="{{$item->penduduk_id}}">{{$item->full_name}}</option>
                                                     @endforeach;
                                                 </select>
