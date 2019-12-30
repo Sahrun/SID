@@ -19,7 +19,8 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>KIA</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="nik" placeholder="KIA">
+									<input type="text" class="form-control input-full" name="nik" placeholder="KIA" minlength="16" maxlength="16" required id="nik">
+                                    <span id="error_nik" class="text-danger"></span>
 								</div>
 							</div>
                             <div class="form-group form-inline">
@@ -90,8 +91,9 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Tanggal Lahir</b></label>
 								<div class="col-md-9 p-0">
-									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir" required>
-								</div>
+									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir" required onchange="validasitanggal()">
+                                    <span id="error_tgl_lahir" class="text-danger"></span>
+                                </div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Alamat</b></label>
@@ -239,6 +241,31 @@
                 }
         
         });
+   }
+   function Submit(e)
+   {
+       var nik = $("#nik").val();
+       $.get(url+"/validation-nik/"+nik+"/null", function(data, status){
+            if(data['response'] == false)
+            {
+                e.submit();
+            }else
+            {
+                $("#error_nik").text('NIK '+nik+' Sudah ada');
+            }
+       });
+        return false;
+   }
+   function validasitanggal() {
+        var tanggal = $("#tanggal_lahir").val();
+        if (new Date(tanggal).getTime() > ToDate.getTime()) {
+            $("#error_tgl_lahir").text("Tanggal lahir harus kurang dari hari ini");
+            $("#tanggal_lahir").val(null);
+            return false;
+        }else{
+            $("#error_tgl_lahir").text(null);
+        }
+        return true;
    }
 </script>
 @stop

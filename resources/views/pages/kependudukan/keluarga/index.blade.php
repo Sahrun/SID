@@ -47,9 +47,9 @@
                                                 <thead>
                                                     <tr role="row">
                                                     <th  tabindex="0" aria-controls="add-row" rowspan="1" colspan="1">No</th>
-                                                        <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 233px;">No.KK</th>
+                                                        <th  tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"  style="width: 233px;">No.KK</th>
                                                         <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 344px;">Kepala Keluarga</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 344px;">Alamat</th>
+                                                        <th  tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"  style="width: 344px;">Alamat</th>
                                                         <th style="width: 108px;" tabindex="0">Aksi</th>
                                                     </tr>
                                                 </thead>
@@ -83,8 +83,6 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="add-row_info" role="status" aria-live="polite">Showing 1 to 5 of 10 entries
-                                            </div>
                                         </div>
                                         <div class="col-sm-12 col-md-7">
                                             <div class="dataTables_paginate paging_simple_numbers" id="add-row_paginate">
