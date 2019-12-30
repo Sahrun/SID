@@ -12,8 +12,11 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Data Penduduk</h4>
+                                <a class="btn btn-round ml-auto" id="excel-btn" href="{{url('/kependudukan/penduduk/excel-penduduk')}}" target="_blank">
+                                    <i class="fas fa-file-excel"></i> Unduh sbg Excel
+                                </a>
                                 <a class="btn btn-primary btn-round ml-auto" href="{{url('kependudukan/penduduk/add')}}">
-                                <i class="fa fa-plus"></i> Tambah Penduduk
+                                    <i class="fa fa-plus"></i> Tambah Penduduk
                                 </a>
                             </div>
                         </div>

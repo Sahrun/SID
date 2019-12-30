@@ -7,6 +7,8 @@ use App\Wilayah;
 use Illuminate\Support\Facades\DB;
 use App\Penduduk;
 use DateTime;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PendudukExport;
 
 class PendudukController extends Controller
 {
@@ -181,6 +183,11 @@ class PendudukController extends Controller
         }
         
         return array('response' => $is_exis);
-    }   
+    } 
+    
+    public function excel_penduduk()
+    {
+        return Excel::download(new PendudukExport, 'penduduk_'.date("YmdHis").'.xlsx');
+    }
 
 }
