@@ -74,12 +74,12 @@
                                                     <td>{{date_diff(date_create($item->tanggal_lahir), date_create('now'))->y}}</td>
                                                     <th style="width:30px;">
                                                             <div class="form-button-action">
+                                                            <a href="{{url('kependudukan/penduduk/view/'.$item->penduduk_id)}}" class="btn btn-link btn-primary btn-sm" title="Lihat">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </a>
                                                                 <button  class="btn btn-link btn-primary btn-sm" title="Edit" onclick="edit_angota({{$item->penduduk_id}})">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
-                                                                <a href="{{url('kependudukan/penduduk/view/'.$item->penduduk_id)}}" class="btn btn-link btn-primary btn-sm" title="Show">
-                                                                    <i class="fa fa-eye"></i>
-                                                                </a>
                                                                 <a title="Delete" class="btn btn-link btn-danger btn-sm"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/keluarga/delete-anggota/'.$item->penduduk_id)}}">
                                                                     <i class="fa fa-times"></i>
                                                                 </a>

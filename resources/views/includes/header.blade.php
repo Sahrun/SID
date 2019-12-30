@@ -27,7 +27,7 @@
         <li class="nav-item toggle-nav-search hidden-caret">
         <li class="nav-item dropdown hidden-caret">
           <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
-              <font color='white'><i class="fa fa-cog"></i></font>
+              <font color='white'><i class="fa fa-user-circle"></i></font>
           </a>
           <ul class="dropdown-menu dropdown-user animated fadeIn">
             <li>
@@ -40,9 +40,6 @@
               </div>
             </li>
             <li>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">My Profile</a>
-              <a class="dropdown-item" href="#">Account Setting</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
