@@ -141,13 +141,13 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Berat Lahir (Kg)</b></label>
 								<div class="col-md-9 p-0">
-                                    <input type="number" class="form-control" name="berat" placeholder="Berat">
+                                    <input type="text" class="form-control" name="berat" placeholder="Berat" onkeypress="decimalOnly(this,event)">
                                  </div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Panjang Lahir (Cm)</b></label>
 								<div class="col-md-9 p-0">
-                                    <input type="number" class="form-control" name="panjang" placeholder="Panjang">
+                                    <input type="text" class="form-control" name="panjang" placeholder="Panjang" onkeypress="decimalOnly(this,event)">
                                  </div>
 							</div>
                             <div class="form-group form-inline">
@@ -268,6 +268,20 @@
             $("#error_tgl_lahir").text(null);
         }
         return true;
+   }
+   function decimalOnly(obj,event)
+   {
+    var data = obj.value;
+	if((event.charCode>= 48 && event.charCode <= 57) || event.charCode== 46 ||event.charCode == 0){
+		if(data.indexOf('.') > -1){
+ 			if(event.charCode== 46)
+  				event.preventDefault();
+		}
+	}else
+    {
+		event.preventDefault();
+    }
+
    }
 </script>
 @stop
