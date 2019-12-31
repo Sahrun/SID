@@ -1088,9 +1088,7 @@ class SuratController extends Controller
         return View("pages.surat.rekap_surat",['surat' => $result,'filter' => $filter]);
 
     }
-    public function rekap_surat1(Request $request)
-    {
-    }
+
     public function CheckValue($val)
     {
         return $val == "" || $val == null? "-": $val;
