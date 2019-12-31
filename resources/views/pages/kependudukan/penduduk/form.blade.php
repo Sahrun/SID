@@ -224,6 +224,7 @@
             }else
             {
                 $("#error_nik").text('NIK '+nik+' Sudah ada');
+                $("#nik").focus();
             }
        });
         return false;

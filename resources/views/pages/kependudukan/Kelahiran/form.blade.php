@@ -14,7 +14,7 @@
                         <div class="card-title">Tambah Data Kelahiran</div>
                     </div>
                     <div class="card-body">
-                        <form role="form" method="post"  action="{{url('kependudukan/kelahiran/create')}}" >
+                        <form role="form" method="post"  action="{{url('kependudukan/kelahiran/create')}}" onsubmit="return Submit(this)">
                             @csrf
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>KIA</b></label>
@@ -33,18 +33,18 @@
 								<label class="col-md-3 label-control"><b>Wilayah</b></label>
 								<div class="col-md-9 p-0">
                                    <b>Dusun :  </b>
-                                   <select class="form-control" name="wilayah_dusun" onchange="GetRW(this)"> 
+                                   <select class="form-control" name="wilayah_dusun" onchange="GetRW(this)" required> 
                                         <option value=""> - Pilih -</option>
                                         @foreach ($dusun as $item)
                                         <option value="{{$item->wilayah_id}}">{{$item->wilayah_nama}}</option>
                                         @endforeach;
                                     </select>
                                     <b> RW  : </b>
-                                    <select class="form-control" name="wilayah_rw" id="wilayah_rw"  onchange="GetRT(this)"> 
+                                    <select class="form-control" name="wilayah_rw" id="wilayah_rw"  onchange="GetRT(this)" required> 
                                         <option value=""> - Pilih -</option>
                                     </select>
                                     <b> RT : </b>
-                                    <select class="form-control" name="wilayah_rt" id="wilayah_rt"> 
+                                    <select class="form-control" name="wilayah_rt" id="wilayah_rt" required> 
                                         <option value=""> - Pilih -</option>
                                     </select>
 								</div>
@@ -91,7 +91,7 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Tanggal Lahir</b></label>
 								<div class="col-md-9 p-0">
-									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir" required onchange="validasitanggal()">
+									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir" required onchange="validasitanggal()" id="tanggal_lahir">
                                     <span id="error_tgl_lahir" class="text-danger"></span>
                                 </div>
 							</div>
@@ -104,13 +104,13 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Jam Lahir</b></label>
 								<div class="col-md-9 p-0">
-									<input type="time" class="form-control" name="tob" placeholder="Tempat lahir">
+									<input type="time" class="form-control" name="tob" placeholder="Tempat lahir" required>
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Penolong Kelahiran</b></label>
 								<div class="col-md-9 p-0">
-									<select name="hob" class="form-control">
+									<select name="hob" class="form-control" required> 
                                         <option value="">- Pilih -</option>
                                         <option value="Dockter">Dokter</option>
                                         <option value="Bidan">Bidan</option>
@@ -129,7 +129,7 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Anak Ke</b></label>
 								<div class="col-md-9 p-0">
-                                 <input type="number" class="form-control" name="anak_ke" placeholder="Anak ke">                                 </div>
+                                 <input type="number" class="form-control" name="anak_ke" placeholder="Anak ke" required>                                 </div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Jenis Kelamin</b></label>
@@ -208,6 +208,7 @@
 </div>
 <script>
    var url = "{{url('kependudukan/penduduk/')}}";
+   var ToDate = new Date();
    function GetRW(evnt){
         $.get(url+"/get_wilayah/"+evnt.value+"/rw", function(data, status){
            
@@ -215,7 +216,7 @@
             .find('option')
             .remove()
             .end()
-            .append('<option>- Pilih -</option>');
+            .append('<option value="">- Pilih -</option>');
 
             for(i=0;i < data.length;i++)
                 {   
@@ -232,7 +233,7 @@
             .find('option')
             .remove()
             .end()
-            .append('<option>- Pilih -</option>');
+            .append('<option value="">- Pilih -</option>');
             for(i=0;i < data.length;i++)
                 {   
                     $('#wilayah_rt').append(`<option value="${data[i].wilayah_id}"> 
@@ -252,6 +253,7 @@
             }else
             {
                 $("#error_nik").text('NIK '+nik+' Sudah ada');
+                $("#nik").focus();
             }
        });
         return false;

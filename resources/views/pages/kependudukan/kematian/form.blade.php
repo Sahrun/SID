@@ -131,7 +131,9 @@
                 <div class="form-group form-inline">
                     <label class="col-md-3 label-control"><b>Tanggal Kematian</b></label>
                     <div class="col-md-9 p-0">
-                        <input type="date" class="form-control" name="tgl_kematian" id="tgl_kematian" placeholder="Tanggal Kematian" required>
+                        <input type="date" class="form-control" name="tgl_kematian" id="tgl_kematian" placeholder="Tanggal Kematian" required onchange="validasitanggal()" id="tgl_kematian">
+                        <br/>
+                        <span id="error_tgl_kematian" class="text-danger"></span>
 				    </div>
 				</div>
                 <div class="form-group form-inline">
@@ -174,6 +176,7 @@
 
     <script>
       var url = "{{url('kependudukan/kematian/')}}";
+      var ToDate = new Date();
       function open_form(id){
 
                 $('#nik').html(null);
@@ -184,6 +187,7 @@
                 $('#jam_kematian').val(null);
                 $('#sebab_kematian').val(null);
                 $('#tempat_kematian').val(null);
+                $("#error_tgl_kematian").text(null);
 
                 $.get(url+"/get-data-penduduk/"+id, function(data, status){
                     if(data !== null){
@@ -197,5 +201,16 @@
                     }
                 });
         }
+    function validasitanggal() {
+        var tanggal = $("#tgl_kematian").val();
+        if (new Date(tanggal).getTime() > ToDate.getTime()) {
+            $("#error_tgl_kematian").text("Tanggal Kematian harus kurang dari hari ini");
+            $("#tgl_kematian").val(null);
+            return false;
+        }else{
+            $("#error_tgl_kematian").text(null);
+        }
+        return true;
+     }
     </script>
     @stop

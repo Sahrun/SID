@@ -14,12 +14,13 @@
                         <div class="card-title">Edit Data Kelahiran</div>
                     </div>
                     <div class="card-body">
-                        <form role="form" method="post"  action="{{url('kependudukan/kelahiran/update/'.$kelahiran->kelahiran_id)}}" method="POST" >
+                        <form role="form" method="post"  action="{{url('kependudukan/kelahiran/update/'.$kelahiran->kelahiran_id)}}" method="POST" onsubmit="return Submit(this)">
                             @csrf
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>NIK</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="nik" placeholder="NIK" value="{{$kelahiran->nik}}" required>
+									<input type="text" class="form-control input-full" name="nik" placeholder="NIK" value="{{$kelahiran->nik}}" minlength="16" maxlength="16" required id="nik">
+                                    <span id="error_nik" class="text-danger"></span>
 								</div>
 							</div>
                             <div class="form-group form-inline">
@@ -75,8 +76,9 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Tanggal Lahir</b></label>
 								<div class="col-md-9 p-0">
-									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir" value="{{$kelahiran->tanggal_lahir}}">
-								</div>
+									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir" value="{{$kelahiran->tanggal_lahir}}" required onchange="validasitanggal()" id="tanggal_lahir">
+                                    <span id="error_tgl_lahir" class="text-danger"></span>
+                                </div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Jenis Kelamin {{$kelahiran->jekel == 'Perempuan' ? 'checked':''}}</b></label>
@@ -112,7 +114,7 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Golongan Darah</b></label>
 								<div class="col-md-9 p-0">
-                                <select name="golongan_darah" class="form-control form-control-sm">
+                                <select name="golongan_darah" class="form-control">
                                     <option value="">- Pilih -</option>
                                     <option value="A" {{$kelahiran->golongan_darah == "A"?"selected":""}}>A</option>
                                     <option value="B" {{$kelahiran->golongan_darah == "B"?"selected":""}}>B</option>
@@ -195,6 +197,8 @@
 </div>
 <script>
    var url = "{{url('kependudukan/penduduk/')}}";
+   var ToDate = new Date();
+   var id_penduduk = "{{$kelahiran->penduduk_id}}";
    function GetRW(evnt){
         $.get(url+"/get_wilayah/"+evnt.value+"/rw", function(data, status){
             $('#wilayah_rw')
@@ -229,6 +233,32 @@
                 }
         
         });
+   }
+   function Submit(e)
+   {
+       var nik = $("#nik").val();
+       $.get(url+"/validation-nik/"+nik+"/"+id_penduduk, function(data, status){
+            if(data['response'] == false)
+            {
+                e.submit();
+            }else
+            {
+                $("#error_nik").text('NIK '+nik+' Sudah ada');
+                $("#nik").focus();
+            }
+       });
+        return false;
+   }
+   function validasitanggal() {
+        var tanggal = $("#tanggal_lahir").val();
+        if (new Date(tanggal).getTime() > ToDate.getTime()) {
+            $("#error_tgl_lahir").text("Tanggal lahir harus kurang dari hari ini");
+            $("#tanggal_lahir").val(null);
+            return false;
+        }else{
+            $("#error_tgl_lahir").text(null);
+        }
+        return true;
    }
 </script>
 @stop
