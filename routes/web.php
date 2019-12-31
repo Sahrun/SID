@@ -54,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kependudukan/keluarga/edit-anggota/{id}', 'KeluargaController@edit_keluarga');
     Route::post('/kependudukan/keluarga/update-anggota/{id}', 'KeluargaController@update_keluarga');
     Route::get('/kependudukan/keluarga/get-data-keluarga/{id}', 'KeluargaController@get_data_keluarga');
+    Route::get('/kependudukan/keluarga/validation-no-kk/{kk}/{id}', 'KeluargaController@validation_no_kk');
     // End Keluarga
 
     // Penduduk

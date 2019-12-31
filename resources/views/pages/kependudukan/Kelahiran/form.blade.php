@@ -252,7 +252,7 @@
                 e.submit();
             }else
             {
-                $("#error_nik").text('NIK '+nik+' Sudah ada');
+                $("#error_nik").text('KIA '+nik+' Sudah ada');
                 $("#nik").focus();
             }
        });

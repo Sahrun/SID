@@ -14,12 +14,12 @@
                         <div class="card-title">Tambah Data Keluarga</div>
                     </div>
                     <div class="card-body">
-                        <form role="form" method="post"  action="{{url('kependudukan/keluarga/create')}}" >
+                        <form role="form" method="post"  action="{{url('kependudukan/keluarga/create')}}" onsubmit="return Submit(this)" >
                             @csrf
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Kepala Keluarga</b></label>
 								<div class="col-md-9 p-0">
-                                        <select class="form-control" name="kepala_keluarga"> 
+                                        <select class="form-control" name="kepala_keluarga" required> 
                                             <option value=""> - Pilih -</option>
                                             @foreach ($penduduk as $item)
                                             <option value="{{$item->penduduk_id}}">{{$item->nik}}</option>
@@ -30,20 +30,21 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>No. Kartu Keluarga</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="no_kk" placeholder="No. Kartu Keluarga">
+									<input type="text" class="form-control input-full" name="no_kk" placeholder="No. Kartu Keluarga" minlength="16" maxlength="16" required id="no_kk">
+                                    <span id="error_no_kk" class="text-danger"></span>
 								</div>
 							</div>
                           
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Alamat</b></label>
 								<div class="col-md-9 p-0">
-                                    <textarea name="alamat_keluarga" class="form-control input-full"  placeholder="Alamat"></textarea>
+                                    <textarea name="alamat_keluarga" class="form-control input-full"  placeholder="Alamat" required></textarea>
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Dusun</b></label>
 								<div class="col-md-9 p-0">
-                                    <select class="form-control" name="wilayah_dusun" onchange="GetRW(this)"> 
+                                    <select class="form-control" name="wilayah_dusun" onchange="GetRW(this)" required> 
                                         <option value=""> - Pilih -</option>
                                         @foreach ($dusun as $item)
                                         <option value="{{$item->wilayah_id}}">{{$item->wilayah_nama}}</option>
@@ -54,7 +55,7 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>RW</b></label>
 								<div class="col-md-9 p-0">
-                                    <select class="form-control" name="wilayah_rw" id="wilayah_rw"  onchange="GetRT(this)"> 
+                                    <select class="form-control" name="wilayah_rw" id="wilayah_rw"  onchange="GetRT(this)" required> 
                                         <option value=""> - Pilih -</option>
                                     </select>
 								</div>
@@ -62,7 +63,7 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>RT</b></label>
 								<div class="col-md-9 p-0">
-                                    <select class="form-control" name="wilayah_rt" id="wilayah_rt"> 
+                                    <select class="form-control" name="wilayah_rt" id="wilayah_rt" required> 
                                         <option value=""> - Pilih -</option>
                                     </select>
                                  </div>
@@ -82,6 +83,7 @@
 </div>
 <script>
    var url = "{{url('kependudukan/penduduk/')}}";
+   var url_kk = "{{url('kependudukan/keluarga/')}}";
    function GetRW(evnt){
         $.get(url+"/get_wilayah/"+evnt.value+"/rw", function(data, status){
            
@@ -115,6 +117,21 @@
                 }
         
         });
+   }
+   function Submit(e)
+   {
+       var no_kk = $("#no_kk").val();
+       $.get(url_kk+"/validation-no-kk/"+no_kk+"/null", function(data, status){
+            if(data['response'] == false)
+            {
+                e.submit();
+            }else
+            {
+                $("#error_no_kk").text('NO KK '+no_kk+' Sudah ada');
+                $("#no_kk").focus();
+            }
+       });
+        return false;
    }
 </script>
 @stop

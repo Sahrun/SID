@@ -283,6 +283,31 @@ class KeluargaController extends Controller
        return $result;
 
     }
+    public function validation_no_kk($kk,$id)
+    {
+
+        $keluarga = new Keluarga;
+        $keluarga = $keluarga->newQuery();
+
+        $is_exis = false;
+
+        $keluarga = Keluarga::where('no_kk','=',$kk);
+
+        if($id !== "null")
+        {
+           
+            $keluarga->where('keluarga_id','!=',$id);
+        }
+    
+        $res = $keluarga->first();
+
+        if($res !== null)
+        {
+            $is_exis = true;
+        }
+        
+        return array('response' => $is_exis);
+    }
 
 
 }

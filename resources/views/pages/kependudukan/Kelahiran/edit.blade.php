@@ -17,7 +17,7 @@
                         <form role="form" method="post"  action="{{url('kependudukan/kelahiran/update/'.$kelahiran->kelahiran_id)}}" method="POST" onsubmit="return Submit(this)">
                             @csrf
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>NIK</b></label>
+								<label class="col-md-3 label-control"><b>KIA</b></label>
 								<div class="col-md-9 p-0">
 									<input type="text" class="form-control input-full" name="nik" placeholder="NIK" value="{{$kelahiran->nik}}" minlength="16" maxlength="16" required id="nik">
                                     <span id="error_nik" class="text-danger"></span>
@@ -243,7 +243,7 @@
                 e.submit();
             }else
             {
-                $("#error_nik").text('NIK '+nik+' Sudah ada');
+                $("#error_nik").text('KIA '+nik+' Sudah ada');
                 $("#nik").focus();
             }
        });
