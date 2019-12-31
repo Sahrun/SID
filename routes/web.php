@@ -140,6 +140,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/surat/cetak-surat-kurang-mampu/','SuratController@cetak_surat_kurang_mampu');
     Route::get('surat/get-surat/{id}','SuratController@get_surat');
     Route::get('/surat/salinan-kk/{id}','SuratController@salinan_kk');
+    Route::get('/surat/rekap-surat/','SuratController@rekap_surat');
+    Route::post('/surat/rekap-surat/','SuratController@rekap_surat');
+    Route::get('/surat/delete/{id}','SuratController@destroy');
     // End Surat
     
     //region Export Excel

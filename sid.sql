@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2019 at 10:25 AM
+-- Generation Time: Dec 31, 2019 at 12:05 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -277,6 +277,13 @@ CREATE TABLE `staff` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`staff_id`, `nama_staff`, `staff_nip`, `staff_nik`, `staff_posisi`, `created_at`, `updated_at`) VALUES
+(1, 'Joni', '1211313121', '12131212', 'Printer', '2019-12-31 03:14:37', '2019-12-31 03:14:37');
+
 -- --------------------------------------------------------
 
 --
@@ -286,7 +293,7 @@ CREATE TABLE `staff` (
 CREATE TABLE `surat` (
   `surat_id` int(10) UNSIGNED NOT NULL,
   `nama_surat` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tanggal` datetime NOT NULL,
+  `tanggal` date NOT NULL,
   `hal` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `surat_filename` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `penduduk_id` int(10) UNSIGNED DEFAULT NULL,
@@ -294,6 +301,15 @@ CREATE TABLE `surat` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `surat`
+--
+
+INSERT INTO `surat` (`surat_id`, `nama_surat`, `tanggal`, `hal`, `surat_filename`, `penduduk_id`, `staff_id`, `created_at`, `updated_at`) VALUES
+(1, 'Surat Keterangan Kurang Mampu', '2019-12-31', '1213242121212', 'Surat Keterangan Kurang Mampu_20191231101504.doc', 4, 1, '2019-12-31 03:15:04', '2019-12-31 03:15:04'),
+(2, 'Surat Keterangan Kurang Mampu', '2019-12-31', '1213242121212', 'Surat Keterangan Kurang Mampu_20191231101511.doc', 4, 1, '2019-12-31 03:15:11', '2019-12-31 03:15:11'),
+(3, 'Surat Keterangan Kurang Mampu', '2019-12-31', '1213242121212', 'Surat Keterangan Kurang Mampu_20191231101512.doc', 4, 1, '2019-12-31 03:15:13', '2019-12-31 03:15:13');
 
 -- --------------------------------------------------------
 
@@ -547,13 +563,13 @@ ALTER TABLE `penduduk_pindah`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `staff_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `staff_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `surat`
 --
 ALTER TABLE `surat`
-  MODIFY `surat_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `surat_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`

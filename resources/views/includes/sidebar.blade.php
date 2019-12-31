@@ -110,7 +110,7 @@
               </a>
             </li>
             <li>
-              <a href="surat/rekap_surat.html">
+              <a href="{{url('surat/rekap-surat')}}">
                 <span class="sub-item">Rekap Surat</span>
               </a>
             </li>

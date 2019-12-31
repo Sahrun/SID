@@ -22,26 +22,9 @@ class SuratController extends Controller
     protected $path_folder="master_surat";
     protected $identitas = array();
     protected $timezone ="Asia/Jakarta";
-
-    public function index()
-    {
-        
-    }
-
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function save(Request $request,$file_name)
@@ -50,61 +33,22 @@ class SuratController extends Controller
         
         
         $surat->nama_surat =  $surat->getsuratValue($request->kode_surat,"title");
-        $surat->tanggal = Date("Y-m-d h:i:s");
+        $surat->tanggal = Date("Y-m-d");
         $surat->hal = $request->hal;
         $surat->surat_filename = $file_name;
         $surat->penduduk_id = $request->penduduk_id;
-        $surat->staff_id =null;
+        $surat->staff_id = $request->staf_id;
         $surat->created_at = Date("Y-m-d h:i:s");
         $surat->updated_at = Date("Y-m-d h:i:s");
         $surat->save();
         
         return $surat;
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $surat = Surat::find($id);
+        $surat->delete();
+        return redirect()->back();
     }
 
     public function format_surat()
@@ -1107,7 +1051,46 @@ class SuratController extends Controller
 
         echo $document;
     }
+
+    public function rekap_surat(Request $request)
+    {
+        $surat = new Surat;
+        $surat = $surat->newQuery();
+        
+        $filter = array(
+            'startDate' => isset($request->startDate)? $request->startDate : null,
+            'endDate'   => isset($request->endDate)? $request->endDate : null
+        );
+
+        $result = array();
+        
+
+        $surat->join('penduduk','penduduk.penduduk_id','=','surat.penduduk_id')
+              ->join('staff','staff.staff_id','=','surat.staff_id')
+              ->select('surat.*','penduduk.full_name as nama_penduduk','staff.nama_staff as nama_staff');
+
+
+
+       if(isset($request->startDate))
+        {
+           
+            $surat->where('tanggal','>=',$request->startDate);
+        }
+
+        if(isset($request->endDate))
+        {
+           
+            $surat->where('tanggal','<=',$request->endDate);
+        }
     
+        $result = $surat->get();
+
+        return View("pages.surat.rekap_surat",['surat' => $result,'filter' => $filter]);
+
+    }
+    public function rekap_surat1(Request $request)
+    {
+    }
     public function CheckValue($val)
     {
         return $val == "" || $val == null? "-": $val;
