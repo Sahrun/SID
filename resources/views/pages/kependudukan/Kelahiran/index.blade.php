@@ -88,8 +88,6 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="add-row_info" role="status" aria-live="polite">Showing 1 to 5 of 10 entries
-                                            </div>
                                         </div>
                                         <div class="col-sm-12 col-md-7">
                                             <div class="dataTables_paginate paging_simple_numbers" id="add-row_paginate">

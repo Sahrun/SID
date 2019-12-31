@@ -3,7 +3,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Daftar Pemilih</h4>
+                <h4 class="page-title">Daftar Pemilih Tetap</h4>
 
             </div>
             <div class="row">

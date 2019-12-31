@@ -83,8 +83,6 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="add-row_info" role="status" aria-live="polite">Showing 1 to 5 of 10 entries
-                                            </div>
                                         </div>
                                         <div class="col-sm-12 col-md-7">
                                             <div class="dataTables_paginate paging_simple_numbers" id="add-row_paginate">
@@ -187,5 +185,34 @@
                     }
                 });
         }
+        
+        var currentUrl = new URL(window.location.href);
+        var search_val = currentUrl.searchParams.get("search");
+        $("#search").val(search_val);
+
+        var baseUrl = "{{url('')}}" + window.location.pathname;
+
+        function filter_data(page=null){     
+            var showdata = $("#show_data").val();
+            var search =  $("#search").val();
+            
+            return baseUrl+"?search="+search+"&showdata="+showdata+"&page="+page;
+        }
+
+        function searchEnter(event){
+            if (event.keyCode === 13) {
+                window.location.href = filter_data();
+            }
+        }
+
+        function searchChange(){
+                window.location.href = filter_data();
+        }
+        
+        function searchPage(event,page)
+        {
+            event.href = filter_data(page);
+        }
+        
     </script>
     @stop

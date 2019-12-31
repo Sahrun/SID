@@ -12,8 +12,11 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Data Penduduk</h4>
+                                <a class="btn btn-round ml-auto" id="excel-btn" href="{{url('/kependudukan/penduduk/excel-penduduk')}}" target="_blank">
+                                    <i class="fas fa-file-excel"></i> Unduh sbg Excel
+                                </a>
                                 <a class="btn btn-primary btn-round ml-auto" href="{{url('kependudukan/penduduk/add')}}">
-                                <i class="fa fa-plus"></i> Tambah Penduduk
+                                    <i class="fa fa-plus"></i> Tambah Penduduk
                                 </a>
                             </div>
                         </div>
@@ -47,10 +50,10 @@
                                                 <thead>
                                                     <tr role="row">
                                                     <th  tabindex="0" aria-controls="add-row" rowspan="1" colspan="1">No</th>
-                                                        <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 233px;">NIK</th>
+                                                        <th tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" style="width: 233px;">NIK</th>
                                                         <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 344px;">Nama</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 344px;">Usia</th>
-                                                        <th style="width: 108px;" class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending">Aksi</th>
+                                                        <th  tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"  style="width: 344px;">Usia</th>
+                                                        <th style="width: 108px;"  tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" >Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -82,8 +85,6 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="add-row_info" role="status" aria-live="polite">Showing 1 to 5 of 10 entries
-                                            </div>
                                         </div>
                                         <div class="col-sm-12 col-md-7">
                                             <div class="dataTables_paginate paging_simple_numbers" id="add-row_paginate">
