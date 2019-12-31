@@ -181,6 +181,10 @@ class PendudukController extends Controller
         }
         
         return array('response' => $is_exis);
-    }   
+    }
+    public function daftar_pemilih_tetap ()
+    {
+        $users = DB::select('select * from users where active = ?', [1]);
+    }
 
 }

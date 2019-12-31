@@ -4,11 +4,8 @@
     "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\pages",
-    "\\routes"
+    "\\resources"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\SuratController.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\PendudukController.php",
   "PreviewInSolutionExplorer": false
 }
