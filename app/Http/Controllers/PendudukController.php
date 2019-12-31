@@ -9,6 +9,8 @@ use App\Penduduk;
 use DateTime;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PendudukExport;
+use App\Exports\PemilihTetapExport;
+
 
 class PendudukController extends Controller
 {
@@ -188,5 +190,39 @@ class PendudukController extends Controller
     public function excel_penduduk()
     {
         return Excel::download(new PendudukExport, 'penduduk_'.date("YmdHis").'.xlsx');
+    }
+
+    public function pemilih_tetap(Request $request)
+    {
+        $tanggal = null;
+
+        $date = Date("Y-m-d");
+        if(isset($request->tanggal))
+        {
+            $date = $request->tanggal;
+            $tanggal = $request->tanggal;
+        }
+
+        $pemilih = DB::select("SELECT *,TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()) as usia from Penduduk
+        WHERE  TIMESTAMPDIFF(YEAR, tanggal_lahir, '".$date."') >= 17
+        AND ((status_kependudukan != 'Meninggal' AND status_kependudukan != 'Pindah') OR status_kependudukan IS NULL)");
+
+        return view('pages.kependudukan.penduduk.pemilih_tetap',['pemilih' => $pemilih,'tanggal' => $tanggal]);
+    }
+
+    public function pemilih_tetap_export(Request $request)
+    {
+
+        $date = Date("Y-m-d");
+        if(isset($request->tanggal))
+        {
+            $date = $request->tanggal;
+        }
+
+        $pemilih = DB::select("SELECT *,TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()) as usia from Penduduk
+        WHERE  TIMESTAMPDIFF(YEAR, tanggal_lahir, '".$date."') >= 17
+        AND ((status_kependudukan != 'Meninggal' AND status_kependudukan != 'Pindah') OR status_kependudukan IS NULL)");
+
+        return Excel::download(new PemilihTetapExport($pemilih),'daftar_pemilih_tetap_'.date("YmdHis").'.xlsx');
     }
 }

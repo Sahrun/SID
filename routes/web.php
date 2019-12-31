@@ -68,6 +68,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kependudukan/penduduk/view/{id}', 'PendudukController@show');
     Route::get('/kependudukan/penduduk/validation-nik/{nik}/{id}','PendudukController@validation_nik');
     Route::get('/kependudukan/penduduk/excel-penduduk', 'PendudukController@excel_penduduk');
+    Route::get('/kependudukan/penduduk/pemilih-tetap', 'PendudukController@pemilih_tetap');
+    Route::get('/kependudukan/penduduk/pemilih-tetap-export', 'PendudukController@pemilih_tetap_export');
     // End Penduduk
 
     // Kelahiran

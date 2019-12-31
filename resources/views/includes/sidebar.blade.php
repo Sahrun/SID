@@ -84,7 +84,7 @@
               </a>
             </li>
             <li>
-            <a href="{{url('kependudukan/dpt/daftar-pemilih')}}">
+            <a href="{{url('kependudukan/penduduk/pemilih-tetap')}}">
                 <span class="sub-item">Daftar Pemilih Tetap</span>
               </a>
             </li>
