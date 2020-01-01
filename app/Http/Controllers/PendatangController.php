@@ -66,6 +66,7 @@ class PendatangController extends Controller
             $penduduk->wilayah_dusun = $request->wilayah_dusun;
             $penduduk->wilayah_rw = $request->wilayah_rw;
             $penduduk->wilayah_rt = $request->wilayah_rt;
+            $penduduk->alamat = $request->alamat;
             $penduduk->created_at = Date("Y-m-d h:i:s");
             $penduduk->updated_at = Date("Y-m-d h:i:s");
             $penduduk->save();
@@ -149,6 +150,7 @@ class PendatangController extends Controller
             $penduduk->status_perkawinan   = $request->status_perkawinan;
             $penduduk->golongan_darah   = $request->golongan_darah;
             $penduduk->status_kependudukan   = $request->status_kependudukan;
+            $penduduk->alamat = $request->alamat;
             $penduduk->updated_at    = Date("Y-m-d h:i:s");
             $penduduk->save();
 

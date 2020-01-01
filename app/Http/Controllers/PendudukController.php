@@ -62,6 +62,7 @@ class PendudukController extends Controller
         "wilayah_dusun" => $request->wilayah_dusun,
         "wilayah_rw" => $request->wilayah_rw,
         "wilayah_rt" => $request->wilayah_rt,
+        "alamat" => $request->alamat,
         "created_at" => Date("Y-m-d h:i:s"),
         "updated_at" => Date("Y-m-d h:i:s")
         ]);
@@ -125,6 +126,7 @@ class PendudukController extends Controller
         $penduduk->status_perkawinan   = $request->status_perkawinan;
         $penduduk->golongan_darah   = $request->golongan_darah;
         $penduduk->status_kependudukan   = $request->status_kependudukan;
+        $penduduk->alamat = $request->alamat;
         $penduduk->updated_at    = Date("Y-m-d h:i:s");
         $penduduk->save();
         return redirect()->action('PendudukController@index');
