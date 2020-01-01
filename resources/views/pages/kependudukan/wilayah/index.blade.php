@@ -67,34 +67,5 @@
             </div>
         </div>
     </div>
-    <script>
-        var currentUrl = new URL(window.location.href);
-        var search_val = currentUrl.searchParams.get("search");
-        $("#search").val(search_val);
-
-        var baseUrl = "{{url('')}}" + window.location.pathname;
-
-        function filter_data(page=null){     
-            var showdata = $("#show_data").val();
-            var search =  $("#search").val();
-            
-            return baseUrl+"?search="+search+"&showdata="+showdata+"&page="+page;
-        }
-
-        function searchEnter(event){
-            if (event.keyCode === 13) {
-                window.location.href = filter_data();
-            }
-        }
-
-        function searchChange(){
-                window.location.href = filter_data();
-        }
-        
-        function searchPage(event,page)
-        {
-            event.href = filter_data(page);
-        }
-        
-    </script>   
+   
     @stop

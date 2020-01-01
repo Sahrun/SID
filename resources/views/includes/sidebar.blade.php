@@ -138,7 +138,7 @@
         <div class="collapse" id="laporan">
           <ul class="nav nav-collapse">
             <li>
-              <a href="laporan/lap_statistik.html">
+              <a href="{{url('lap/statistik')}}">
                 <span class="sub-item">Laporan Statistik Kependudukan</span>
               </a>
             </li>
