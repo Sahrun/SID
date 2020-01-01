@@ -148,7 +148,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/surat/delete/{id}','SuratController@destroy');
     // End Surat
     
-    //region Export Excel
+    //region Laporan dan Export Excel
+    Route::get('/lap/statistik', 'LaporanController@statistik');
+
     Route::get('/lap/penduduk-pindah', 'LaporanController@penduduk_pindah');
     Route::get('/lap/penduduk-pindah/{tgl_awal}/{tgl_akhir}', 'LaporanController@penduduk_pindah_filter');
     Route::get('/lap/excel-penduduk-pindah', 'LaporanController@excel_penduduk_pindah');
@@ -168,7 +170,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/lap/kematian/{tgl_awal}/{tgl_akhir}', 'LaporanController@kematian_filter');
     Route::get('/lap/excel-kematian', 'LaporanController@excel_kematian');
     Route::get('/lap/excel-kematian/{tgl_awal}/{tgl_akhir}', 'LaporanController@excel_kematian_filter');
-    //endregion Export Excel
+    //endregion Laporan dan Export Excel
 
     // User
     Route::get('/user', 'UserController@index');

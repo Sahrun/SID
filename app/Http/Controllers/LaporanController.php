@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 use App\PendudukPindah;
 use App\Exports\PendudukPindahExport;
@@ -21,9 +22,64 @@ use App\Exports\KelahiranFilterExport;
 use App\Kematian;
 use App\Exports\KematianExport;
 use App\Exports\KematianFilterExport;
+use App\Penduduk;
 
 class LaporanController extends Controller
 {
+    public function statistik()
+    {
+        $jen_kel = Penduduk::select(DB::raw('ifnull(jekel, "Belum isi data") as jekel, count(*) as jumlah'))
+        ->where([
+            ['status_kependudukan', '<>', 'Meninggal'],
+            ['status_kependudukan', '<>', 'Pindah']
+        ])
+        ->groupBy('jekel')
+        ->get();
+
+        $agama = Penduduk::select(DB::raw('ifnull(agama, "Belum isi data") as agama, count(*) as jumlah'))
+        ->where([
+            ['status_kependudukan', '<>', 'Meninggal'],
+            ['status_kependudukan', '<>', 'Pindah']
+        ])
+        ->groupBy('agama')
+        ->get();
+
+        $pendidikan = Penduduk::select(DB::raw('ifnull(pendidikan, "Belum isi data") as pendidikan, count(*) as jumlah'))
+        ->where([
+            ['status_kependudukan', '<>', 'Meninggal'],
+            ['status_kependudukan', '<>', 'Pindah']
+        ])
+        ->groupBy('pendidikan')
+        ->get();
+
+        $status_kependudukan = Penduduk::select(DB::raw('ifnull(status_kependudukan, "Belum isi data") as status_kependudukan, count(*) as jumlah'))
+        ->groupBy('status_kependudukan')
+        ->get();
+
+        $umur = Penduduk::select(DB::raw('case 
+            when timestampdiff(year, tanggal_lahir, current_date()) between 0 and 2 then "0 - 2"
+            when timestampdiff(year, tanggal_lahir, current_date()) between 3 and 5 then "3 - 5"
+            when timestampdiff(year, tanggal_lahir, current_date()) between 6 and 12 then "6 - 12"
+            when timestampdiff(year, tanggal_lahir, current_date()) between 13 and 17 then "13 - 17"
+            when timestampdiff(year, tanggal_lahir, current_date()) between 18 and 25 then "18 - 25"
+            when timestampdiff(year, tanggal_lahir, current_date()) between 26 and 35 then "26 - 35"
+            when timestampdiff(year, tanggal_lahir, current_date()) between 36 and 40 then "36 - 40"
+            when timestampdiff(year, tanggal_lahir, current_date()) between 41 and 50 then "41 - 50"
+            when timestampdiff(year, tanggal_lahir, current_date()) between 51 and 70 then "51 - 70"
+            when timestampdiff(year, tanggal_lahir, current_date()) > 70 then "> 70"
+            when tanggal_lahir is null then "Belum isi data"
+            end as umur, count(*) as jumlah'))
+        ->where([
+            ['status_kependudukan', '<>', 'Meninggal'],
+            ['status_kependudukan', '<>', 'Pindah']
+        ])
+        ->groupBy('umur')
+        ->get();
+
+        return view('pages.laporan.statistik', ['jen_kel' => $jen_kel, 'agama' => $agama, 'pendidikan' => $pendidikan,
+            'status_kependudukan' => $status_kependudukan, 'umur' => $umur]);
+    }
+
     //region Laporan Penduduk Pindah
     public function penduduk_pindah()
     {
