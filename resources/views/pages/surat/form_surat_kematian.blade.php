@@ -47,9 +47,10 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Tanggal Lahir</b></label>
+								<label class="col-md-3 label-control"><b>Tanggal Lahir Pelapor</b></label>
 								<div class="col-md-9 p-0">
-									<input type="date" class="form-control" name="tanggal_lahir_pelapor">
+									<input type="date" class="form-control" name="tanggal_lahir_pelapor" id="tanggal_lahir" onchange="validasitanggal()"> <br/>
+                                    <span id="error_tgl_lahir" class="text-danger"></span>
 								</div>
 							</div>
                             <div class="form-group form-inline">
@@ -85,40 +86,17 @@
     </div>
 </div>
 <script>
-   var url = "{{url('kependudukan/penduduk/')}}";
-   function GetRW(evnt){
-        $.get(url+"/get_wilayah/"+evnt.value+"/rw", function(data, status){
-           
-            $('#wilayah_rw')
-            .find('option')
-            .remove()
-            .end()
-            .append('<option>- Pilih -</option>');
-
-            for(i=0;i < data.length;i++)
-                {   
-                    $('#wilayah_rw').append(`<option value="${data[i].wilayah_id}"> 
-                                            ${data[i].wilayah_nama} 
-                                        </option>`); 
-                }
-        
-        });
-   }
-   function GetRT(evnt){
-        $.get(url+"/get_wilayah/"+evnt.value+"/rt", function(data, status){
-            $('#wilayah_rt')
-            .find('option')
-            .remove()
-            .end()
-            .append('<option>- Pilih -</option>');
-            for(i=0;i < data.length;i++)
-                {   
-                    $('#wilayah_rt').append(`<option value="${data[i].wilayah_id}"> 
-                                            ${data[i].wilayah_nama} 
-                                        </option>`); 
-                }
-        
-        });
+var ToDate = new Date();
+  function validasitanggal() {
+        var tanggal = $("#tanggal_lahir").val();
+        if (new Date(tanggal).getTime() > ToDate.getTime()) {
+            $("#error_tgl_lahir").text("Tanggal lahir harus kurang dari hari ini");
+            $("#tanggal_lahir").val(null);
+            return false;
+        }else{
+            $("#error_tgl_lahir").text(null);
+        }
+        return true;
    }
 </script>
 @stop

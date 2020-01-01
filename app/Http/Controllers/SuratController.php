@@ -22,6 +22,14 @@ class SuratController extends Controller
     protected $path_folder="master_surat";
     protected $identitas = array();
     protected $timezone ="Asia/Jakarta";
+    protected $hari = array ( 1 =>    'Senin',
+			'Selasa',
+			'Rabu',
+			'Kamis',
+			'Jumat',
+			'Sabtu',
+			'Minggu'
+		);
     /**
      * Show the form for creating a new resource.
      *
@@ -174,8 +182,8 @@ class SuratController extends Controller
         $document = str_replace("[nama_kab]", $this->getIdentitas("nama_kab"), $document);
         
         
-        $document = str_replace("[form_hari]", date("l",strtotime($kematian->tgl_kematian)), $document);
-        $document = str_replace("[form_tanggal_mati]", date("d",strtotime($kematian->tgl_kematian)), $document);
+        $document = str_replace("[form_hari]", $this->hari[date("N",strtotime($kematian->tgl_kematian))], $document);
+        $document = str_replace("[form_tanggal_mati]", date("d",strtotime($kematian->tgl_kematian. ' '.$this->timezone)), $document);
         $document = str_replace("[form_jam]", $kematian->jam_kematian, $document);
         $document = str_replace("[form_tempat_mati]", $kematian->tempat_kematian, $document);
         $document = str_replace("[sebab_nama]", $kematian->sebab_kematian, $document);
