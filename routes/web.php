@@ -11,13 +11,11 @@
 |
 */
 
+use App\Http\Controllers\HomeController;
+
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-        return View::make('pages.home.home');
-    });
-    Route::get('/dasbhoard', function () {
-        return View::make('pages.home.home');
-    });
+    Route::get('/', 'HomeController@index');
+    Route::get('/dashboard', 'HomeController@index');
     Route::get('/login', function () {
         return View::make('manage.auth.login');
     });
