@@ -18,6 +18,12 @@
                             @csrf
                             <input type="hidden" value="{{$kode_surat}}" name="kode_surat" />
                             <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor Surat</b></label>
+								<div class="col-md-9 p-0">
+                                    <input type="text" class="form-control input-full" name="nomor_surat" required>
+                                 </div>
+							</div>
+                            <div class="form-group form-inline">
                                 <label class="col-md-3 label-control"><b>NIK/Nama</b></label>
                                 <div class="col-md-9 p-0">
                                     <select class="form-control" name="penduduk_id" required>
