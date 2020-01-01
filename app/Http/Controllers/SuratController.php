@@ -542,8 +542,12 @@ class SuratController extends Controller
         $document = str_replace("[tanggal_lahir_ibu]",date("d-m-Y",strtotime($ibu->tanggal_lahir)), $document);
         $document = str_replace("[umur_ibu]",date_diff(date_create($ibu->tanggal_lahir), date_create('now'))->y, $document);
         $document = str_replace("[pekerjaanibu]",$ibu->pekerjaan, $document);
+        $document = str_replace("[alamat_ibu]",$ibu->alamat, $document);
+        $document = str_replace("[sebutan_desa]",$this->getIdentitas("sebutan_desa"), $document);
         $document = str_replace("[desaibu]",$this->getIdentitas("nama_desa"), $document);
+        $document = str_replace("[sebutan_kecamatan]",$this->getIdentitas("sebutan_kecamatan"), $document);
         $document = str_replace("[kecibu]",$this->getIdentitas("nama_kec"), $document);
+        $document = str_replace("[sebutan_kabupaten]",$this->getIdentitas("sebutan_kabupaten"), $document);
         $document = str_replace("[kabibu]",$this->getIdentitas("nama_kab"), $document);
         //
 
@@ -553,9 +557,12 @@ class SuratController extends Controller
         $document = str_replace("[nik_ayah]",$ayah->nik, $document);
         $document = str_replace("[umur_ayah]",date_diff(date_create($ayah->tanggal_lahir), date_create('now'))->y, $document);
         $document = str_replace("[pekerjaanayah]","ok", $document);
-        $document = str_replace("[alamat_ayah]",date_diff(date_create($ayah->tanggal_lahir), date_create('now'))->y, $document); 
+        $document = str_replace("[alamat_ayah]",$ayah->tanggal_lahir->alamat, $document);   
+        $document = str_replace("[sebutan_desa]",$this->getIdentitas("sebutan_desa"), $document);
         $document = str_replace("[desaayah]",$this->getIdentitas("nama_desa"), $document);
+        $document = str_replace("[sebutan_kecamatan]",$this->getIdentitas("sebutan_kecamatan"), $document);
         $document = str_replace("[kecayah]",$this->getIdentitas("nama_kec"), $document);
+        $document = str_replace("[sebutan_kabupaten]",$this->getIdentitas("sebutan_kabupaten"), $document);
         $document = str_replace("[kabayah]",$this->getIdentitas("nama_kab"), $document);
         //
 
