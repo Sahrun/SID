@@ -19,10 +19,62 @@ class PendudukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $penduduk = Penduduk::where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
-        return view('pages.kependudukan.penduduk.index',['penduduk' => $penduduk]);
+        $penduduk = new Penduduk;
+
+        $pages = 0;
+        $page = 0;
+        $showdata = 10;
+
+        $penduduk = $penduduk->newQuery();
+
+        if(isset($request->search))
+        {
+            $penduduk->where('nik','like',''.$request->search.'%');
+            $penduduk->orWhere('full_name', 'like',''.$request->search.'%');
+        }
+
+        if(isset($request->page) && !empty($request->page))
+        {
+            $page = $request->page;
+
+        }
+
+        if(isset($request->showdata) && !empty($request->showdata))
+        {
+            $showdata = $request->showdata;
+
+        }
+
+
+        $penduduk->where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
+      
+        
+        if(isset($request->order) && !empty($request->order))
+        {
+            if($request->order == "desc")
+            {
+                $penduduk->orderBy('full_name', 'desc');
+            }else
+            {
+                $penduduk->orderBy('full_name', 'asc');
+            }
+        }else
+        {
+            $penduduk->orderBy('full_name', 'asc');
+        }
+        
+        $result  = $penduduk->get();
+
+        $penduduk->offset(($page * $showdata));
+        $penduduk->limit($showdata);
+
+        $penduduk = $penduduk->get();
+         
+        $pages =  ceil(count($result) / $showdata);
+      
+       return view('pages.kependudukan.penduduk.index',['penduduk' => $penduduk,'pages' => $pages,'page' => $page,'showdata' => $showdata]);
     }
 
     /**
