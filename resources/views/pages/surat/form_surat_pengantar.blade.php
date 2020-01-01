@@ -35,18 +35,6 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>NO KTP</b></label>
-								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="no_ktp" placeholder="NO KTP">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>NO KK</b></label>
-								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="no_kk" placeholder="NO KK">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Berlaku</b></label>
 								<div class="col-md-9 p-0">
 									<input type="date" class="form-control" name="berlaku_mulai">
@@ -57,27 +45,6 @@
 								<label class="col-md-3 label-control"><b>Keperluan</b></label>
 								<div class="col-md-9 p-0">
                                     <input type="text" class="form-control input-full" name="hal" required>
-                                 </div>
-							</div>
-                            <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Gologan Darah</b></label>
-								<div class="col-md-9 p-0">
-                                <select name="golongan_darah" class="form-control">
-                                    <option value="">- Pilih -</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="AB">AB</option>
-                                    <option value="O">O</option>
-                                    <option value="A+">A+</option>
-                                    <option value="A-">A-</option>
-                                    <option value="B+">B+</option>
-                                    <option value="B-">B-</option>
-                                    <option value="AB+">AB+</option>
-                                    <option value="AB-">AB-</option>
-                                    <option value="O+">O+</option>
-                                    <option value="O-">O-</option>
-                                    <option value="TIDAK TAHU">TIDAK TAHU</option>
-                                </select>
                                  </div>
 							</div>
                             <div class="form-group form-inline">

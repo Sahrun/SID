@@ -92,7 +92,7 @@ class SuratController extends Controller
            
             return View($surat->getsuratValue($kode_surat,"page"),['kode_surat' => $kode_surat,'penduduk' => $penduduk,'staff' => $staff]);
         }else if($kode_surat == "S04"){
-            $penduduk = Penduduk::all();
+            $penduduk = Penduduk::where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
            
             return View($surat->getsuratValue($kode_surat,"page"),['kode_surat' => $kode_surat,'penduduk' => $penduduk,'staff' => $staff]);
         }else if($kode_surat == "S01")
@@ -219,7 +219,8 @@ class SuratController extends Controller
          $penduduk = Penduduk::join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
          ->join('wilayah as  rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
          ->join('wilayah as  rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
-         ->select('penduduk.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
+         ->leftjoin('keluarga','keluarga.keluarga_id','=','penduduk.keluarga_id')
+         ->select('penduduk.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT','keluarga.no_kk')
          ->where('penduduk.penduduk_id',$request->penduduk_id)->first();
 
 
@@ -260,12 +261,12 @@ class SuratController extends Controller
         
         
         
-        $document = str_replace("[no_ktp]", $request->nama_pelapor, $document);
-        $document = str_replace("[no_kk]", $request->nik_pelapor, $document);
+        $document = str_replace("[no_ktp]", $penduduk->nik, $document);
+        $document = str_replace("[no_kk]", $penduduk->no_kk, $document);
         $document = str_replace("[keperluan]",$request->hal, $document);
         $document = str_replace("[mulai_berlaku]", date("d-m-Y",strtotime($request->berlaku_mulai)), $document);
         $document = str_replace("[tgl_akhir]", date("d-m-Y",strtotime($request->berlaku_sampai)), $document);
-        $document = str_replace("[gol_darah]", $request->golongan_darah, $document);
+        $document = str_replace("[gol_darah]", $penduduk->golongan_darah, $document);
         
         
         $document = str_replace("[nama_des]", $this->getIdentitas("nama_desa"), $document);
