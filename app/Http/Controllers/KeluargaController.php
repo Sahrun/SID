@@ -14,11 +14,64 @@ class KeluargaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $keluarga = Keluarga::leftjoin('penduduk', 'penduduk.penduduk_id', '=', 'keluarga.kepala_keluarga')
-        ->select('keluarga.*', 'penduduk.full_name')->get();
-       return view('pages.kependudukan.keluarga.index',['keluarga' => $keluarga]);
+        $keluarga = new Keluarga;
+
+        $pages = 0;
+        $page = 0;
+        $showdata = 10;
+
+        $kelaurga = $keluarga->newQuery();
+
+        
+
+        $keluarga = $keluarga::leftjoin('penduduk', 'penduduk.penduduk_id', '=', 'keluarga.kepala_keluarga')
+        ->select('keluarga.*', 'penduduk.full_name');
+
+        if(isset($request->search))
+        {
+            $keluarga->where('keluarga.no_kk','like',''.$request->search.'%');
+            $keluarga->orWhere('penduduk.full_name', 'like',''.$request->search.'%');
+        }
+
+        if(isset($request->page) && !empty($request->page))
+        {
+            $page = $request->page;
+
+        }
+
+        if(isset($request->showdata) && !empty($request->showdata))
+        {
+            $showdata = $request->showdata;
+
+        }
+
+        
+        if(isset($request->order) && !empty($request->order))
+        {
+            if($request->order == "desc")
+            {
+                $keluarga->orderBy('penduduk.full_name', 'desc');
+            }else
+            {
+                $keluarga->orderBy('penduduk.full_name', 'asc');
+            }
+        }else
+        {
+            $keluarga->orderBy('penduduk.full_name', 'asc');
+        }
+        
+        $result  = $keluarga->get();
+
+        $keluarga->offset(($page * $showdata));
+        $keluarga->limit($showdata);
+
+        $keluarga = $keluarga->get();
+         
+        $pages =  ceil(count($result) / $showdata);
+      
+        return view('pages.kependudukan.keluarga.index',['keluarga' => $keluarga,'pages' => $pages,'page' => $page,'showdata' => $showdata]);
     }
 
     /**

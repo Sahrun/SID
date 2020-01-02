@@ -15,12 +15,49 @@ class KematianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kematian = Kematian::join('penduduk', 'penduduk.penduduk_id', '=', 'kematian.penduduk_id')
-        ->select('kematian.*','penduduk.nik','penduduk.full_name')
-        ->get();
-        return view('pages.kependudukan.kematian.index',['kematian' => $kematian]);
+
+        $kematian = new Kematian;
+
+        $pages = 0;
+        $page = 0;
+        $showdata = 10;
+
+        $kematian = $kematian->newQuery();
+
+        $kematian->join('penduduk', 'penduduk.penduduk_id', '=', 'kematian.penduduk_id')
+                 ->select('kematian.*','penduduk.nik','penduduk.full_name');
+
+        if(isset($request->search))
+        {
+            $kematian->where('penduduk.nik','like',''.$request->search.'%');
+            $kematian->orWhere('penduduk.full_name', 'like',''.$request->search.'%');
+        }
+
+        if(isset($request->page) && !empty($request->page))
+        {
+            $page = $request->page;
+
+        }
+
+        if(isset($request->showdata) && !empty($request->showdata))
+        {
+            $showdata = $request->showdata;
+
+        }
+
+        
+        $result  = $kematian->get();
+
+        $kematian->offset(($page * $showdata));
+        $kematian->limit($showdata);
+
+        $kematian = $kematian->get();
+         
+        $pages =  ceil(count($result) / $showdata);
+    
+        return view('pages.kependudukan.kematian.index',['kematian' => $kematian,'pages' => $pages,'page' => $page,'showdata' => $showdata]);
     }
 
     /**

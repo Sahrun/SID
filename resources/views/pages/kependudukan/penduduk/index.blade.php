@@ -21,7 +21,6 @@
                             </div>
                         </div>
                         <div class="card-body">
-
                             <div class="table-responsive">
                                 <div id="add-row_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                                     <div class="row">
@@ -89,7 +88,7 @@
                                         <div class="col-sm-12 col-md-7">
                                             <div class="dataTables_paginate paging_simple_numbers" id="add-row_paginate">
                                                 <ul class="pagination">
-                                                    <li class="paginate_button page-item previous {{($page) < 0? 'disabled':''}}" id="add-row_previous">
+                                                    <li class="paginate_button page-item previous {{($page) <= 0 ? 'disabled':''}}" id="add-row_previous">
                                                         <a href="#" aria-controls="add-row" data-dt-idx="0" tabindex="0" class="page-link" onmouseover="searchPage(this,{{$page - 1}})">Previous</a>
                                                     </li>
                                                     @for ($i = 1; $i <= $pages; $i++)

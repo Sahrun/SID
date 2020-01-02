@@ -16,12 +16,49 @@ class KelahiranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kelahiran = Kelahiran::leftjoin('penduduk', 'penduduk.penduduk_id','=','kelahiran.penduduk_id')
-        ->leftjoin('keluarga', 'penduduk.keluarga_id', '=', 'keluarga.keluarga_id')
-        ->get();
-        return view('pages.kependudukan.kelahiran.index',['kelahiran' => $kelahiran]);
+
+        $kelahiran = new Kelahiran;
+
+        $pages = 0;
+        $page = 0;
+        $showdata = 10;
+
+        $kelahiran = $kelahiran->newQuery();
+
+        $kelahiran->leftjoin('penduduk', 'penduduk.penduduk_id','=','kelahiran.penduduk_id')
+                    ->leftjoin('keluarga', 'penduduk.keluarga_id', '=', 'keluarga.keluarga_id');
+
+        if(isset($request->search))
+        {
+            $kelahiran->where('penduduk.nik','like',''.$request->search.'%');
+            $kelahiran->orWhere('penduduk.full_name', 'like',''.$request->search.'%');
+        }
+
+        if(isset($request->page) && !empty($request->page))
+        {
+            $page = $request->page;
+
+        }
+
+        if(isset($request->showdata) && !empty($request->showdata))
+        {
+            $showdata = $request->showdata;
+
+        }
+
+        
+        $result  = $kelahiran->get();
+
+        $kelahiran->offset(($page * $showdata));
+        $kelahiran->limit($showdata);
+
+        $kelahiran = $kelahiran->get();
+         
+        $pages =  ceil(count($result) / $showdata);
+      
+        return view('pages.kependudukan.kelahiran.index',['kelahiran' => $kelahiran,'pages' => $pages,'page' => $page,'showdata' => $showdata]);
     }
 
     /**

@@ -25,18 +25,18 @@
                                         <div class="col-sm-12 col-md-6">
                                             <div class="dataTables_length" id="add-row_length">
                                                 <label>Show
-                                                    <select name="add-row_length" aria-controls="add-row" class="form-control form-control-sm">
-                                                        <option value="10">10</option>
-                                                        <option value="25">25</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
+                                                    <select name="show_data" id="show_data" aria-controls="add-row" class="form-control form-control-sm" onchange="searchChange()">
+                                                            <option value="10" {{$showdata == "10"?"selected":""}}>10</option>
+                                                            <option value="25" {{$showdata == "25"?"selected":""}}>25</option>
+                                                            <option value="50" {{$showdata == "50"?"selected":""}}>50</option>
+                                                            <option value="100" {{$showdata == "100"?"selected":""}}>100</option>
                                                     </select> entries</label>
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <div id="add-row_filter" class="dataTables_filter">
-                                                <label>Search:
-                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="add-row">
+                                                <label>Search NIK/Nama:
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="add-row" name="search" id="search" onkeyup="searchEnter(event)">
                                                 </label>
                                             </div>
                                         </div>
@@ -87,10 +87,17 @@
                                         <div class="col-sm-12 col-md-7">
                                             <div class="dataTables_paginate paging_simple_numbers" id="add-row_paginate">
                                                 <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled" id="add-row_previous"><a href="#" aria-controls="add-row" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                                                    <li class="paginate_button page-item active"><a href="#" aria-controls="add-row" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item "><a href="#" aria-controls="add-row" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                                    <li class="paginate_button page-item next" id="add-row_next"><a href="#" aria-controls="add-row" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
+                                                    <li class="paginate_button page-item previous {{($page) <= 0 ? 'disabled':''}}" id="add-row_previous">
+                                                        <a href="#" aria-controls="add-row" data-dt-idx="0" tabindex="0" class="page-link" onmouseover="searchPage(this,{{$page - 1}})">Previous</a>
+                                                    </li>
+                                                    @for ($i = 1; $i <= $pages; $i++)
+                                                        <li class="paginate_button page-item {{($page + 1) == $i? 'active':''}}">
+                                                            <a href="#" aria-controls="add-row" data-dt-idx="1" tabindex="0" class="page-link"  onmouseover="searchPage(this,{{$i -1 }})">{{$i}}</a>
+                                                        </li>
+                                                    @endfor
+                                                    <li class="paginate_button page-item next {{($page + 2) <= $pages? '':'disabled'}}" id="add-row_next">
+                                                        <a href="#" aria-controls="add-row" data-dt-idx="3" tabindex="0" class="page-link" onmouseover="searchPage(this,{{$page + 1}})">Next</a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -163,6 +170,14 @@
 
     <script>
       var url = "{{url('lap/excel-penduduk-pindah/')}}";
+
+      var currentUrl = new URL(window.location.href);
+        var search_val = currentUrl.searchParams.get("search");
+        var current_page = "{{$page}}";
+        var baseUrl = "{{url('')}}" + window.location.pathname;
+
+        $("#search").val(search_val);
+
       function open_form(id){
                 $('#nik').html(null);
                 $('#nama').html(null);
@@ -186,33 +201,26 @@
                 });
         }
         
-        var currentUrl = new URL(window.location.href);
-        var search_val = currentUrl.searchParams.get("search");
-        $("#search").val(search_val);
-
-        var baseUrl = "{{url('')}}" + window.location.pathname;
-
+       
         function filter_data(page=null){     
             var showdata = $("#show_data").val();
             var search =  $("#search").val();
-            
             return baseUrl+"?search="+search+"&showdata="+showdata+"&page="+page;
         }
 
         function searchEnter(event){
             if (event.keyCode === 13) {
-                window.location.href = filter_data();
+                window.location.href = filter_data(0);
             }
         }
 
         function searchChange(){
-                window.location.href = filter_data();
+                window.location.href = filter_data(current_page);
         }
         
         function searchPage(event,page)
         {
             event.href = filter_data(page);
         }
-        
     </script>
     @stop

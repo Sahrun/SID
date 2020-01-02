@@ -16,12 +16,49 @@ class PendudukPindahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $penduduk_pindah = PendudukPindah::join('penduduk', 'penduduk.penduduk_id', '=', 'penduduk_pindah.penduduk_id')
-        ->select('penduduk_pindah.*','penduduk.nik','penduduk.full_name')
-        ->get();
-        return view('pages.kependudukan.penduduk_pindah.index',['penduduk_pindah' => $penduduk_pindah]);
+
+        $penduduk_pindah = new PendudukPindah;
+
+        $pages = 0;
+        $page = 0;
+        $showdata = 10;
+
+        $penduduk_pindah = $penduduk_pindah->newQuery();
+
+        $penduduk_pindah->join('penduduk', 'penduduk.penduduk_id', '=', 'penduduk_pindah.penduduk_id')
+                       ->select('penduduk_pindah.*','penduduk.nik','penduduk.full_name');
+
+        if(isset($request->search))
+        {
+            $penduduk_pindah->where('penduduk.nik','like',''.$request->search.'%');
+            $penduduk_pindah->orWhere('penduduk.full_name', 'like',''.$request->search.'%');
+        }
+
+        if(isset($request->page) && !empty($request->page))
+        {
+            $page = $request->page;
+
+        }
+
+        if(isset($request->showdata) && !empty($request->showdata))
+        {
+            $showdata = $request->showdata;
+
+        }
+
+        
+        $result  = $penduduk_pindah->get();
+
+        $penduduk_pindah->offset(($page * $showdata));
+        $penduduk_pindah->limit($showdata);
+
+        $penduduk_pindah = $penduduk_pindah->get();
+         
+        $pages =  ceil(count($result) / $showdata);
+
+        return view('pages.kependudukan.penduduk_pindah.index',['penduduk_pindah' => $penduduk_pindah,'pages' => $pages,'page' => $page,'showdata' => $showdata]);
     }
 
     /**
