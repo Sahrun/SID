@@ -28,6 +28,7 @@
                                                     <tr role="row">
                                                         <th>No</th>
                                                         <th>Nama</th>
+                                                        <th>Tingkatan</th>
                                                         <th>Email</th>
                                                         <th>Aksi</th>
                                                     </tr>
@@ -38,6 +39,7 @@
                                                         <tr role="row" class="{{$no%2?'odd':'even'}}">
                                                             <td>{{$no++}}</td>
                                                             <td>{{$item->name}}</td>
+                                                            <td>{{$item->user_role_name}}</td>
                                                             <td>{{$item->email}}</td>
                                                             <td>
                                                                 <div class="form-button-action">

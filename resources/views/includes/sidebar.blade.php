@@ -91,6 +91,7 @@
           </ul>
         </div>
       </li>
+      @if(Auth::user()->user_role_id == 1)
       <li class="nav-item">
         <a data-toggle="collapse" href="#surat">
           <i class="fas fa-pen-square"></i>
@@ -129,6 +130,7 @@
           <p>Users</p>
         </a>
       </li>
+      @endif
       <li class="nav-item">
         <a data-toggle="collapse" href="#laporan">
           <i class="far fa-chart-bar"></i>

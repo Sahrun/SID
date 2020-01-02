@@ -111,39 +111,39 @@ Route::middleware(['auth'])->group(function () {
     // End Kematian
 
     // Daftar Pemilih
-    Route::get('/kependudukan/dpt/daftar-pemilih', 'DaftarpemilihController@index');
+    Route::get('/kependudukan/dpt/daftar-pemilih', 'DaftarpemilihController@index')->middleware('isUser');
     // End Daftar Pemilih
 
     // Identitas Desa
-    Route::get('/pengaturan/identitas','IdentitasController@index');
-    Route::post('/pengaturan/identitas/update','IdentitasController@update');
+    Route::get('/pengaturan/identitas','IdentitasController@index')->middleware('isUser');
+    Route::post('/pengaturan/identitas/update','IdentitasController@update')->middleware('isUser');
     // End Indetitas Desa
 
     // Staff
-    Route::get('/staff','StaffController@index');
-    Route::get('/staff/add','StaffController@create');
-    Route::post('/staff/create','StaffController@store');
-    Route::get('/staff/edit/{id}', 'StaffController@edit');
-    Route::post('/staff/update/{id}', 'StaffController@update');
-    Route::get('/staff/delete/{id}', 'StaffController@destroy');
+    Route::get('/staff','StaffController@index')->middleware('isUser');
+    Route::get('/staff/add','StaffController@create')->middleware('isUser');
+    Route::post('/staff/create','StaffController@store')->middleware('isUser');
+    Route::get('/staff/edit/{id}', 'StaffController@edit')->middleware('isUser');
+    Route::post('/staff/update/{id}', 'StaffController@update')->middleware('isUser');
+    Route::get('/staff/delete/{id}', 'StaffController@destroy')->middleware('isUser');
     // End Staff
     
     // Surat
-    Route::get('/surat/format-surat','SuratController@format_surat');
-    Route::post('/surat/upload', 'SuratController@upload');
-    Route::get('/surat/download/{file}','SuratController@download');
-    Route::post('/surat/cetak-surat-kematian/','SuratController@cetak_surat_kematian');
-    Route::get('/surat/daftar-cetak-surat','SuratController@daftar_cetak_surat');
-    Route::get('/surat/form-cetak-surat/{kode_surat}','SuratController@form_cetak_surat');
-    Route::post('/surat/cetak-surat-pengantar/','SuratController@cetak_surat_pengantar');
-    Route::post('/surat/cetak-surat-kelahiran/','SuratController@cetak_surat_kelahiran');
-    Route::post('/surat/cetak-surat-penduduk-pindah/','SuratController@cetak_surat_penduduk_pindah');
-    Route::post('/surat/cetak-surat-kurang-mampu/','SuratController@cetak_surat_kurang_mampu');
-    Route::get('surat/get-surat/{id}','SuratController@get_surat');
-    Route::get('/surat/salinan-kk/{id}','SuratController@salinan_kk');
-    Route::get('/surat/rekap-surat/','SuratController@rekap_surat');
-    Route::post('/surat/rekap-surat/','SuratController@rekap_surat');
-    Route::get('/surat/delete/{id}','SuratController@destroy');
+    Route::get('/surat/format-surat','SuratController@format_surat')->middleware('isUser');
+    Route::post('/surat/upload', 'SuratController@upload')->middleware('isUser');
+    Route::get('/surat/download/{file}','SuratController@download')->middleware('isUser');
+    Route::post('/surat/cetak-surat-kematian/','SuratController@cetak_surat_kematian')->middleware('isUser');
+    Route::get('/surat/daftar-cetak-surat','SuratController@daftar_cetak_surat')->middleware('isUser');
+    Route::get('/surat/form-cetak-surat/{kode_surat}','SuratController@form_cetak_surat')->middleware('isUser');
+    Route::post('/surat/cetak-surat-pengantar/','SuratController@cetak_surat_pengantar')->middleware('isUser');
+    Route::post('/surat/cetak-surat-kelahiran/','SuratController@cetak_surat_kelahiran')->middleware('isUser');
+    Route::post('/surat/cetak-surat-penduduk-pindah/','SuratController@cetak_surat_penduduk_pindah')->middleware('isUser');
+    Route::post('/surat/cetak-surat-kurang-mampu/','SuratController@cetak_surat_kurang_mampu')->middleware('isUser');
+    Route::get('surat/get-surat/{id}','SuratController@get_surat')->middleware('isUser');
+    Route::get('/surat/salinan-kk/{id}','SuratController@salinan_kk')->middleware('isUser');
+    Route::get('/surat/rekap-surat/','SuratController@rekap_surat')->middleware('isUser');
+    Route::post('/surat/rekap-surat/','SuratController@rekap_surat')->middleware('isUser');
+    Route::get('/surat/delete/{id}','SuratController@destroy')->middleware('isUser');
     // End Surat
     
     //region Laporan dan Export Excel
@@ -171,8 +171,9 @@ Route::middleware(['auth'])->group(function () {
     //endregion Laporan dan Export Excel
 
     // User
-    Route::get('/user', 'UserController@index');
-    Route::get('/user/add','UserController@create');
+    Route::get('/user', 'UserController@index')->middleware('isUser');
+    Route::get('/user/add','UserController@create')->middleware('isUser');
+    Route::post('/user/create','UserController@store')->middleware('isUser');
     // End User
 });
 
