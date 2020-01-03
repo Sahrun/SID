@@ -13,13 +13,11 @@
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Data Daftar Pemilih Tetap</h4>
                                 <div class="ml-auto">
-                                    <form>
-                                        <input type="date" name="tanggal" value="{{$tanggal}}"/>
-                                        <input type="submit" value="Filter"/>
-                                           <a class="btn btn-round ml-auto" id="excel-btn" href="#" target="_blank">
-                                                <i class="fas fa-file-excel"></i> Export
-                                           </a>
-                                    </form>
+                                        <input type="date" name="tanggal" id="tanggal" value="{{$tanggal}}"/>
+                                        <button onclick="searchTanggal()">Filter</button>
+                                        <a class="btn btn-round ml-auto" id="excel-btn" href="#" target="_blank">
+                                            <i class="fas fa-file-excel"></i> Export
+                                        </a>   
                                 </div>
                             </div>
                         </div>
@@ -31,18 +29,18 @@
                                         <div class="col-sm-12 col-md-6">
                                             <div class="dataTables_length" id="add-row_length">
                                                 <label>Show
-                                                    <select name="add-row_length" aria-controls="add-row" class="form-control form-control-sm">
-                                                        <option value="10">10</option>
-                                                        <option value="25">25</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
+                                                    <select name="show_data" id="show_data" aria-controls="add-row" class="form-control form-control-sm" onchange="searchChange()">
+                                                            <option value="10" {{$showdata == "10"?"selected":""}}>10</option>
+                                                            <option value="25" {{$showdata == "25"?"selected":""}}>25</option>
+                                                            <option value="50" {{$showdata == "50"?"selected":""}}>50</option>
+                                                            <option value="100" {{$showdata == "100"?"selected":""}}>100</option>
                                                     </select> entries</label>
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <div id="add-row_filter" class="dataTables_filter">
                                                 <label>Search:
-                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="add-row">
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="add-row" name="search" id="search" onkeyup="searchEnter(event)">
                                                 </label>
                                             </div>
                                         </div>
@@ -59,7 +57,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $no =1 ?>
+                                                    <?php $no = ($showdata * $page) + 1 ?>
                                                     @foreach ($pemilih as $item)
                                                         <tr role="row" class="{{$no%2?'odd':'even'}}">
                                                             <td class="sorting_1">{{$no++}}</td>
@@ -78,10 +76,17 @@
                                         <div class="col-sm-12 col-md-7">
                                             <div class="dataTables_paginate paging_simple_numbers" id="add-row_paginate">
                                                 <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled" id="add-row_previous"><a href="#" aria-controls="add-row" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                                                    <li class="paginate_button page-item active"><a href="#" aria-controls="add-row" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item "><a href="#" aria-controls="add-row" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                                    <li class="paginate_button page-item next" id="add-row_next"><a href="#" aria-controls="add-row" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
+                                                    <li class="paginate_button page-item previous {{($page) <= 0 ? 'disabled':''}}" id="add-row_previous">
+                                                        <a href="#" aria-controls="add-row" data-dt-idx="0" tabindex="0" class="page-link" onmouseover="searchPage(this,{{$page - 1}})">Previous</a>
+                                                    </li>
+                                                    @for ($i = 1; $i <= $pages; $i++)
+                                                        <li class="paginate_button page-item {{($page + 1) == $i? 'active':''}}">
+                                                            <a href="#" aria-controls="add-row" data-dt-idx="1" tabindex="0" class="page-link"  onmouseover="searchPage(this,{{$i -1 }})">{{$i}}</a>
+                                                        </li>
+                                                    @endfor
+                                                    <li class="paginate_button page-item next {{($page + 2) <= $pages? '':'disabled'}}" id="add-row_next">
+                                                        <a href="#" aria-controls="add-row" data-dt-idx="3" tabindex="0" class="page-link" onmouseover="searchPage(this,{{$page + 1}})">Next</a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -97,6 +102,40 @@
     <script>
         var export_url = "{{url('/kependudukan/penduduk/pemilih-tetap-export/'.$tanggal)}}";
         var button = $("#excel-btn");
+
+        var currentUrl = new URL(window.location.href);
+        var search_val = currentUrl.searchParams.get("search");
+        var current_page = "{{$page}}";
+        var baseUrl = "{{url('')}}" + window.location.pathname;
+
+        $("#search").val(search_val);
         button[0].href=export_url;
+       
+        function filter_data(page=null){     
+            var showdata = $("#show_data").val();
+            var search =  $("#search").val();
+            var tanggal = $("#tanggal").val();
+            return baseUrl+"?search="+search+"&tanggal="+tanggal+"&showdata="+showdata+"&page="+page;
+        }
+
+        function searchEnter(event){
+            if (event.keyCode === 13) {
+                window.location.href = filter_data(0);
+            }
+        }
+
+        function searchChange(){
+                window.location.href = filter_data(current_page);
+        }
+        
+        function searchPage(event,page)
+        {
+            event.href = filter_data(page);
+        }
+
+        function searchTanggal()
+        {
+            window.location.href = filter_data(current_page);
+        }
     </script>
     @stop

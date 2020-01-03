@@ -44,12 +44,12 @@ class HomeController extends Controller
         ->orWhereNull('status_kependudukan')
         ->get();
 
-        $pendudukDusun = Penduduk::join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
-        ->select('dusun.wilayah_nama as DUSUN', DB::raw('count(*) as jml_penduduk'))
-        ->where([
-            ['status_kependudukan', '<>', 'Meninggal'],
-            ['status_kependudukan', '<>', 'Pindah']
-        ])
+        $pendudukDusun = Wilayah::leftjoin(DB::raw("(select * from penduduk where status_kependudukan  != 'Meninggal' and status_kependudukan != 'Pindah') as penduduk"), function( $join )
+                        {
+                            $join->on( 'penduduk.wilayah_dusun', '=', 'wilayah.wilayah_id' );
+                        })
+        ->select('wilayah.wilayah_nama as DUSUN', DB::raw('count(penduduk.penduduk_id) as jml_penduduk'))
+        ->where('wilayah_part','=',(new Wilayah)->part["dusun"])
         ->groupBy('DUSUN')
         ->get();
 
