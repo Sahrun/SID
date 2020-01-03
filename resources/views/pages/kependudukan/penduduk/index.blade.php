@@ -56,7 +56,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $no =1 ?>
+                                                    <?php $no = ($showdata * $page) + 1 ?>
                                                     @foreach ($penduduk as $item)
                                                         <tr role="row" class="{{$no%2?'odd':'even'}}">
                                                             <td class="sorting_1">{{$no++}}</td>
