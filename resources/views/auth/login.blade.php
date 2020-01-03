@@ -35,21 +35,21 @@
 								name="remember" {{ old('remember') ? 'checked' : '' }}>
 							<label class="custom-control-label" for="remember">{{ __('Remember Me') }}</label>
 						</div>
-						@if (Route::has('password.request'))
+						{{-- @if (Route::has('password.request'))
 							<a href="{{ route('password.request') }}" class="link float-right">
 								{{ __('Forgot Your Password?') }}
 							</a>
-						@endif
+						@endif --}}
 					</div>
 					<div class="form-action mb-3">
 						<button type="submit" class="btn btn-primary btn-rounded btn-login">{{ __('Login') }}</button>
 					</div>
 					<div class="login-account">
-					@if (Route::has('register'))
+					{{-- @if (Route::has('register'))
 						<span class="msg">Don't have an account yet ?</span>
 							<a href="{{ route('register') }}" id="show-signup" class="link">{{ __('Register') }}</a>
 						</div>
-					@endif
+					@endif --}}
 				</div>
 			</form>
 		</div>

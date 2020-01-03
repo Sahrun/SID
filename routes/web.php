@@ -174,6 +174,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user', 'UserController@index')->middleware('isUser');
     Route::get('/user/add','UserController@create')->middleware('isUser');
     Route::post('/user/create','UserController@store')->middleware('isUser');
+    Route::get('/user/edit/{id}', 'UserController@edit')->middleware('isUser');
+    Route::post('/user/update/{id}', 'UserController@update')->middleware('isUser');
+    Route::get('/user/delete/{id}', 'UserController@destroy')->middleware('isUser');
     // End User
 });
 

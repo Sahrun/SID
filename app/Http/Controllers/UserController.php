@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\UserRole;
 use Validator;
-use Auth;
-use File;
 
 class UserController extends Controller
 {
@@ -33,6 +31,15 @@ class UserController extends Controller
     {
         $role = UserRole::all();
         return view('pages.user.add', ['role' => $role]);
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
     }
 
     /**
@@ -74,7 +81,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $user_role = UserRole::all();
+
+        return view('pages.user.edit', ['user' => $user, 'user_role' => $user_role]);
     }
 
     /**
@@ -86,7 +96,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name         = $request->name;
+        $user->email        = $request->email;
+        $user->password     = isset($request->password) 
+            ? Hash::make($request->password) 
+            : $user->password;
+        $user->user_role_id = $request->user_role_id;
+        $user->updated_at   = Date('Y-m-d h:i:s');
+        $user->save();
+        
+        return redirect()->action('UserController@index');
     }
 
     /**
@@ -97,6 +117,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->back();
     }
 }
