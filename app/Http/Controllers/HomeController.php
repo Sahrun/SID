@@ -27,13 +27,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $dusun = Wilayah::select(DB::raw('count(distinct(wilayah_dusun)) as jml_dusun'))
+        $dusun = Wilayah::where('wilayah_part', (new Wilayah)->part["dusun"])->select(DB::raw('count(distinct(wilayah_id)) as jml_dusun'))
         ->get();
 
-        $rt = Wilayah::select(DB::raw('count(distinct(wilayah_rt)) as jml_rt'))
+        $rt = Wilayah::where('wilayah_part', (new Wilayah)->part["rt"])->select(DB::raw('count(distinct(wilayah_id)) as jml_rt'))
         ->get();
 
-        $rw = Wilayah::select(DB::raw('count(distinct(wilayah_rw)) as jml_rw'))
+        $rw = Wilayah::where('wilayah_part', (new Wilayah)->part["rw"])->select(DB::raw('count(distinct(wilayah_id)) as jml_rw'))
         ->get();
         
         $penduduk = Penduduk::select(DB::raw('count(*) as jml_penduduk'))
@@ -41,6 +41,7 @@ class HomeController extends Controller
             ['status_kependudukan', '<>', 'Meninggal'],
             ['status_kependudukan', '<>', 'Pindah']
         ])
+        ->orWhereNull('status_kependudukan')
         ->get();
 
         $pendudukDusun = Penduduk::join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
