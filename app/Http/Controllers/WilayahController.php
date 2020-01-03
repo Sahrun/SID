@@ -35,7 +35,7 @@ class WilayahController extends Controller
      */
     public function create()
     {
-        $penduduk =  Penduduk::all();
+        $penduduk =  Penduduk::where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
         return view('pages.kependudukan.wilayah.form',["penduduk"=>$penduduk]); 
     }
 
@@ -127,7 +127,7 @@ class WilayahController extends Controller
      */
     public function edit($id)
     {
-        $penduduk =  Penduduk::all();
+        $penduduk =  Penduduk::where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
         $wilayah =  DB::table('wilayah')->leftjoin('penduduk', 'wilayah.penduduk_id', '=', 'penduduk.penduduk_id')
         ->select('wilayah.wilayah_id', 'penduduk.penduduk_id','wilayah.wilayah_nama')
         ->where('wilayah.wilayah_id',$id)->first();
@@ -168,7 +168,7 @@ class WilayahController extends Controller
     {
 
         $dusun = Wilayah::find($id);
-        $penduduk =  Penduduk::all();
+        $penduduk =  Penduduk::where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
         return view('pages.kependudukan.wilayah.form-rw',['dusun' =>  $dusun,"penduduk"=>$penduduk]);
     }
 
@@ -231,7 +231,7 @@ class WilayahController extends Controller
     {
         $wilayah = new Wilayah;
 
-        $penduduk =  Penduduk::all();
+        $penduduk =  Penduduk::where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
 
         $rw =  $wilayah->leftjoin('penduduk', 'wilayah.penduduk_id', '=', 'penduduk.penduduk_id')
                 ->select('wilayah.wilayah_id', 'penduduk.penduduk_id','wilayah.wilayah_dusun','wilayah.wilayah_nama','penduduk.full_name')
@@ -257,7 +257,7 @@ class WilayahController extends Controller
     public function add_rt($id)
     {
         $rw = Wilayah::find($id);
-        $penduduk =  Penduduk::all();
+        $penduduk =  Penduduk::where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
         return view('pages.kependudukan.wilayah.form-rt',['rw' =>  $rw,"penduduk"=>$penduduk]);
     }
     public function create_rt(Request $request,$id)
@@ -283,7 +283,7 @@ class WilayahController extends Controller
     {
         $wilayah = new Wilayah;
 
-        $penduduk =  Penduduk::all();
+        $penduduk =  Penduduk::where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
 
         $rt=  $wilayah->leftjoin('penduduk', 'wilayah.penduduk_id', '=', 'penduduk.penduduk_id')
                 ->select('wilayah.wilayah_id', 'penduduk.penduduk_id','wilayah.wilayah_rw','wilayah.wilayah_nama','penduduk.full_name')
