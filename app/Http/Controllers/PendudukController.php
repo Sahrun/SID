@@ -285,19 +285,26 @@ class PendudukController extends Controller
 
         }
 
-        if(isset($request->showdata) && !empty($request->showdata))
+        if(isset($request->showdata))
         {
             $showdata = $request->showdata;
 
         }
-        $result  = $pemilih->get();
 
-        $pemilih->offset(($page * $showdata));
-        $pemilih->limit($showdata);
+        $result  = $pemilih->get();
+        
+        if($showdata !== "0")
+        {
+            $pemilih->offset(($page * $showdata));
+            $pemilih->limit($showdata);
+        }
 
         $pemilih = $pemilih->get();
 
-        $pages =  ceil(count($result) / $showdata);
+        if($showdata !== "0")
+        {
+            $pages =  ceil(count($result) / $showdata);
+        }
 
         return view('pages.kependudukan.penduduk.pemilih_tetap',['pemilih' => $pemilih,'tanggal' => $tanggal,'pages' => $pages,'page' => $page,'showdata' => $showdata]);
     }
@@ -305,15 +312,55 @@ class PendudukController extends Controller
     public function pemilih_tetap_export(Request $request)
     {
 
+        $pemilih = new Penduduk;
+        $pemilih = $pemilih->newQuery();
+
+        $tanggal = null;
+
+        $pages = 0;
+        $page = 0;
+        $showdata = 10;
+
         $date = Date("Y-m-d");
+
         if(isset($request->tanggal))
         {
             $date = $request->tanggal;
+            $tanggal = $request->tanggal;
         }
 
-        $pemilih = DB::select("SELECT *,TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()) as usia from Penduduk
-        WHERE  TIMESTAMPDIFF(YEAR, tanggal_lahir, '".$date."') >= 17
+        $pemilih->select(DB::raw("* ,TIMESTAMPDIFF(YEAR, tanggal_lahir, '".$date."') as usia"));
+
+        if(isset($request->search))
+        {
+            $pemilih->where('penduduk.nik','like',''.$request->search.'%');
+            $pemilih->orWhere('penduduk.full_name', 'like',''.$request->search.'%');
+        }
+
+        $pemilih->whereRaw("TIMESTAMPDIFF(YEAR, tanggal_lahir, '".$date."') >= 17
         AND ((status_kependudukan != 'Meninggal' AND status_kependudukan != 'Pindah') OR status_kependudukan IS NULL)");
+
+
+
+        if(isset($request->page) && !empty($request->page))
+        {
+            $page = $request->page;
+
+        }
+
+        if(isset($request->showdata))
+        {
+            $showdata = $request->showdata;
+
+        }
+        
+        if($showdata !== "0")
+        {
+            $pemilih->offset(($page * $showdata));
+            $pemilih->limit($showdata);
+        }
+
+        $pemilih = $pemilih->get();
 
         return Excel::download(new PemilihTetapExport($pemilih),'daftar_pemilih_tetap_'.date("YmdHis").'.xlsx');
     }

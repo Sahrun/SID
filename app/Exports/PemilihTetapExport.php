@@ -21,6 +21,7 @@ class PemilihTetapExport implements FromView, ShouldAutoSize
 
     public function view(): View
     {
+        
         return view('pages.kependudukan.penduduk.excel_pemilih_tetap_def', ['pemilihtetap' => $this->data_pemilih_tetap]);
     }
 }

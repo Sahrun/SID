@@ -34,6 +34,7 @@
                                                             <option value="25" {{$showdata == "25"?"selected":""}}>25</option>
                                                             <option value="50" {{$showdata == "50"?"selected":""}}>50</option>
                                                             <option value="100" {{$showdata == "100"?"selected":""}}>100</option>
+                                                            <option value="0" {{$showdata == "0"?"selected":""}}>All</option>
                                                     </select> entries</label>
                                             </div>
                                         </div>
@@ -100,8 +101,7 @@
         </div>
     </div>
     <script>
-        var export_url = "{{url('/kependudukan/penduduk/pemilih-tetap-export/'.$tanggal)}}";
-        var button = $("#excel-btn");
+        
 
         var currentUrl = new URL(window.location.href);
         var search_val = currentUrl.searchParams.get("search");
@@ -109,33 +109,37 @@
         var baseUrl = "{{url('')}}" + window.location.pathname;
 
         $("#search").val(search_val);
-        button[0].href=export_url;
+       
        
         function filter_data(page=null){     
             var showdata = $("#show_data").val();
             var search =  $("#search").val();
             var tanggal = $("#tanggal").val();
-            return baseUrl+"?search="+search+"&tanggal="+tanggal+"&showdata="+showdata+"&page="+page;
+            return "?search="+search+"&tanggal="+tanggal+"&showdata="+showdata+"&page="+page;
         }
 
         function searchEnter(event){
             if (event.keyCode === 13) {
-                window.location.href = filter_data(0);
+                window.location.href = baseUrl+filter_data(0);
             }
         }
 
         function searchChange(){
-                window.location.href = filter_data(current_page);
+                window.location.href = baseUrl+filter_data(current_page);
         }
         
         function searchPage(event,page)
         {
-            event.href = filter_data(page);
+            event.href = baseUrl+filter_data(page);
         }
 
         function searchTanggal()
         {
-            window.location.href = filter_data(current_page);
+            window.location.href = baseUrl+filter_data(current_page);
         }
+
+        var export_url = "{{url('/kependudukan/penduduk/pemilih-tetap-export')}}";
+        var button = $("#excel-btn");
+        button[0].href=export_url+filter_data(current_page);
     </script>
     @stop
