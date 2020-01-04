@@ -7,8 +7,10 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 
-class PemilihTetapExport implements FromView, ShouldAutoSize
+class PemilihTetapExport implements FromView,WithColumnFormatting, ShouldAutoSize
 {
     use Exportable;
 
@@ -17,6 +19,12 @@ class PemilihTetapExport implements FromView, ShouldAutoSize
     function __construct($data_pemilih_tetap)
     {
         $this->data_pemilih_tetap = $data_pemilih_tetap;
+    }
+    public function columnFormats(): array
+    {
+        return [
+            'B' => NumberFormat::FORMAT_TEXT,
+        ];
     }
 
     public function view(): View

@@ -6,7 +6,7 @@
       <h4 class="page-title">Dashboard</h4>
     </div>
     <div class="row">
-      <div class="col-sm-6 col-md-3">
+      <div class="col-sm-6 col-md-4">
         <div class="card card-stats card-round">
           <div class="card-body ">
             <div class="row align-items-center">
@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6 col-md-3">
+      <div class="col-sm-6 col-md-4">
         <div class="card card-stats card-round">
           <div class="card-body">
             <div class="row align-items-center">
@@ -44,7 +44,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6 col-md-3">
+      <div class="col-sm-6 col-md-4">
         <div class="card card-stats card-round">
           <div class="card-body">
             <div class="row align-items-center">
@@ -63,25 +63,46 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6 col-md-3">
-        <div class="card card-stats card-round">
-          <div class="card-body">
-            <div class="row align-items-center">
-              <div class="col-icon">
-                <div class="icon-big text-center icon-secondary bubble-shadow-small">
-                  <i class="fas fa-user-friends"></i>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+          <div class="card card-stats card-round">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-icon">
+                  <div class="icon-big text-center icon-secondary bubble-shadow-small">
+                    <i class="fas fa-user-friends"></i>
+                  </div>
                 </div>
-              </div>
-              <div class="col col-stats ml-3 ml-sm-0">
-                <div class="numbers">
-                  <p class="card-category">Jumlah Penduduk</p>
-                  <h4 class="card-title">{{$penduduk[0]->jml_penduduk}}</h4>
+                <div class="col col-stats ml-3 ml-sm-0">
+                  <div class="numbers">
+                    <p class="card-category">Jumlah Penduduk</p>
+                    <h4 class="card-title">{{$penduduk[0]->jml_penduduk}}</h4>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+        <div class="col-sm-6 col-md-6">
+          <div class="card card-stats card-round">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-icon">
+                  <div class="icon-big text-center icon-warning bubble-shadow-small">
+                    <i class="fas fa-users"></i>
+                  </div>
+                </div>
+                <div class="col col-stats ml-3 ml-sm-0">
+                  <div class="numbers">
+                    <p class="card-category">Jumlah Keluarga</p>
+                    <h4 class="card-title">{{$keluarga}}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
     <div class="row">
       <div class="col-md-12">

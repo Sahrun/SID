@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Penduduk;
 use App\Wilayah;
+use App\Keluarga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -69,7 +70,10 @@ class HomeController extends Controller
         ->groupBy('agama')
         ->get();
 
+        
+        $keluarga = Keluarga::count();
+
         return view('pages.home.home', ['dusun' => $dusun, 'rt' => $rt, 'rw' => $rw, 'penduduk' => $penduduk,
-            'penduduk_dusun' => $pendudukDusun, 'jen_kel' => $jen_kel, 'agama' => $agama]);
+            'penduduk_dusun' => $pendudukDusun, 'jen_kel' => $jen_kel, 'agama' => $agama,'keluarga' => $keluarga  ]);
     }
 }
