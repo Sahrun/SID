@@ -13,20 +13,18 @@
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Data Kelahiran</h4>
 
-                                <div class="form-group ml-auto">
+                                <div class="ml-auto">
                                     <label for="">Tanggal awal</label>
-                                    <input type="date" name="tgl-awal" class="form-control">
-                                </div>
-                                <div class="form-group ml-auto">
+                                    <input type="date" name="tgl-awal">
                                     <label for="">Tanggal akhir</label>
-                                    <input type="date" name="tgl-akhir" class="form-control">
+                                    <input type="date" name="tgl-akhir">
+                                    <button id="filter-btn">Filter</button>
+                                    <a class="btn btn-success btn-round" id="excel-btn" href="{{url('lap/excel-kelahiran')}}" target="_blank">
+                                        <i class="fas fa-download"></i> Unduh sbg Excel
+                                    </a>
                                 </div>
-                                <a class="btn btn-round ml-auto" id="filter-btn" href="javascript:void(0)">
-                                    <i class="fas fa-file-excel"></i> Terapkan tanggal
-                                </a>
-                                <a class="btn btn-primary btn-round ml-auto" id="excel-btn" href="{{url('lap/excel-kelahiran')}}" target="_blank">
-                                    <i class="fas fa-file-excel"></i> Unduh sbg Excel
-                                </a>
+                                
+                                
                             </div>
                         </div>
                         <div class="card-body">
@@ -148,6 +146,9 @@
 
         if (tglAwal && tglAkhir) {
             window.location.assign(`${url}/${tglAwal}/${tglAkhir}`)
+        }else
+        {
+            window.location.assign(`${url}`)
         }
     })
 

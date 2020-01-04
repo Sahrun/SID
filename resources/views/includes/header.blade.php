@@ -3,7 +3,7 @@
   <div class="logo-header">
 
     <a href="/" class="logo">
-    <b><font color='white'> Sistem Informasi Desa </font></b>
+    <b><font color='white'> SID </font></b>
     </a>
     <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon">
@@ -27,7 +27,7 @@
         <li class="nav-item toggle-nav-search hidden-caret">
         <li class="nav-item dropdown hidden-caret">
           <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
-              <font color='white'><i class="fa fa-user-circle"></i></font>
+              <i class="fa fa-user-circle" style="color:white"></i>
           </a>
           <ul class="dropdown-menu dropdown-user animated fadeIn">
             <li>

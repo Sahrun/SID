@@ -15,8 +15,8 @@
                                 <div class="ml-auto">
                                         <input type="date" name="tanggal" id="tanggal" value="{{$tanggal}}"/>
                                         <button onclick="searchTanggal()">Filter</button>
-                                        <a class="btn btn-round ml-auto" id="excel-btn" href="#" target="_blank">
-                                            <i class="fas fa-file-excel"></i> Export
+                                        <a class="btn btn-success btn-round ml-auto" id="excel-btn" href="#" target="_blank">
+                                            <i class="fas fa-download"></i> Export
                                         </a>   
                                 </div>
                             </div>
