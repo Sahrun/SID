@@ -3,7 +3,7 @@
 <div class="login">
 	<div class="wrapper wrapper-login">
 		<div class="container container-login animated fadeIn">
-			<h3 class="text-center">Sign In </h3>
+			<h3 class="text-center">Login User </h3>
 			<form method="post" action="{{ route('login') }}">
 				@csrf
 				<div class="login-form">
@@ -11,7 +11,7 @@
 						<input id="email" name="email" type="email" 
 							class="form-control input-border-bottom @error('email') is-invalid @enderror" 
 							value="{{ old('email') }}" autocomplete="email" autofocus required>
-						<label for="email" class="placeholder">{{ __('E-Mail Address') }}</label>
+						<label for="email" class="placeholder">{{ __('E-Mail') }}</label>
 					</div>
 					@error('email')
 						<span class="invalid-feedback" role="alert">
@@ -33,11 +33,11 @@
 						<div class="custom-control custom-checkbox">
 							<input type="checkbox" class="custom-control-input" id="remember"
 								name="remember" {{ old('remember') ? 'checked' : '' }}>
-							<label class="custom-control-label" for="remember">{{ __('Remember Me') }}</label>
+							<label class="custom-control-label" for="remember">{{ __('Ingat Saya') }}</label>
 						</div>
 						{{-- @if (Route::has('password.request'))
 							<a href="{{ route('password.request') }}" class="link float-right">
-								{{ __('Forgot Your Password?') }}
+								<!-- {{ __('Forgot Your Password?') }} -->
 							</a>
 						@endif --}}
 					</div>
@@ -46,8 +46,8 @@
 					</div>
 					<div class="login-account">
 					{{-- @if (Route::has('register'))
-						<span class="msg">Don't have an account yet ?</span>
-							<a href="{{ route('register') }}" id="show-signup" class="link">{{ __('Register') }}</a>
+						<!-- <span class="msg">Don't have an account yet ?</span>
+							<a href="{{ route('register') }}" id="show-signup" class="link">{{ __('Register') }}</a> -->
 						</div>
 					@endif --}}
 				</div>
