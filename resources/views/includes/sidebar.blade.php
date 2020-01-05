@@ -6,12 +6,13 @@
     <div class="user">
       <div class="avatar-sm float-left mr-2">
         <img src="{{url('')}}/user.png" alt="..." class="avatar-img rounded-circle">
+        <div class="notify setpos"> <span class="heartbit"></span> <span class="point"></span> </div>
       </div>
       <div class="info">
         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
           <span>
           <h4>{{ Auth::user()->name }}</h4>
-            <span class="user-level">Administrator</span>
+            <span class="user-level">{{ Auth::user()->email}}</span>
             <span class="caret"></span>
           </span>
         </a>
