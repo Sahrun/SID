@@ -19,12 +19,10 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Kepala Keluarga</b></label>
 								<div class="col-md-9 p-0">
-                                        <select class="form-control" name="kepala_keluarga" required> 
-                                            <option value=""> - Pilih -</option>
-                                            @foreach ($penduduk as $item)
-                                            <option value="{{$item->penduduk_id}}">{{$item->nik}}</option>
-                                            @endforeach;
-                                        </select>
+                                    <div class="autocomplete" style="width:300px;">
+                                        <input id="input-auto-coplate" type="text" placeholder="NIK / Nama" class="form-control input-full" required>
+                                        <input type="hidden" name="kepala_keluarga" id="kepala_keluarga" required/>
+                                    </div>
 								</div>
 							</div>
                             <div class="form-group form-inline">
@@ -133,5 +131,24 @@
        });
         return false;
    }
+
+   
+// Autocomplate
+
+var penduduk = [];
+var temp ={};
+
+@foreach ($penduduk as $item)
+
+        var item = {
+            penduduk_id:"{{$item->penduduk_id}}",
+            nik:"{{$item->nik}}",
+            nama:"{{$item->full_name}}",
+        };
+        penduduk.push(item);
+@endforeach;
+autocomplete(document.getElementById("input-auto-coplate"), penduduk,"kepala_keluarga");
+
+// End
 </script>
 @stop

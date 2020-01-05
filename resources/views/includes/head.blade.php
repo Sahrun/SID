@@ -6,6 +6,7 @@
   <!-- Fonts and icons -->
   <script src="{{asset('app-asset/js/core/jquery.3.2.1.min.js')}}"></script>
   <script src="{{asset('app-asset/js/plugin/webfont.min.js')}}"></script>
+  <script src="{{asset('app-asset/js/custome.js')}}"></script>
   <script>
     WebFont.load({
       google: { "families": ["Open+Sans:300,400,600,700"] },
@@ -19,6 +20,7 @@
   <!-- CSS Files -->
   <link rel="stylesheet" href="{{asset('app-asset/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('app-asset/css/azzara.min.css')}}">
+  <link rel="stylesheet" href="{{asset('app-asset/css/style.css')}}">
 
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <!-- <link rel="stylesheet" href="assets/css/demo.css"> -->
