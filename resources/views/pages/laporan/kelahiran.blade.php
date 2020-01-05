@@ -134,7 +134,7 @@
     </style>
 
     <script>
-    const url = "{{url('lap/kelahiran/')}}"
+    const url = "{{url('lap/lap-kelahiran/')}}"
     const tglAwalUrl = "{{Request::segment(3)}}"
     const tglAkhirUrl = "{{Request::segment(4)}}"
 

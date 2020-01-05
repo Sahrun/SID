@@ -123,7 +123,7 @@
     </style>
 
     <script>
-    const url = "{{url('lap/kematian/')}}"
+    const url = "{{url('lap/lap-kematian/')}}"
     const tglAwalUrl = "{{Request::segment(3)}}"
     const tglAkhirUrl = "{{Request::segment(4)}}"
 

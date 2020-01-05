@@ -34,57 +34,57 @@
       </div>
     </div>
     <ul class="nav">
-      <li class="nav-item ">
+      <li class="nav-item" id="dashboard">
         <a href="{{url('/')}}">
           <i class="fas fa-home"></i>
           <p>Dashboard</p>
         </a>
       </li>
-      <li class="nav-item">
-        <a data-toggle="collapse" href="#kependudukan">
+      <li class="nav-item" id="kependudukan">
+        <a data-toggle="collapse" href="#kependudukan-menu" id="kependudukan-sub">
           <i class="fas fa-layer-group"></i>
           <p>Kependudukan</p>
           <span class="caret"></span>
         </a>
-        <div class="collapse" id="kependudukan">
+        <div class="collapse" id="kependudukan-menu">
           <ul class="nav nav-collapse">
-            <li>
+            <li id="wilayah">
               <a href="{{url('/kependudukan/wilayah')}}">
                 <span class="sub-item">Data Wilayah</span>
               </a>
             </li>
-            <li>
+            <li id="penduduk">
               <a href="{{url('kependudukan/penduduk')}}">
                 <span class="sub-item">Data Penduduk</span>
               </a>
             </li>
-            <li>
+            <li id="keluarga">
               <a href="{{url('kependudukan/keluarga')}}">
                 <span class="sub-item">Data Keluarga</span>
               </a>
             </li>
-            <li>
-            <a href="{{url('kependudukan/kelahiran')}}">
-                <span class="sub-item">Data Kelahiran</span>
+            <li id="kelahiran">
+              <a href="{{url('kependudukan/kelahiran')}}">
+                  <span class="sub-item">Data Kelahiran</span>
               </a>
             </li>
-            <li>
-            <a href="{{url('kependudukan/kematian')}}">
+            <li id="kematian">
+              <a href="{{url('kependudukan/kematian')}}">
                 <span class="sub-item">Data Kematian</span>
               </a>
             </li>
-            <li>
-            <a href="{{url('kependudukan/pendatang')}}">
+            <li id="pendatang">
+              <a href="{{url('kependudukan/pendatang')}}">
                 <span class="sub-item">Data Pendatang</span>
               </a>
             </li>
-            <li>
+            <li id="penduduk-pindah">
             <a href="{{url('kependudukan/penduduk-pindah')}}">
                 <span class="sub-item">Data Penduduk Pindah</span>
               </a>
             </li>
-            <li>
-            <a href="{{url('kependudukan/penduduk/pemilih-tetap')}}">
+            <li id="pemilih-tetap">
+              <a href="{{url('kependudukan/pemilih-tetap')}}">
                 <span class="sub-item">Daftar Pemilih Tetap</span>
               </a>
             </li>
@@ -92,25 +92,25 @@
         </div>
       </li>
       @if(Auth::user()->user_role_id == 1)
-      <li class="nav-item">
-        <a data-toggle="collapse" href="#surat">
+      <li class="nav-item" id="surat">
+        <a data-toggle="collapse" href="#surat-menu" id="surat-sub">
           <i class="fas fa-pen-square"></i>
           <p>Surat</p>
           <span class="caret"></span>
         </a>
-        <div class="collapse" id="surat">
+        <div class="collapse" id="surat-menu">
           <ul class="nav nav-collapse">
-            <li>
+            <li id="format-surat">
               <a href="{{url('surat/format-surat')}}">
                 <span class="sub-item">Format Surat</span>
               </a>
             </li>
-            <li>
+            <li id="daftar-cetak-surat">
               <a href="{{url('surat/daftar-cetak-surat')}}">
                 <span class="sub-item">Cetak Surat</span>
               </a>
             </li>
-            <li>
+            <li id="rekap-surat">
               <a href="{{url('surat/rekap-surat')}}">
                 <span class="sub-item">Rekap Surat</span>
               </a>
@@ -118,64 +118,64 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item ">
+      <li class="nav-item " id="staff">
       <a href="{{url('/staff')}}">
           <i class="fas fa-users"></i>
           <p>Staff Desa</p>
         </a>
       </li>
-      <li class="nav-item ">
+      <li class="nav-item " id="user">
         <a href="{{url('/user')}}">
           <i class="fas fa-user"></i>
           <p>Users</p>
         </a>
       </li>
       @endif
-      <li class="nav-item">
-        <a data-toggle="collapse" href="#laporan">
+      <li class="nav-item" id="lap">
+        <a data-toggle="collapse" href="#lap-menu" id="lap-sub">
           <i class="far fa-chart-bar"></i>
           <p>Laporan</p>
           <span class="caret"></span>
         </a>
-        <div class="collapse" id="laporan">
+        <div class="collapse" id="lap-menu">
           <ul class="nav nav-collapse">
-            <li>
+            <li id="statistik">
               <a href="{{url('lap/statistik')}}">
                 <span class="sub-item">Laporan Statistik Kependudukan</span>
               </a>
             </li>
-            <li>
-              <a href="{{url('lap/kelahiran')}}">
+            <li id="lap-kelahiran">
+              <a href="{{url('lap/lap-kelahiran')}}">
                 <span class="sub-item">Laporan Data Kelahiran</span>
               </a>
             </li>
-            <li>
-              <a href="{{url('lap/kematian')}}">
+            <li id="lap-kematian">
+              <a href="{{url('lap/lap-kematian')}}">
                 <span class="sub-item">Laporan Data Kematian</span>
               </a>
             </li>
-            <li>
-              <a href="{{url('lap/pendatang')}}">
+            <li id="lap-pendatang">
+              <a href="{{url('lap/lap-pendatang')}}">
                 <span class="sub-item">Laporan Data Pendatang</span>
               </a>
             </li>
-            <li>
-              <a href="{{url('lap/penduduk-pindah')}}">
+            <li id="lap-penduduk-pindah">
+              <a href="{{url('lap/lap-penduduk-pindah')}}">
                 <span class="sub-item">Laporan Data Penduduk Pindah</span>
               </a>
             </li>
           </ul>
         </div>
       </li>
-      <li class="nav-item">
-        <a data-toggle="collapse" href="#pengaturan">
+      <li class="nav-item" id="pengaturan">
+        <a data-toggle="collapse" href="#pengaturan-menu" id="pengaturan-sub">
           <i class="fas fa-cog"></i>
           <p>Pengaturan</p>
           <span class="caret"></span>
         </a>
-        <div class="collapse" id="pengaturan">
+        <div class="collapse" id="pengaturan-menu">
           <ul class="nav nav-collapse">
-             <li>
+            <li id="identitas">
               <a href="{{url('/pengaturan/identitas')}}">
                 <span class="sub-item">Identitas Desa</span>
               </a>
@@ -187,3 +187,24 @@
   </div>
 </div>
 </div>
+
+<script>
+var path = window.location.pathname;
+
+if(path == "/" || path == "/dashboard")
+{
+  $("#dashboard").addClass("active");
+}else
+{
+  path = path.replace(/\/+$/, '');
+  path = path[0] == '/' ? path.substr(1) : path;
+  var path_split = path.split("/");
+
+  $("#"+path_split[0]+"").addClass("active");
+  $("#"+path_split[0]+"").addClass("submenu");
+  $("#"+path_split[0]+"-sub").attr("aria-expanded","true");
+  $("#"+path_split[0]+"-menu").addClass("show");
+  $("#"+path_split[1]+"").addClass("active");
+}
+
+</script>

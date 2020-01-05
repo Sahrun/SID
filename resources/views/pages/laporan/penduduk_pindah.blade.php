@@ -122,7 +122,7 @@
     </style>
 
     <script>
-    const url = "{{url('lap/penduduk-pindah/')}}"
+    const url = "{{url('lap/lap-penduduk-pindah/')}}"
     const tglAwalUrl = "{{Request::segment(3)}}"
     const tglAkhirUrl = "{{Request::segment(4)}}"
 

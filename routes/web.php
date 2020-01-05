@@ -66,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kependudukan/penduduk/view/{id}', 'PendudukController@show');
     Route::get('/kependudukan/penduduk/validation-nik/{nik}/{id}','PendudukController@validation_nik');
     Route::get('/kependudukan/penduduk/excel-penduduk', 'PendudukController@excel_penduduk');
-    Route::get('/kependudukan/penduduk/pemilih-tetap', 'PendudukController@pemilih_tetap');
+    Route::get('/kependudukan/pemilih-tetap', 'PendudukController@pemilih_tetap');
     Route::get('/kependudukan/penduduk/pemilih-tetap-export', 'PendudukController@pemilih_tetap_export');
     // End Penduduk
 
@@ -149,23 +149,23 @@ Route::middleware(['auth'])->group(function () {
     //region Laporan dan Export Excel
     Route::get('/lap/statistik', 'LaporanController@statistik');
 
-    Route::get('/lap/penduduk-pindah', 'LaporanController@penduduk_pindah');
-    Route::get('/lap/penduduk-pindah/{tgl_awal}/{tgl_akhir}', 'LaporanController@penduduk_pindah_filter');
+    Route::get('/lap/lap-penduduk-pindah', 'LaporanController@penduduk_pindah');
+    Route::get('/lap/lap-penduduk-pindah/{tgl_awal}/{tgl_akhir}', 'LaporanController@penduduk_pindah_filter');
     Route::get('/lap/excel-penduduk-pindah', 'LaporanController@excel_penduduk_pindah');
     Route::get('/lap/excel-penduduk-pindah/{tgl_awal}/{tgl_akhir}', 'LaporanController@excel_penduduk_pindah_filter');
 
-    Route::get('/lap/pendatang', 'LaporanController@pendatang');
-    Route::get('/lap/pendatang/{tgl_awal}/{tgl_akhir}', 'LaporanController@pendatang_filter');
+    Route::get('/lap/lap-pendatang', 'LaporanController@pendatang');
+    Route::get('/lap/lap-pendatang/{tgl_awal}/{tgl_akhir}', 'LaporanController@pendatang_filter');
     Route::get('/lap/excel-pendatang', 'LaporanController@excel_pendatang');
     Route::get('/lap/excel-pendatang/{tgl_awal}/{tgl_akhir}', 'LaporanController@excel_pendatang_filter');
 
-    Route::get('/lap/kelahiran', 'LaporanController@kelahiran');
-    Route::get('/lap/kelahiran/{tgl_awal}/{tgl_akhir}', 'LaporanController@kelahiran_filter');
+    Route::get('/lap/lap-kelahiran', 'LaporanController@kelahiran');
+    Route::get('/lap/lap-kelahiran/{tgl_awal}/{tgl_akhir}', 'LaporanController@kelahiran_filter');
     Route::get('/lap/excel-kelahiran', 'LaporanController@excel_kelahiran');
     Route::get('/lap/excel-kelahiran/{tgl_awal}/{tgl_akhir}', 'LaporanController@excel_kelahiran_filter');
 
-    Route::get('/lap/kematian', 'LaporanController@kematian');
-    Route::get('/lap/kematian/{tgl_awal}/{tgl_akhir}', 'LaporanController@kematian_filter');
+    Route::get('/lap/lap-kematian', 'LaporanController@kematian');
+    Route::get('/lap/lap-kematian/{tgl_awal}/{tgl_akhir}', 'LaporanController@kematian_filter');
     Route::get('/lap/excel-kematian', 'LaporanController@excel_kematian');
     Route::get('/lap/excel-kematian/{tgl_awal}/{tgl_akhir}', 'LaporanController@excel_kematian_filter');
     //endregion Laporan dan Export Excel

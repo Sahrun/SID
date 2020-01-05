@@ -126,7 +126,7 @@
     </style>
 
     <script>
-    const url = "{{url('lap/pendatang/')}}"
+    const url = "{{url('lap/lap-pendatang/')}}"
     const tglAwalUrl = "{{Request::segment(3)}}"
     const tglAkhirUrl = "{{Request::segment(4)}}"
 
