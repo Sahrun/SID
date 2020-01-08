@@ -53,7 +53,7 @@
                                     <select class="form-control" name="staf_id" required> 
                                         <option value=""> - Pilih -</option>
                                         @foreach ($staff as $item)
-                                        <option value="{{$item->staff_id}}">{{$item->nama_staff}}</option>
+                                        <option value="{{$item->staff_id}}">{{$item->nama_staff}}  ({{$item->staff_posisi}})</option>
                                         @endforeach;
                                     </select>
                                  </div>
