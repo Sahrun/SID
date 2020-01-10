@@ -56,12 +56,6 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>No Kartu Keluarga</b></label>
-								<div class="col-md-9 p-0">
-                                     <input type="text" class="form-control input-full" name="no_kk" placeholder="No kartu keluarga" value="{{$penduduk->no_kk}}">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Tempat Lahir</b></label>
 								<div class="col-md-9 p-0">
 									<input type="text" class="form-control input-full" name="tempat_lahir" placeholder="Tempat lahir" value="{{$penduduk->tempat_lahir}}" >
@@ -75,12 +69,70 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>Jenis Kelamin {{$penduduk->jekel == 'Perempuan' ? 'checked':''}}</b></label>
+								<label class="col-md-3 label-control"><b>Jenis Kelamin</b></label>
 								<div class="col-md-9 p-0">
                                     <b>Laki - Laki </b><input type="radio" class="form-control" name="jekel" value="Laki-laki" required  {{$penduduk->jekel == 'Laki-laki' ? 'checked':''}}>
                                     <b>Perempuan </b><input type="radio" class="form-control" name="jekel" value="Perempuan" required {{$penduduk->jekel == 'Perempuan' ? 'checked':''}}>
                                  </div>
 							</div>
+
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nama Ayah</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="nama_ayah" placeholder="Nama Ayah" maxlength="50"
+                                    value="{{$penduduk->nama_ayah}}"/>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nama Ibu</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="nama_ibu" placeholder="Nama Ibu" maxlength="50"
+                                    value="{{$penduduk->nama_ibu}}"/>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor KITAS/KITAP</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_kitas_kitap" placeholder="Nomor KITAS/KITAP" maxlength="20"
+                                    value="{{$penduduk->no_kitas_kitap}}"/>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor Paspor</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_paspor" placeholder="Nomor Paspor" maxlength="20"
+                                    value="{{$penduduk->no_paspor}}"/>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Status Kewarganegaraan</b></label>
+								<div class="col-md-9 p-0">
+                                    <select name="status_warganegara" class="form-control">
+                                            <option value="">- Pilih -</option>
+                                            <option value="WNI" {{$penduduk->status_warganegara == "WNI"?"selected":""}}>WNI</option>
+                                            <option value="WNA" {{$penduduk->status_warganegara == "WNA"?"selected":""}}>WNA</option>
+                                            <option value="Dua Kewarganegaraan" {{$penduduk->status_warganegara == "Dua Kewarganegaraan"?"selected":""}}>Dua Kewarganegaraan</option>
+                                    </select>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor Akta Kelahiran</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_akta_kelahiran" placeholder="Nomor Akta Kelahiran" maxlength="20"
+                                    value="{{$penduduk->no_akta_kelahiran}}"/>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>KTP Elektronik</b></label>
+								<div class="col-md-9 p-0">
+                                    <select name="ktp_elektronik" class="form-control">
+                                            <option value="">- Pilih -</option>
+                                            <option value="Belum" {{$penduduk->ktp_elektronik == "Belum"?"selected":""}}>Belum</option>
+                                            <option value="Sudah" {{$penduduk->ktp_elektronik == "Sudah"?"selected":""}}>Sudah</option>
+                                    </select>
+								</div>
+							</div>
+
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Alamat</b></label>
 								<div class="col-md-9 p-0">
@@ -123,7 +175,29 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Pekerjaan</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="pekerjaan" placeholder="Pekerjaan" value="{{$penduduk->pekerjaan}}">
+                                <select name="pekerjaan" class="form-control">
+                                        <option value="">- Pilih -</option>
+                                        <option value="BELUM/TIDAK BEKERJA" {{$penduduk->pekerjaan == "BELUM/TIDAK BEKERJA"?"selected":""}}>BELUM/TIDAK BEKERJA </option>
+                                        <option value="MENGURUS RUMAH TANGGA" {{$penduduk->pekerjaan == "MENGURUS RUMAH TANGGA"?"selected":""}}> MENGURUS RUMAH TANGGA </option>
+                                        <option value="PELAJAR/MAHASISWA" {{$penduduk->pekerjaan == "PELAJAR/MAHASISWA"?"selected":""}}> PELAJAR/MAHASISWA </option>
+                                        <option value="PENSIUNAN" {{$penduduk->pekerjaan == "PENSIUNAN"?"selected":""}}> PENSIUNAN </option>
+                                        <option value="PEGAWAI NEGERI SIPIL (PNS)" {{$penduduk->pekerjaan == "PEGAWAI NEGERI SIPIL (PNS)"?"selected":""}}> PEGAWAI NEGERI SIPIL (PNS) </option>
+                                        <option value="TENTARA NASIONAL INDONESIA (TNI)" {{$penduduk->pekerjaan == "TENTARA NASIONAL INDONESIA (TNI)"?"selected":""}}> TENTARA NASIONAL INDONESIA (TNI) </option>
+                                        <option value="KEPOLISIAN RI (POLRI)" {{$penduduk->pekerjaan == "KEPOLISIAN RI (POLRI)"?"selected":""}}> KEPOLISIAN RI (POLRI) </option>
+                                        <option value="PERDAGANGAN" {{$penduduk->pekerjaan == "PERDAGANGAN"?"selected":""}}> PERDAGANGAN </option>
+                                        <option value="PETANI/PEKEBUN" {{$penduduk->pekerjaan == "PETANI/PEKEBUN"?"selected":""}}> PETANI/PEKEBUN </option>
+                                        <option value="KARYAWAN SWASTA" {{$penduduk->pekerjaan == "KARYAWAN SWASTA"?"selected":""}}> KARYAWAN SWASTA </option>
+                                        <option value="KARYAWAN HONORER" {{$penduduk->pekerjaan == "KARYAWAN HONORER"?"selected":""}}> KARYAWAN HONORER </option>
+                                        <option value="BURUH HARIAN LEPAS" {{$penduduk->pekerjaan == "BURUH HARIAN LEPAS"?"selected":""}}> BURUH HARIAN LEPAS </option>
+                                        <option value="PEMBANTU RUMAH TANGGA" {{$penduduk->pekerjaan == "PEMBANTU RUMAH TANGGA"?"selected":""}}> PEMBANTU RUMAH TANGGA </option>
+                                        <option value="SENIMAN" {{$penduduk->pekerjaan == "SENIMAN"?"selected":""}}> SENIMAN </option>
+                                        <option value="GURU" {{$penduduk->pekerjaan == "GURU"?"selected":""}}> GURU </option>
+                                        <option value="KONSULTAN" {{$penduduk->pekerjaan == "KONSULTAN"?"selected":""}}> KONSULTAN </option>
+                                        <option value="DOKTER" {{$penduduk->pekerjaan == "DOKTER"?"selected":""}}> DOKTER </option>
+                                        <option value="PERANGKAT DESA" {{$penduduk->pekerjaan == "PERANGKAT DESA"?"selected":""}}> PERANGKAT DESA </option>
+                                        <option value="WIRASWASTA" {{$penduduk->pekerjaan == "WIRASWASTA"?"selected":""}}> WIRASWASTA </option>
+                                        <option value="LAINNYA" {{$penduduk->pekerjaan == "LAINNYA"?"selected":""}}> LAINNYA </option>
+                                    </select>
 								</div>
 							</div>
                             <div class="form-group form-inline">

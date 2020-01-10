@@ -88,10 +88,11 @@ class KelahiranController extends Controller
        
        DB::transaction(function () use ($penduduk,$kelahiran,$request,$keluarga) {
            
+            $data_ibu = $penduduk::find($request->id_penduduk_ibu);
+            $data_ayah = $penduduk::find($request->id_penduduk_ayah);
             // Insert To Table Penduduk
             $penduduk->nik = $request->nik;
             $penduduk->full_name = $request->full_name;
-            $penduduk->no_kk = $keluarga->no_kk;
             $penduduk->tempat_lahir = $request->tempat_lahir;
             $penduduk->tanggal_lahir = $request->tanggal_lahir;
             $penduduk->jekel = $request->jekel;
@@ -107,6 +108,13 @@ class KelahiranController extends Controller
             $penduduk->wilayah_rw = $request->wilayah_rw;
             $penduduk->wilayah_rt = $request->wilayah_rt;
             $penduduk->alamat = $request->alamat;
+            $penduduk->ktp_elektronik = $request->ktp_elektronik;
+            $penduduk->no_akta_kelahiran = $request->no_akta_kelahiran;
+            $penduduk->status_warganegara = $request->status_warganegara;
+            $penduduk->no_paspor = $request->no_paspor;
+            $penduduk->no_kitas_kitap = $request->no_kitas_kitap;
+            $penduduk->nama_ayah = $data_ayah->full_name;
+            $penduduk->nama_ibu = $data_ibu->full_name; 
             $penduduk->created_at = Date("Y-m-d h:i:s");
             $penduduk->updated_at = Date("Y-m-d h:i:s");
             $penduduk->save();
@@ -140,9 +148,10 @@ class KelahiranController extends Controller
         ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
         ->join('wilayah as  rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
         ->join('wilayah as  rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->leftjoin('keluarga','keluarga.keluarga_id','=','penduduk.keluarga_id')
         ->leftjoin('penduduk as ibu','ibu.penduduk_id','=','kelahiran.id_penduduk_ibu')
-        ->leftjoin('penduduk as ayah','ibu.penduduk_id','=','kelahiran.id_penduduk_ayah')
-        ->select('penduduk.*','kelahiran.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT','ibu.nik as nik_ibu','ayah.nik as nik_ayah')
+        ->leftjoin('penduduk as ayah','ayah.penduduk_id','=','kelahiran.id_penduduk_ayah')
+        ->select('penduduk.*','kelahiran.*','keluarga.no_kk as no_kk', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT','ibu.nik as nik_ibu','ayah.nik as nik_ayah')
         ->where('kelahiran.kelahiran_id',$id)->first();
         return view('pages.kependudukan.kelahiran.view',['kelahiran' => $kelahiran ]);
     }
@@ -178,6 +187,7 @@ class KelahiranController extends Controller
         $penduduk = Penduduk::find($kelahiran->penduduk_id);
         
         DB::transaction(function () use ($penduduk,$kelahiran,$request) {
+
             $penduduk->nik  = $request->nik;
             $penduduk->wilayah_dusun   = $request->wilayah_dusun;
             $penduduk->wilayah_rw   = $request->wilayah_rw;
@@ -193,6 +203,11 @@ class KelahiranController extends Controller
             $penduduk->golongan_darah   = $request->golongan_darah;
             $penduduk->status_kependudukan   = $request->status_kependudukan;
             $penduduk->alamat = $request->alamat;
+            $penduduk->ktp_elektronik = $request->ktp_elektronik;
+            $penduduk->no_akta_kelahiran = $request->no_akta_kelahiran;
+            $penduduk->status_warganegara = $request->status_warganegara;
+            $penduduk->no_paspor = $request->no_paspor;
+            $penduduk->no_kitas_kitap = $request->no_kitas_kitap;
             $penduduk->updated_at    = Date("Y-m-d h:i:s");
             $penduduk->save();
 

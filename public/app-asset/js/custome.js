@@ -1,6 +1,6 @@
 function autocomplete(inp, arr,identity) {
     var currentFocus;
-    
+    var temp ={};
     inp.addEventListener("input", function(e) {
   
         resetproperty();

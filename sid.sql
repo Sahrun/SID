@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 31, 2019 at 12:05 PM
+-- Generation Time: Jan 10, 2020 at 04:49 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -88,7 +88,11 @@ CREATE TABLE `kelahiran` (
 --
 
 INSERT INTO `kelahiran` (`kelahiran_id`, `penduduk_id`, `anak_ke`, `id_penduduk_ibu`, `id_penduduk_ayah`, `tob`, `hob`, `kondisi_lahir`, `berat`, `panjang`, `created_at`, `updated_at`, `jenis_kelahiran`) VALUES
-(3, 19, 2, 4, 5, '01:22:00', 'Dukun Beranak', 'Normal', 1.3, 60, '2019-12-22 03:02:23', '2019-12-22 03:09:21', 'Normal');
+(3, 19, 2, 4, 5, '01:22:00', 'Dukun Beranak', 'Normal', 1, 60, '2019-12-22 03:02:23', '2019-12-22 03:09:21', 'Normal'),
+(4, 20, 1, NULL, NULL, '00:00:00', 'Dokter', 'Normal', 6, 5, '2019-12-31 04:52:08', '2019-12-31 05:00:41', 'Normal'),
+(5, 21, 3, 4, 4, '01:00:00', 'Bidan', 'Normal', 0.4, 5.4, '2019-12-30 19:40:22', '2019-12-30 19:41:58', 'Normal'),
+(6, 31, 12, 26, 5, '01:00:00', 'Dokter', 'Normal', 0.4, 5.4, '2020-01-09 20:21:41', '2020-01-09 20:22:42', 'Normal'),
+(7, 32, 1, 24, 25, '01:57:00', 'Bidan', 'Normal', 0.4, 5.4, '2020-01-09 20:39:05', '2020-01-09 20:41:17', 'Normal');
 
 -- --------------------------------------------------------
 
@@ -113,7 +117,8 @@ CREATE TABLE `keluarga` (
 --
 
 INSERT INTO `keluarga` (`keluarga_id`, `kepala_keluarga`, `no_kk`, `wilayah_dusun`, `wilayah_rw`, `wilayah_rt`, `alamat_keluarga`, `created_at`, `updated_at`) VALUES
-(4, 4, '21412124223432', 79, 80, 85, 'lrbka bulus', '2019-12-15 03:25:18', '2019-12-15 03:45:55');
+(6, 18, '1234567891234567', 79, 80, 86, 'qwqwqwqwqw', '2019-12-31 05:29:52', '2019-12-31 05:56:59'),
+(7, 4, '1234567891234564', 79, 80, 85, 'asas', '2019-12-31 05:56:16', '2019-12-31 05:57:05');
 
 -- --------------------------------------------------------
 
@@ -131,6 +136,13 @@ CREATE TABLE `kematian` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `kematian`
+--
+
+INSERT INTO `kematian` (`kematian_id`, `tgl_kematian`, `jam_kematian`, `tempat_kematian`, `sebab_kematian`, `penduduk_id`, `created_at`, `updated_at`) VALUES
+(4, '2019-12-29', '02:01:00', 'Rumah', 'Usia Tua', 5, '2020-01-01 05:35:06', '2020-01-01 05:35:06');
 
 -- --------------------------------------------------------
 
@@ -196,7 +208,8 @@ CREATE TABLE `pendatang` (
 --
 
 INSERT INTO `pendatang` (`pendatang_id`, `tgl_datang`, `alamat_datang`, `alasan_datang`, `penduduk_id`, `created_at`, `updated_at`) VALUES
-(5, '2019-12-22', 'Purworejo', 'Transmigrasi', 18, '2019-12-22 01:39:42', '2019-12-22 01:39:42');
+(5, '2019-12-22', 'Purworejo', 'Transmigrasi', 18, '2019-12-22 01:39:42', '2019-12-22 01:39:42'),
+(6, '2020-01-24', 'wewewewe', 'Pekerjaan', 30, '2020-01-09 19:56:01', '2020-01-09 20:07:36');
 
 -- --------------------------------------------------------
 
@@ -207,7 +220,6 @@ INSERT INTO `pendatang` (`pendatang_id`, `tgl_datang`, `alamat_datang`, `alasan_
 CREATE TABLE `penduduk` (
   `penduduk_id` int(10) UNSIGNED NOT NULL,
   `nik` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_kk` varchar(16) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `wilayah_dusun` int(10) UNSIGNED NOT NULL,
   `wilayah_rt` int(10) UNSIGNED NOT NULL,
   `wilayah_rw` int(10) UNSIGNED NOT NULL,
@@ -222,21 +234,41 @@ CREATE TABLE `penduduk` (
   `status_perkawinan` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `golongan_darah` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_kependudukan` enum('Tetap','Pendatang','Tidak tetap','Meninggal','Pindah') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
   `hubungan_keluarga` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `alamat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `alamat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ktp_elektronik` enum('Belum','Sudah') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_akta_kelahiran` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status_warganegara` enum('WNI','WNA','Dua Kewarganegaraan') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_paspor` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_kitas_kitap` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_ayah` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_ibu` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `penduduk`
 --
 
-INSERT INTO `penduduk` (`penduduk_id`, `nik`, `no_kk`, `wilayah_dusun`, `wilayah_rt`, `wilayah_rw`, `keluarga_id`, `full_name`, `tempat_lahir`, `tanggal_lahir`, `jekel`, `agama`, `pendidikan`, `pekerjaan`, `status_perkawinan`, `golongan_darah`, `status_kependudukan`, `created_at`, `updated_at`, `hubungan_keluarga`, `alamat`) VALUES
-(4, '3306060208956666', NULL, 79, 85, 80, 4, 'Sahrun', NULL, '1995-08-02', NULL, '- Pilih -', NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:17', '2019-12-15 03:45:55', 'KEPALA KELUARGA', NULL),
-(5, '2131312321', NULL, 79, 85, 80, 4, 'Rini', NULL, '1998-06-16', NULL, '- Pilih -', NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:45', '2019-12-15 03:30:31', 'MENANTU', NULL),
-(18, '155156656', NULL, 79, 85, 80, NULL, 'Surya', NULL, '1990-07-03', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'Pindah', '2019-12-22 01:39:42', '2019-12-22 01:40:21', NULL, NULL),
-(19, '2454533232', '21412124223432', 79, 85, 80, 4, 'surti', NULL, '2019-12-06', 'Laki-laki', 'ISLAM', NULL, NULL, NULL, 'TIDAK TAHU', 'Pendatang', '2019-12-22 03:02:23', '2019-12-22 03:09:21', 'ANAK', NULL);
+INSERT INTO `penduduk` (`penduduk_id`, `nik`, `wilayah_dusun`, `wilayah_rt`, `wilayah_rw`, `keluarga_id`, `full_name`, `tempat_lahir`, `tanggal_lahir`, `jekel`, `agama`, `pendidikan`, `pekerjaan`, `status_perkawinan`, `golongan_darah`, `status_kependudukan`, `hubungan_keluarga`, `alamat`, `ktp_elektronik`, `no_akta_kelahiran`, `status_warganegara`, `no_paspor`, `no_kitas_kitap`, `nama_ayah`, `nama_ibu`, `created_at`, `updated_at`) VALUES
+(4, '3306060208956666', 79, 85, 80, 7, 'ddssdss', 'ss', '1995-08-01', 'Laki-laki', 'ISLAM', 'TIDAK / BELUM SEKOLAH', 'asas', 'BELUM KAWIN', 'A', 'Tetap', 'KEPALA KELUARGA', 'Jl Mangkubumi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:17', '2019-12-31 18:01:01'),
+(5, '2131312321', 79, 85, 80, NULL, 'Rini', NULL, '1998-06-16', NULL, '- Pilih -', NULL, NULL, NULL, NULL, 'Meninggal', 'MENANTU', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-15 03:12:45', '2019-12-31 17:35:05'),
+(18, '155156656', 79, 85, 80, 6, 'Surya', NULL, '1990-07-03', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'Tetap', 'KEPALA KELUARGA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-22 01:39:42', '2020-01-02 23:50:09'),
+(19, '2454533232', 79, 81, 80, NULL, 'surti', NULL, '2019-12-06', 'Laki-laki', 'ISLAM', NULL, NULL, NULL, 'TIDAK TAHU', 'Pendatang', 'ANAK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-22 03:02:23', '2020-01-02 23:50:24'),
+(20, '3306060208956662', 79, 81, 80, NULL, 'ddssdss', 'ss', '2019-12-23', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'Pendatang', 'ANAK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-31 04:52:08', '2019-12-31 05:30:09'),
+(21, '3456789876543234', 79, 81, 80, 6, 'Andin', NULL, '2019-12-16', 'Perempuan', NULL, NULL, NULL, NULL, NULL, 'Pendatang', 'ANAK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-30 19:40:22', '2020-01-02 20:23:30'),
+(22, '2353322323121312', 79, 85, 80, 6, 'doni', 'ss', '2020-01-01', 'Laki-laki', 'ISLAM', 'BELUM TAMAT SD/SEDERAJAT', 'asas', 'BELUM KAWIN', 'A', 'Tetap', 'ANAK', 'Jalan Jalan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-31 18:02:14', '2019-12-31 18:30:09'),
+(23, '3335565323121213', 79, 81, 80, NULL, 'Arif', 'ss', '2019-12-29', 'Laki-laki', 'ISLAM', 'TIDAK / BELUM SEKOLAH', NULL, 'BELUM KAWIN', 'B-', 'Tetap', NULL, 'Jl Angrek', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-31 18:07:31', '2020-01-09 20:02:57'),
+(24, '1234465322323232', 79, 81, 80, NULL, 'Orang 1', 'ss', '2019-12-29', 'Laki-laki', 'KRISTEN', 'TIDAK / BELUM SEKOLAH', 'ASDFGBN', 'BELUM KAWIN', 'B-', 'Tetap', NULL, 'Jl Mangkubumi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-01-01 00:14:37', '2020-01-01 00:14:37'),
+(25, '2454533232121212', 79, 85, 80, NULL, 'Orang 2', 'ss', '2019-12-29', 'Perempuan', 'ISLAM', 'TIDAK / BELUM SEKOLAH', 'asas', 'BELUM KAWIN', 'B-', 'Tetap', NULL, 'Jl Angrek', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-01-01 00:15:11', '2020-01-02 20:23:41'),
+(26, '3306060208956663', 79, 85, 80, NULL, 'Orang 3', 'ss', '2019-12-30', 'Laki-laki', 'ISLAM', 'TIDAK / BELUM SEKOLAH', 'ASXDC', 'BELUM KAWIN', 'B-', 'Tetap', NULL, 'asas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-01-01 00:15:51', '2020-01-01 00:15:51'),
+(27, '2323231212121121', 79, 81, 80, NULL, 'Orang 4', 'ss', '2019-12-30', 'Laki-laki', 'ISLAM', 'TIDAK / BELUM SEKOLAH', 'asas', 'BELUM KAWIN', 'AB+', 'Tetap', NULL, 'asas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-01-01 00:16:31', '2020-01-02 23:51:08'),
+(28, '2454533232098766', 79, 81, 80, NULL, 'Orang 5', 'ss', '2019-12-29', 'Laki-laki', 'ISLAM', 'TIDAK / BELUM SEKOLAH', 'ASDFGBN', 'BELUM KAWIN', 'A-', 'Tetap', NULL, 'Jl Mangkubumi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-01-01 00:17:39', '2020-01-02 23:51:18'),
+(29, '1232342121212123', 79, 85, 80, NULL, 'Joko', 'ss', '2019-12-29', 'Laki-laki', 'ISLAM', 'STRATA II9', 'TENTARA NASIONAL INDONESIA (TNI)', 'BELUM KAWIN', 'O+', 'Tetap', NULL, 'Jalan Jalan', 'Sudah', '1212123232332', 'Dua Kewarganegaraan', '232342232', '23212122323', 'Ayah', 'Ibu', '2020-01-09 19:37:03', '2020-01-09 19:37:52'),
+(30, '3335565323121212', 79, 85, 80, NULL, 'Penduduk Datang 2', 'asqwqw', '2020-01-06', 'Laki-laki', 'ISLAM', 'TIDAK / BELUM SEKOLAH', 'PEMBANTU RUMAH TANGGA', 'BELUM KAWIN', 'B-', 'Pendatang', NULL, 'asasas', 'Belum', '234212453245', 'WNA', '2323423', '132323', 'Ayah', 'Ibu', '2020-01-09 19:56:01', '2020-01-09 20:07:36'),
+(31, '0982372372382323', 82, 84, 83, 7, 'Anak Baru Lahir', 'ss', '2019-12-30', 'Laki-laki', 'HINDU', NULL, NULL, NULL, 'AB+', 'Pendatang', 'ANAK', 'asasas', 'Belum', '121221', 'WNI', '12121212', '12121212', 'Orang 3', 'Rini', '2020-01-09 20:21:41', '2020-01-09 20:22:42'),
+(32, '3243567654325675', 79, 85, 80, 6, 'asasasas', 'asasas', '2019-12-29', 'Laki-laki', 'KRISTEN', NULL, NULL, NULL, 'B', 'Pendatang', 'ANAK', 'asasas', 'Sudah', 'sdas1231212', 'WNA', 'sdsdsd', 'dsdsd', 'Orang 2', 'Orang 1', '2020-01-09 20:39:05', '2020-01-09 20:41:17');
 
 -- --------------------------------------------------------
 
@@ -253,13 +285,6 @@ CREATE TABLE `penduduk_pindah` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `penduduk_pindah`
---
-
-INSERT INTO `penduduk_pindah` (`pindah_id`, `tgl_pindah`, `alamat_pindah`, `alasan_pindah`, `penduduk_id`, `created_at`, `updated_at`) VALUES
-(6, '2019-12-22', 'kjkhkjhjkhjkh', 'Pekerjaan', 18, '2019-12-22 01:40:21', '2019-12-22 01:40:21');
 
 -- --------------------------------------------------------
 
@@ -309,7 +334,20 @@ CREATE TABLE `surat` (
 INSERT INTO `surat` (`surat_id`, `nama_surat`, `tanggal`, `hal`, `surat_filename`, `penduduk_id`, `staff_id`, `created_at`, `updated_at`) VALUES
 (1, 'Surat Keterangan Kurang Mampu', '2019-12-31', '1213242121212', 'Surat Keterangan Kurang Mampu_20191231101504.doc', 4, 1, '2019-12-31 03:15:04', '2019-12-31 03:15:04'),
 (2, 'Surat Keterangan Kurang Mampu', '2019-12-31', '1213242121212', 'Surat Keterangan Kurang Mampu_20191231101511.doc', 4, 1, '2019-12-31 03:15:11', '2019-12-31 03:15:11'),
-(3, 'Surat Keterangan Kurang Mampu', '2019-12-31', '1213242121212', 'Surat Keterangan Kurang Mampu_20191231101512.doc', 4, 1, '2019-12-31 03:15:13', '2019-12-31 03:15:13');
+(3, 'Surat Keterangan Kurang Mampu', '2019-12-31', '1213242121212', 'Surat Keterangan Kurang Mampu_20191231101512.doc', 4, 1, '2019-12-31 03:15:13', '2019-12-31 03:15:13'),
+(6, 'Surat Pengantar ', '2020-01-01', '12345678', 'Surat Pengantar _20200101121518.doc', 4, 1, '2020-01-01 05:15:18', '2020-01-01 05:15:18'),
+(7, 'Surat Keterangan Kurang Mampu', '2020-01-01', '12345678', 'Surat Keterangan Kurang Mampu_20200101122423.doc', 4, 1, '2020-01-01 05:24:23', '2020-01-01 05:24:23'),
+(8, 'Surat Keterangan Kurang Mampu', '2020-01-01', 'asas', 'Surat Keterangan Kurang Mampu_20200101122643.doc', 4, 1, '2020-01-01 05:26:43', '2020-01-01 05:26:43'),
+(9, 'Surat Keterangan Kurang Mampu', '2020-01-01', 'asas', 'Surat Keterangan Kurang Mampu_20200101122826.doc', 4, 1, '2020-01-01 05:28:26', '2020-01-01 05:28:26'),
+(10, 'Surat Keterangan Kurang Mampu', '2020-01-01', 'asas', 'Surat Keterangan Kurang Mampu_20200101122900.doc', 4, 1, '2020-01-01 05:29:00', '2020-01-01 05:29:00'),
+(11, 'Surat Keterangan Kematian', '2020-01-01', '123456', 'Surat Keterangan Kematian_20200101123550.doc', 5, 1, '2020-01-01 05:35:50', '2020-01-01 05:35:50'),
+(12, 'Surat Keterangan Kematian', '2020-01-01', '123456', 'Surat Keterangan Kematian_20200101124229.doc', 5, 1, '2020-01-01 05:42:29', '2020-01-01 05:42:29'),
+(13, 'Surat Keterangan Kematian', '2020-01-01', '123456', 'Surat Keterangan Kematian_20200101124243.doc', 5, 1, '2020-01-01 05:42:43', '2020-01-01 05:42:43'),
+(14, 'Surat Keterangan Kematian', '2020-01-01', 'qasas', 'Surat Keterangan Kematian_20200101124832.doc', 5, 1, '2020-01-01 05:48:32', '2020-01-01 05:48:32'),
+(15, 'Surat Keterangan Kelahiran', '2020-01-01', 'asas', 'Surat Keterangan Kelahiran_20200101010957.doc', 19, 1, '2019-12-31 18:09:57', '2019-12-31 18:09:57'),
+(16, 'Surat Keterangan Pindah Penduduk', '2020-01-01', '123456', 'Surat Keterangan Pindah Penduduk_20200101012930.doc', 18, 1, '2019-12-31 18:29:30', '2019-12-31 18:29:30'),
+(17, 'Surat Keterangan Pindah Penduduk', '2020-01-01', '123456', 'Surat Keterangan Pindah Penduduk_20200101013031.doc', 18, 1, '2019-12-31 18:30:31', '2019-12-31 18:30:31'),
+(18, 'Surat Keterangan Pindah Penduduk', '2020-01-01', '123456', 'Surat Keterangan Pindah Penduduk_20200101013137.doc', 21, 1, '2019-12-31 18:31:37', '2019-12-31 18:31:37');
 
 -- --------------------------------------------------------
 
@@ -337,7 +375,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `user_picture`, `user_role_id`, `api_token`, `remember_token`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'sahrun', 'sahrun@admin', NULL, '$2y$10$YqplSwN26t9CexXRIuvBM.kEV/ElvTITBYUEFrEzAWYZfABrUKC7q', NULL, NULL, NULL, NULL, NULL, '2019-12-22 09:46:19', '2019-12-22 09:46:19');
+(1, 'sahrun', 'sahrun@admin', NULL, '$2y$10$YqplSwN26t9CexXRIuvBM.kEV/ElvTITBYUEFrEzAWYZfABrUKC7q', NULL, 1, NULL, NULL, NULL, '2019-12-22 09:46:19', '2019-12-22 09:46:19');
 
 -- --------------------------------------------------------
 
@@ -351,6 +389,13 @@ CREATE TABLE `user_role` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_role`
+--
+
+INSERT INTO `user_role` (`user_role_id`, `user_role_name`, `created_at`, `updated_at`) VALUES
+(1, 'admin', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -403,7 +448,9 @@ INSERT INTO `wilayah` (`wilayah_id`, `wilayah_part`, `wilayah_dusun`, `wilayah_r
 (84, 3, 82, 83, NULL, '-', '2019-12-15 02:54:33', '2019-12-15 02:54:33', NULL),
 (85, 3, 79, 80, NULL, 'RT 1', '2019-12-15 02:54:59', '2019-12-15 03:19:25', NULL),
 (86, 3, 79, 80, NULL, 'RT 2', '2019-12-15 02:59:43', '2019-12-15 02:59:43', NULL),
-(87, 3, 79, 80, NULL, 'RT 3', '2019-12-15 03:02:36', '2019-12-15 03:02:36', NULL);
+(87, 3, 79, 80, NULL, 'RT 3', '2019-12-15 03:02:36', '2019-12-15 03:02:36', NULL),
+(89, 2, 88, NULL, NULL, '-', '2020-01-04 21:26:01', '2020-01-04 21:26:01', NULL),
+(90, 3, 88, 89, NULL, '-', '2020-01-04 21:26:01', '2020-01-04 21:26:01', NULL);
 
 --
 -- Indexes for dumped tables
@@ -521,19 +568,19 @@ ALTER TABLE `identitas_desa`
 -- AUTO_INCREMENT for table `kelahiran`
 --
 ALTER TABLE `kelahiran`
-  MODIFY `kelahiran_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `kelahiran_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `keluarga`
 --
 ALTER TABLE `keluarga`
-  MODIFY `keluarga_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `keluarga_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `kematian`
 --
 ALTER TABLE `kematian`
-  MODIFY `kematian_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `kematian_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -545,13 +592,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pendatang`
 --
 ALTER TABLE `pendatang`
-  MODIFY `pendatang_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `pendatang_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `penduduk`
 --
 ALTER TABLE `penduduk`
-  MODIFY `penduduk_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `penduduk_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `penduduk_pindah`
@@ -569,7 +616,7 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `surat`
 --
 ALTER TABLE `surat`
-  MODIFY `surat_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `surat_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -581,13 +628,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `user_role_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `user_role_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `wilayah`
 --
 ALTER TABLE `wilayah`
-  MODIFY `wilayah_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `wilayah_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- Constraints for dumped tables

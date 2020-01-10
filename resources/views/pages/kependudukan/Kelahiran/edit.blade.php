@@ -62,12 +62,6 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>No Kartu Keluarga</b></label>
-								<div class="col-md-9 p-0">
-                                     <input type="text" class="form-control input-full" name="no_kk" placeholder="No kartu keluarga" value="{{$kelahiran->no_kk}}">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Tempat Lahir</b></label>
 								<div class="col-md-9 p-0">
 									<input type="text" class="form-control input-full" name="tempat_lahir" placeholder="Tempat lahir" value="{{$kelahiran->tempat_lahir}}">
@@ -86,6 +80,48 @@
                                     <b>Laki - Laki </b><input type="radio" class="form-control" name="jekel" value="Laki-laki" required  {{$kelahiran->jekel == 'Laki-laki' ? 'checked':''}}>
                                     <b>Perempuan </b><input type="radio" class="form-control" name="jekel" value="Perempuan" required {{$kelahiran->jekel == 'Perempuan' ? 'checked':''}}>
                                  </div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor KITAS/KITAP</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_kitas_kitap" placeholder="Nomor KITAS/KITAP" maxlength="20"
+                                    value="{{$kelahiran->no_kitas_kitap}}"/>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor Paspor</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_paspor" placeholder="Nomor Paspor" maxlength="20"
+                                    value="{{$kelahiran->no_paspor}}"/>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Status Kewarganegaraan</b></label>
+								<div class="col-md-9 p-0">
+                                    <select name="status_warganegara" class="form-control">
+                                            <option value="">- Pilih -</option>
+                                            <option value="WNI" {{$kelahiran->status_warganegara == "WNI"?"selected":""}}>WNI</option>
+                                            <option value="WNA" {{$kelahiran->status_warganegara == "WNA"?"selected":""}}>WNA</option>
+                                            <option value="Dua Kewarganegaraan" {{$kelahiran->status_warganegara == "Dua Kewarganegaraan"?"selected":""}}>Dua Kewarganegaraan</option>
+                                    </select>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor Akta Kelahiran</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_akta_kelahiran" placeholder="Nomor Akta Kelahiran" maxlength="20"
+                                    value="{{$kelahiran->no_akta_kelahiran}}"/>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>KTP Elektronik</b></label>
+								<div class="col-md-9 p-0">
+                                    <select name="ktp_elektronik" class="form-control">
+                                            <option value="">- Pilih -</option>
+                                            <option value="Belum" {{$kelahiran->ktp_elektronik == "Belum"?"selected":""}}>Belum</option>
+                                            <option value="Sudah" {{$kelahiran->ktp_elektronik == "Sudah"?"selected":""}}>Sudah</option>
+                                    </select>
+								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Agama</b></label>

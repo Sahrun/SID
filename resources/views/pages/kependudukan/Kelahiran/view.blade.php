@@ -70,6 +70,37 @@
                                 <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$kelahiran->jekel}}</label>
                                  </div>
 							</div>
+							<div class="form-group form-inline">
+								<label class="col-md-3 label-control" style="text-align:left;display:block"><b>Nomor KITAS/KITAP</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$kelahiran->no_kitas_kitap}}</label>
+                                 </div>
+							</div>
+							<div class="form-group form-inline">
+								<label class="col-md-3 label-control" style="text-align:left;display:block"><b>Nomor Paspor</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$kelahiran->no_paspor}}</label>
+                                 </div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control" style="text-align:left;display:block"><b>Status Kewarganegaraan</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$kelahiran->status_warganegara}}</label>
+                                 </div>
+							</div>
+                           
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control" style="text-align:left;display:block"><b>Nomor Akta Kelahiran</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$kelahiran->no_akta_kelahiran}}</label>
+                                 </div>
+							</div>
+							<div class="form-group form-inline">
+								<label class="col-md-3 label-control" style="text-align:left;display:block"><b>KTP Elektronik</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$kelahiran->ktp_elektronik}}</label>
+                                 </div>
+							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control" style="text-align:left;display:block"><b>Agama</b></label>
 								<div class="col-md-9 p-0">

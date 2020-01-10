@@ -88,7 +88,6 @@ class PendatangController extends Controller
     
             $penduduk->nik = $request->nik;
             $penduduk->full_name = $request->full_name;
-            $penduduk->no_kk = $request->no_kk;
             $penduduk->tempat_lahir = $request->tempat_lahir;
             $penduduk->tanggal_lahir = $request->tanggal_lahir;
             $penduduk->jekel = $request->jekel;
@@ -104,6 +103,13 @@ class PendatangController extends Controller
             $penduduk->wilayah_rw = $request->wilayah_rw;
             $penduduk->wilayah_rt = $request->wilayah_rt;
             $penduduk->alamat = $request->alamat;
+            $penduduk->ktp_elektronik = $request->ktp_elektronik;
+            $penduduk->no_akta_kelahiran = $request->no_akta_kelahiran;
+            $penduduk->status_warganegara = $request->status_warganegara;
+            $penduduk->no_paspor = $request->no_paspor;
+            $penduduk->no_kitas_kitap = $request->no_kitas_kitap;
+            $penduduk->nama_ayah = $request->nama_ayah;
+            $penduduk->nama_ibu = $request->nama_ibu;
             $penduduk->created_at = Date("Y-m-d h:i:s");
             $penduduk->updated_at = Date("Y-m-d h:i:s");
             $penduduk->save();
@@ -155,7 +161,6 @@ class PendatangController extends Controller
         $dusun = Wilayah::where('wilayah_part',1)->get();
         $rw =  Wilayah::where('wilayah_part',2)->where('wilayah_dusun',$pendatang->wilayah_dusun)->get();
         $rt = Wilayah::where('wilayah_part',3)->where('wilayah_rw',$pendatang->wilayah_rw)->get();
-
         return view('pages.kependudukan.pendatang.edit',['pendatang'=> $pendatang, 'dusun' => $dusun,'rw' => $rw,'rt' => $rt]);
         }
 
@@ -188,6 +193,13 @@ class PendatangController extends Controller
             $penduduk->golongan_darah   = $request->golongan_darah;
             $penduduk->status_kependudukan   = $request->status_kependudukan;
             $penduduk->alamat = $request->alamat;
+            $penduduk->ktp_elektronik = $request->ktp_elektronik;
+            $penduduk->no_akta_kelahiran = $request->no_akta_kelahiran;
+            $penduduk->status_warganegara = $request->status_warganegara;
+            $penduduk->no_paspor = $request->no_paspor;
+            $penduduk->no_kitas_kitap = $request->no_kitas_kitap;
+            $penduduk->nama_ayah = $request->nama_ayah;
+            $penduduk->nama_ibu = $request->nama_ibu;
             $penduduk->updated_at    = Date("Y-m-d h:i:s");
             $penduduk->save();
 

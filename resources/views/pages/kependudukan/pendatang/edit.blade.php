@@ -14,12 +14,13 @@
                         <div class="card-title">Tambah Data Penduduk</div>
                     </div>
                     <div class="card-body">
-                        <form role="form" method="post"  action="{{url('kependudukan/pendatang/update/'.$pendatang->pendatang_id)}}" method="POST" >
+                        <form role="form" method="post"  action="{{url('kependudukan/pendatang/update/'.$pendatang->pendatang_id)}}" method="POST" onsubmit="return Submit(this)" >
                             @csrf
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>NIK</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="nik" placeholder="NIK" value="{{$pendatang->nik}}" required>
+									<input type="text" class="form-control input-full" name="nik" placeholder="NIK" value="{{$pendatang->nik}}" minlength="16" maxlength="16" required id="nik">
+                                    <span id="error_nik" class="text-danger"></span>
 								</div>
 							</div>
                             <div class="form-group form-inline">
@@ -61,12 +62,6 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>No Kartu Keluarga</b></label>
-								<div class="col-md-9 p-0">
-                                     <input type="text" class="form-control input-full" name="no_kk" placeholder="No kartu keluarga" value="{{$pendatang->no_kk}}">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Tempat Lahir</b></label>
 								<div class="col-md-9 p-0">
 									<input type="text" class="form-control input-full" name="tempat_lahir" placeholder="Tempat lahir" value="{{$pendatang->tempat_lahir}}">
@@ -75,7 +70,9 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Tanggal Lahir</b></label>
 								<div class="col-md-9 p-0">
-									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir" value="{{$pendatang->tanggal_lahir}}">
+									<input type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal lahir" value="{{$pendatang->tanggal_lahir}}"
+                                    id="tanggal_lahir" required onchange="validasitanggal()"/>
+                                    <span id="error_tgl_lahir" class="text-danger"></span>
 								</div>
 							</div>
                             <div class="form-group form-inline">
@@ -85,6 +82,64 @@
                                     <b>Perempuan </b><input type="radio" class="form-control" name="jekel" value="Perempuan" required {{$pendatang->jekel == 'Perempuan' ? 'checked':''}}>
                                  </div>
 							</div>
+                            
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nama Ayah</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="nama_ayah" placeholder="Nama Ayah" maxlength="50"
+                                    value="{{$pendatang->nama_ayah}}"/>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nama Ibu</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="nama_ibu" placeholder="Nama Ibu" maxlength="50"
+                                    value="{{$pendatang->nama_ibu}}"/>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor KITAS/KITAP</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_kitas_kitap" placeholder="Nomor KITAS/KITAP" maxlength="20"
+                                    value="{{$pendatang->no_kitas_kitap}}"/>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor Paspor</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_paspor" placeholder="Nomor Paspor" maxlength="20"
+                                    value="{{$pendatang->no_paspor}}"/>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Status Kewarganegaraan</b></label>
+								<div class="col-md-9 p-0">
+                                    <select name="status_warganegara" class="form-control">
+                                            <option value="">- Pilih -</option>
+                                            <option value="WNI" {{$pendatang->status_warganegara == "WNI"?"selected":""}}>WNI</option>
+                                            <option value="WNA" {{$pendatang->status_warganegara == "WNA"?"selected":""}}>WNA</option>
+                                            <option value="Dua Kewarganegaraan" {{$pendatang->status_warganegara == "Dua Kewarganegaraan"?"selected":""}}>Dua Kewarganegaraan</option>
+                                    </select>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor Akta Kelahiran</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_akta_kelahiran" placeholder="Nomor Akta Kelahiran" maxlength="20"
+                                    value="{{$pendatang->no_akta_kelahiran}}"/>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>KTP Elektronik</b></label>
+								<div class="col-md-9 p-0">
+                                    <select name="ktp_elektronik" class="form-control">
+                                            <option value="">- Pilih -</option>
+                                            <option value="Belum" {{$pendatang->ktp_elektronik == "Belum"?"selected":""}}>Belum</option>
+                                            <option value="Sudah" {{$pendatang->ktp_elektronik == "Sudah"?"selected":""}}>Sudah</option>
+                                    </select>
+								</div>
+							</div>
+
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Agama</b></label>
 								<div class="col-md-9 p-0">
@@ -121,7 +176,29 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Pekerjaan</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="pekerjaan" placeholder="Pekerjaan" value="{{$pendatang->pekerjaan}}">
+                                    <select name="pekerjaan" class="form-control">
+                                        <option value="">- Pilih -</option>
+                                        <option value="BELUM/TIDAK BEKERJA" {{$pendatang->pekerjaan == "BELUM/TIDAK BEKERJA"?"selected":""}}>BELUM/TIDAK BEKERJA </option>
+                                        <option value="MENGURUS RUMAH TANGGA" {{$pendatang->pekerjaan == "MENGURUS RUMAH TANGGA"?"selected":""}}> MENGURUS RUMAH TANGGA </option>
+                                        <option value="PELAJAR/MAHASISWA" {{$pendatang->pekerjaan == "PELAJAR/MAHASISWA"?"selected":""}}> PELAJAR/MAHASISWA </option>
+                                        <option value="PENSIUNAN" {{$pendatang->pekerjaan == "PENSIUNAN"?"selected":""}}> PENSIUNAN </option>
+                                        <option value="PEGAWAI NEGERI SIPIL (PNS)" {{$pendatang->pekerjaan == "PEGAWAI NEGERI SIPIL (PNS)"?"selected":""}}> PEGAWAI NEGERI SIPIL (PNS) </option>
+                                        <option value="TENTARA NASIONAL INDONESIA (TNI)" {{$pendatang->pekerjaan == "TENTARA NASIONAL INDONESIA (TNI)"?"selected":""}}> TENTARA NASIONAL INDONESIA (TNI) </option>
+                                        <option value="KEPOLISIAN RI (POLRI)" {{$pendatang->pekerjaan == "KEPOLISIAN RI (POLRI)"?"selected":""}}> KEPOLISIAN RI (POLRI) </option>
+                                        <option value="PERDAGANGAN" {{$pendatang->pekerjaan == "PERDAGANGAN"?"selected":""}}> PERDAGANGAN </option>
+                                        <option value="PETANI/PEKEBUN" {{$pendatang->pekerjaan == "PETANI/PEKEBUN"?"selected":""}}> PETANI/PEKEBUN </option>
+                                        <option value="KARYAWAN SWASTA" {{$pendatang->pekerjaan == "KARYAWAN SWASTA"?"selected":""}}> KARYAWAN SWASTA </option>
+                                        <option value="KARYAWAN HONORER" {{$pendatang->pekerjaan == "KARYAWAN HONORER"?"selected":""}}> KARYAWAN HONORER </option>
+                                        <option value="BURUH HARIAN LEPAS" {{$pendatang->pekerjaan == "BURUH HARIAN LEPAS"?"selected":""}}> BURUH HARIAN LEPAS </option>
+                                        <option value="PEMBANTU RUMAH TANGGA" {{$pendatang->pekerjaan == "PEMBANTU RUMAH TANGGA"?"selected":""}}> PEMBANTU RUMAH TANGGA </option>
+                                        <option value="SENIMAN" {{$pendatang->pekerjaan == "SENIMAN"?"selected":""}}> SENIMAN </option>
+                                        <option value="GURU" {{$pendatang->pekerjaan == "GURU"?"selected":""}}> GURU </option>
+                                        <option value="KONSULTAN" {{$pendatang->pekerjaan == "KONSULTAN"?"selected":""}}> KONSULTAN </option>
+                                        <option value="DOKTER" {{$pendatang->pekerjaan == "DOKTER"?"selected":""}}> DOKTER </option>
+                                        <option value="PERANGKAT DESA" {{$pendatang->pekerjaan == "PERANGKAT DESA"?"selected":""}}> PERANGKAT DESA </option>
+                                        <option value="WIRASWASTA" {{$pendatang->pekerjaan == "WIRASWASTA"?"selected":""}}> WIRASWASTA </option>
+                                        <option value="LAINNYA" {{$pendatang->pekerjaan == "LAINNYA"?"selected":""}}> LAINNYA </option>
+                                    </select>
 								</div>
 							</div>
                             <div class="form-group form-inline">
@@ -204,6 +281,8 @@
 </div>
 <script>
    var url = "{{url('kependudukan/penduduk/')}}";
+   var id_penduduk = "{{$pendatang->penduduk_id}}";
+   var ToDate = new Date();
    function GetRW(evnt){
         $.get(url+"/get_wilayah/"+evnt.value+"/rw", function(data, status){
             $('#wilayah_rw')
@@ -238,6 +317,32 @@
                 }
         
         });
+   }
+   function Submit(e)
+   {
+       var nik = $("#nik").val();
+       $.get(url+"/validation-nik/"+nik+"/"+id_penduduk, function(data, status){
+            if(data['response'] == false)
+            {
+                e.submit();
+            }else
+            {
+                $("#error_nik").text('NIK '+nik+' Sudah ada');
+                $("#nik").focus();
+            }
+       });
+        return false;
+   }
+   function validasitanggal() {
+        var tanggal = $("#tanggal_lahir").val();
+        if (new Date(tanggal).getTime() > ToDate.getTime()) {
+            $("#error_tgl_lahir").text("Tanggal lahir harus kurang dari hari ini");
+            $("#tanggal_lahir").val(null);
+            return false;
+        }else{
+            $("#error_tgl_lahir").text(null);
+        }
+        return true;
    }
 </script>
 @stop

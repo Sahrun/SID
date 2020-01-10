@@ -52,23 +52,20 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>NIK Ibu</b></label>
 								<div class="col-md-9 p-0">
-                                     <select name="id_penduduk_ibu" class="form-control">
-                                        <option value=""> - Pilih -</option>
-                                            @foreach ($penduduk as $item)
-                                            <option value="{{$item->penduduk_id}}">{{$item->nik}} - {{$item->full_name}}</option>
-                                            @endforeach;
-                                     </select>
+                                    <div class="autocomplete" style="width:300px;">
+                                        <input id="input-auto-coplate-nik-ibu" type="text" placeholder="NIK / Nama" class="form-control input-full">
+                                        <input type="hidden" name="id_penduduk_ibu" id="id_penduduk_ibu"/>
+                                    </div>
+                                     
 								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>NIK Ayah</b></label>
 								<div class="col-md-9 p-0">
-                                     <select name="id_penduduk_ayah" class="form-control">
-                                            <option value=""> - Pilih -</option>
-                                            @foreach ($penduduk as $item)
-                                            <option value="{{$item->penduduk_id}}">{{$item->nik}} - {{$item->full_name}}</option>
-                                            @endforeach;
-                                     </select>
+                                    <div class="autocomplete" style="width:300px;">
+                                        <input id="input-auto-coplate-nik-ayah" type="text" placeholder="NIK / Nama" class="form-control input-full">
+                                        <input type="hidden" name="id_penduduk_ayah" id="id_penduduk_ayah"/>
+                                    </div>
 								</div>
 							</div>
                             <div class="form-group form-inline">
@@ -137,6 +134,45 @@
                                     <b>Laki - Laki </b><input type="radio" class="form-control" name="jekel" value="Laki-laki" required>
                                     <b>Perempuan </b><input type="radio" class="form-control" name="jekel" value="Perempuan" required>
                                  </div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor KITAS/KITAP</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_kitas_kitap" placeholder="Nomor KITAS/KITAP" maxlength="20">
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor Paspor</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_paspor" placeholder="Nomor Paspor" maxlength="20">
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Status Kewarganegaraan</b></label>
+								<div class="col-md-9 p-0">
+                                    <select name="status_warganegara" class="form-control">
+                                            <option value="">- Pilih -</option>
+                                            <option value="WNI">WNI</option>
+                                            <option value="WNA">WNA</option>
+                                            <option value="Dua Kewarganegaraan">Dua Kewarganegaraan</option>
+                                    </select>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor Akta Kelahiran</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_akta_kelahiran" placeholder="Nomor Akta Kelahiran" maxlength="20">
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>KTP Elektronik</b></label>
+								<div class="col-md-9 p-0">
+                                    <select name="ktp_elektronik" class="form-control">
+                                            <option value="">- Pilih -</option>
+                                            <option value="Belum">Belum</option>
+                                            <option value="Sudah">Sudah</option>
+                                    </select>
+								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Berat Lahir (Kg)</b></label>
@@ -283,5 +319,23 @@
     }
 
    }
+   // Autocomplate
+
+var penduduk = [];
+
+@foreach ($penduduk as $item)
+
+        var item = {
+            penduduk_id:"{{$item->penduduk_id}}",
+            nik:"{{$item->nik}}",
+            nama:"{{$item->full_name}}",
+        };
+        penduduk.push(item);
+@endforeach;
+autocomplete(document.getElementById("input-auto-coplate-nik-ibu"), penduduk,"id_penduduk_ibu");
+
+autocomplete(document.getElementById("input-auto-coplate-nik-ayah"), penduduk,"id_penduduk_ayah");
+
+// End
 </script>
 @stop

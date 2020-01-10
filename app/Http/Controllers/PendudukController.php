@@ -99,7 +99,6 @@ class PendudukController extends Controller
         Penduduk::create([ 
         "nik" => $request->nik,
         "full_name" => $request->full_name,
-        "no_kk" => $request->no_kk,
         "tempat_lahir" => $request->tempat_lahir,
         "tanggal_lahir" => $request->tanggal_lahir,
         "jekel" => $request->jekel,
@@ -115,6 +114,13 @@ class PendudukController extends Controller
         "wilayah_rw" => $request->wilayah_rw,
         "wilayah_rt" => $request->wilayah_rt,
         "alamat" => $request->alamat,
+        "ktp_elektronik" => $request->ktp_elektronik,
+        "no_akta_kelahiran" => $request->no_akta_kelahiran,
+        "status_warganegara" => $request->status_warganegara,
+        "no_paspor" => $request->no_paspor,
+        "no_kitas_kitap" => $request->no_kitas_kitap,
+        "nama_ayah" => $request->nama_ayah,
+        "nama_ibu" => $request->nama_ibu,
         "created_at" => Date("Y-m-d h:i:s"),
         "updated_at" => Date("Y-m-d h:i:s")
         ]);
@@ -179,6 +185,13 @@ class PendudukController extends Controller
         $penduduk->golongan_darah   = $request->golongan_darah;
         $penduduk->status_kependudukan   = $request->status_kependudukan;
         $penduduk->alamat = $request->alamat;
+        $penduduk->ktp_elektronik = $request->ktp_elektronik;
+        $penduduk->no_akta_kelahiran = $request->no_akta_kelahiran;
+        $penduduk->status_warganegara = $request->status_warganegara;
+        $penduduk->no_paspor = $request->no_paspor;
+        $penduduk->no_kitas_kitap = $request->no_kitas_kitap;
+        $penduduk->nama_ayah = $request->nama_ayah;
+        $penduduk->nama_ibu = $request->nama_ibu;
         $penduduk->updated_at    = Date("Y-m-d h:i:s");
         $penduduk->save();
         return redirect()->action('PendudukController@index');

@@ -19,7 +19,6 @@ class Penduduk extends Model
     Protected $fillable = [
                 "nik",
                 "full_name",
-                "no_kk",
                 "tempat_lahir",
                 "tanggal_lahir",
                 "jekel",
@@ -35,6 +34,13 @@ class Penduduk extends Model
                 "wilayah_rw",
                 "hubungan_keluarga",
                 "alamat",
+                "ktp_elektronik",
+                "no_akta_kelahiran",
+                "status_warganegara",
+                "no_paspor",
+                "no_kitas_kitap",
+                "nama_ayah",
+                "nama_ibu",
                 "created_at",
                 "updated_at",
               ];

@@ -50,12 +50,6 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>No Kartu Keluarga</b></label>
-								<div class="col-md-9 p-0">
-                                     <input type="text" class="form-control input-full" name="no_kk" placeholder="No kartu keluarga">
-								</div>
-							</div>
-                            <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Tempat Lahir</b></label>
 								<div class="col-md-9 p-0">
 									<input type="text" class="form-control input-full" name="tempat_lahir" placeholder="Tempat lahir">
@@ -74,6 +68,57 @@
                                     <b>Laki - Laki </b><input type="radio" class="form-control" name="jekel" value="Laki-laki" required>
                                     <b>Perempuan </b><input type="radio" class="form-control" name="jekel" value="Perempuan" required>
                                  </div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nama Ayah</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="nama_ayah" placeholder="Nama Ayah" maxlength="50">
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nama Ibu</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="nama_ibu" placeholder="Nama Ibu" maxlength="50">
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor KITAS/KITAP</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_kitas_kitap" placeholder="Nomor KITAS/KITAP" maxlength="20">
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor Paspor</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_paspor" placeholder="Nomor Paspor" maxlength="20">
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Status Kewarganegaraan</b></label>
+								<div class="col-md-9 p-0">
+                                    <select name="status_warganegara" class="form-control">
+                                            <option value="">- Pilih -</option>
+                                            <option value="WNI">WNI</option>
+                                            <option value="WNA">WNA</option>
+                                            <option value="Dua Kewarganegaraan">Dua Kewarganegaraan</option>
+                                    </select>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Nomor Akta Kelahiran</b></label>
+								<div class="col-md-9 p-0">
+									<input type="text" class="form-control input-full" name="no_akta_kelahiran" placeholder="Nomor Akta Kelahiran" maxlength="20">
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>KTP Elektronik</b></label>
+								<div class="col-md-9 p-0">
+                                    <select name="ktp_elektronik" class="form-control">
+                                            <option value="">- Pilih -</option>
+                                            <option value="Belum">Belum</option>
+                                            <option value="Sudah">Sudah</option>
+                                    </select>
+								</div>
 							</div>
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Alamat</b></label>
@@ -117,7 +162,29 @@
                             <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Pekerjaan</b></label>
 								<div class="col-md-9 p-0">
-									<input type="text" class="form-control input-full" name="pekerjaan" placeholder="Pekerjaan">
+                                    <select name="pekerjaan" class="form-control">
+                                        <option value="">- Pilih -</option>
+                                        <option value="BELUM/TIDAK BEKERJA">BELUM/TIDAK BEKERJA </option>
+                                        <option value="MENGURUS RUMAH TANGGA"> MENGURUS RUMAH TANGGA </option>
+                                        <option value="PELAJAR/MAHASISWA"> PELAJAR/MAHASISWA </option>
+                                        <option value="PENSIUNAN"> PENSIUNAN </option>
+                                        <option value="PEGAWAI NEGERI SIPIL (PNS)"> PEGAWAI NEGERI SIPIL (PNS) </option>
+                                        <option value="TENTARA NASIONAL INDONESIA (TNI)"> TENTARA NASIONAL INDONESIA (TNI) </option>
+                                        <option value="KEPOLISIAN RI (POLRI)"> KEPOLISIAN RI (POLRI) </option>
+                                        <option value="PERDAGANGAN"> PERDAGANGAN </option>
+                                        <option value="PETANI/PEKEBUN"> PETANI/PEKEBUN </option>
+                                        <option value="KARYAWAN SWASTA"> KARYAWAN SWASTA </option>
+                                        <option value="KARYAWAN HONORER"> KARYAWAN HONORER </option>
+                                        <option value="BURUH HARIAN LEPAS"> BURUH HARIAN LEPAS </option>
+                                        <option value="PEMBANTU RUMAH TANGGA"> PEMBANTU RUMAH TANGGA </option>
+                                        <option value="SENIMAN"> SENIMAN </option>
+                                        <option value="GURU"> GURU </option>
+                                        <option value="KONSULTAN"> KONSULTAN </option>
+                                        <option value="DOKTER"> DOKTER </option>
+                                        <option value="PERANGKAT DESA"> PERANGKAT DESA </option>
+                                        <option value="WIRASWASTA"> WIRASWASTA </option>
+                                        <option value="LAINNYA"> LAINNYA </option>
+                                    </select>
 								</div>
 							</div>
                             <div class="form-group form-inline">
