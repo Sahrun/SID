@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Penduduk;
 use App\Wilayah;
+use App\Keluarga;
 
 class WilayahController extends Controller
 {
@@ -159,9 +160,55 @@ class WilayahController extends Controller
      */
     public function destroy($id)
     {
-        $dusun = Wilayah::find($id);
-        $dusun->delete();
+        $wilayah = Wilayah::find($id);
+        DB::transaction(function () use ($wilayah) {
+         if($wilayah->wilayah_part == $this->part['dusun'])
+         {
+            $this->delete_dusun($wilayah);
+         }
+         else if($wilayah->wilayah_part == $this->part['rw'])
+         {
+            $this->delete_rw($wilayah);
+         }
+         else if($wilayah->wilayah_part == $this->part['rt'])
+         {
+            $this->delete_rt($wilayah);
+         }
+        });
         return redirect()->back();
+    }
+
+    public function delete_rw($rw){
+        $wilayah = new Wilayah;
+
+        $rt = $wilayah->where('wilayah_part','=',$this->part['rt'])
+        ->where('wilayah_rw','=',$rw->wilayah_id)->get();
+        foreach($rt as $key => $value){
+            $this->delete_rt($value);
+        }
+        Penduduk::where('wilayah_rw',$rw->wilayah_id)->update(['wilayah_rw' => null]);
+        Keluarga::where('wilayah_rw',$rw->wilayah_id)->update(['wilayah_rw' => null]);
+        $rw->delete();
+    }
+    public function delete_rt($rt)
+    {
+        Penduduk::where('wilayah_rt',$rt->wilayah_id)->update(['wilayah_rt' => null]);
+        Keluarga::where('wilayah_rt',$rt->wilayah_id)->update(['wilayah_rt' => null]);
+        $rt->delete();
+    }
+    public function delete_dusun($dusun)
+    {
+        $wilayah = new Wilayah;
+
+        $rw = $wilayah->where('wilayah_part','=',$this->part['rw'])
+        ->where('wilayah_dusun','=',$dusun->wilayah_id)->get();
+        foreach($rw as $key => $value){
+            $this->delete_rw($value);
+        }
+        Penduduk::where('wilayah_dusun',$dusun->wilayah_id)->update(['wilayah_dusun' => null]);
+        Keluarga::where('wilayah_dusun',$dusun->wilayah_id)->update(['wilayah_dusun' => null]);
+        $dusun->delete();
+
     }
     
     public function add_rw($id)
