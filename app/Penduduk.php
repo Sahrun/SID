@@ -48,7 +48,7 @@ class Penduduk extends Model
   public function deletePendudukWithRelasion($id)
   {
     
-        Kelahiran::where('penduduk_id',$id)->update(['penduduk_id' => null]);
+        Kelahiran::where('penduduk_id', $id)->delete();
         Wilayah::where('penduduk_id',$id)->update(['penduduk_id' => null]);
         Keluarga::where('keluarga_id',$id)->update(['keluarga_id' => null]);
         Kematian::where('penduduk_id', $id)->delete();

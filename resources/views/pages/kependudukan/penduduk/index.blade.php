@@ -73,7 +73,9 @@
                                                                     <a href="{{url('kependudukan/penduduk/edit/'.$item->penduduk_id)}}" class="btn btn-link btn-primary btn-lg" title="Edit">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
-                                                                    <a title="Hapus" class="btn btn-link btn-danger"  onclick="return confirm('Anda akan menghapus?')" href="{{url('kependudukan/penduduk/delete/'.$item->penduduk_id)}}">
+                                                                    <a title="Hapus" class="btn btn-link btn-danger"  
+                                                                        onclick="{{$item->kepala_keluarga !== null? "alert('Data tidak dapat dihapus karena penduduk tersebut adalah kepala keluarga')":"return confirm('Anda akan menghapus?')"}}"
+                                                                        href="{{$item->kepala_keluarga !== null?'javascript:void(0)' : url('kependudukan/penduduk/delete/'.$item->penduduk_id)}}">
                                                                         <i class="fa fa-times"></i>
                                                                     </a>
                                                                 </div>

@@ -47,10 +47,12 @@ class PendudukController extends Controller
 
         }
 
+        $penduduk->leftjoin('keluarga', 'keluarga.kepala_keluarga', '=', 'penduduk.penduduk_id');
 
         $penduduk->where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
-      
         
+        $penduduk->select('penduduk.*', 'keluarga.kepala_keluarga');
+
         if(isset($request->order) && !empty($request->order))
         {
             if($request->order == "desc")
