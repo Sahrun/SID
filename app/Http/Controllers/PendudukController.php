@@ -139,9 +139,10 @@ class PendudukController extends Controller
         $penduduk =  Penduduk::join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
         ->join('wilayah as  rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
         ->join('wilayah as  rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
-        ->select('penduduk.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
+        ->leftjoin('keluarga', 'keluarga.keluarga_id', '=', 'penduduk.keluarga_id')
+        ->select('penduduk.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT','keluarga.no_kk as no_kk')
         ->where('penduduk.penduduk_id',$id)->first();
-        return view('pages.kependudukan.penduduk.view',['penduduk' => $penduduk ]);
+       return view('pages.kependudukan.penduduk.view',['penduduk' => $penduduk ]);
     }
 
     /**
