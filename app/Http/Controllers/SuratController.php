@@ -879,9 +879,9 @@ class SuratController extends Controller
 
         $keluarga = Keluarga::find($id);
 
-        $kepala_keluarga = Penduduk::join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
-            ->join('wilayah as  rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
-            ->join('wilayah as  rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        $kepala_keluarga = Penduduk::leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+            ->leftjoin('wilayah as  rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+            ->leftjoin('wilayah as  rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
             ->where('hubungan_keluarga','=','KEPALA KELUARGA')
             ->where('keluarga_id','=',$id)
             ->select('penduduk.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
@@ -917,8 +917,12 @@ class SuratController extends Controller
             'status'  =>  $kepala_keluarga->status_perkawinan,
             'ayah' => '',
             'ibu' => '',
-            'darah' =>  $kepala_keluarga->golongan_darah
-
+            'darah' =>  $kepala_keluarga->golongan_darah,
+            'status_warganegara' => $kepala_keluarga->status_warganegara,
+            'no_paspor' => $kepala_keluarga->no_paspor,
+            'no_kitas_kitap' => $kepala_keluarga->no_kitas_kitap,
+            'nama_ayah'  => $kepala_keluarga->nama_ayah,
+            'nama_ibu'  => $kepala_keluarga->nama_ibu
             ));
         }
 
@@ -936,7 +940,12 @@ class SuratController extends Controller
             'status'  =>  $suami->status_perkawinan, 
             'ayah' => '',
             'ibu' => '',
-            'darah' =>  $suami->golongan_darah
+            'darah' =>  $suami->golongan_darah,
+            'status_warganegara' => $suami->status_warganegara,
+            'no_paspor' => $suami->no_paspor,
+            'no_kitas_kitap' => $suami->no_kitas_kitap,
+            'nama_ayah'  => $suami->nama_ayah,
+            'nama_ibu'  => $suami->nama_ibu
             ));
         }
 
@@ -955,7 +964,12 @@ class SuratController extends Controller
             'status'  =>  $val->status_perkawinan, 
             'ayah' => '',
             'ibu' => '',
-            'darah' =>  $val->golongan_darah
+            'darah' =>  $val->golongan_darah,
+            'status_warganegara' => $val->status_warganegara,
+            'no_paspor' => $val->no_paspor,
+            'no_kitas_kitap' => $val->no_kitas_kitap,
+            'nama_ayah'  => $val->nama_ayah,
+            'nama_ibu'  => $val->nama_ibu
             ));
         }
 
@@ -974,7 +988,12 @@ class SuratController extends Controller
             'status'  =>  $val->status_perkawinan,
             'ayah' => $val->AYAH,
             'ibu' => $val->IBU,
-            'darah' =>  $val->golongan_darah
+            'darah' =>  $val->golongan_darah,
+            'status_warganegara' => $val->status_warganegara,
+            'no_paspor' => $val->no_paspor,
+            'no_kitas_kitap' => $val->no_kitas_kitap,
+            'nama_ayah'  => $val->nama_ayah,
+            'nama_ibu'  => $val->nama_ibu
             ));
         }
 
@@ -1013,11 +1032,11 @@ class SuratController extends Controller
 
             $kawin .= $this->CheckValue($Daftarkeluarga[$key]['status'])." \line ";
             $hubungan .= $this->CheckValue($Daftarkeluarga[$key]['hubungan'])." \line ";
-            $warga_negra .=  "WNI \line ";
-            $pasport .=  $this->CheckValue("")." \line ";
-            $kitas .=  $this->CheckValue("")." \line ";
-            $ayah .= $this->CheckValue($Daftarkeluarga[$key]['ayah'])." \line ";
-            $ibu .= $this->CheckValue($Daftarkeluarga[$key]['ibu'])." \line ";
+            $warga_negra .=  $this->CheckValue($Daftarkeluarga[$key]['status_warganegara'])." \line ";
+            $pasport .=  $this->CheckValue($Daftarkeluarga[$key]['no_paspor'])." \line ";
+            $kitas .=  $this->CheckValue($Daftarkeluarga[$key]['no_kitas_kitap'])." \line ";
+            $ayah .= $this->CheckValue($Daftarkeluarga[$key]['nama_ayah'])." \line ";
+            $ibu .= $this->CheckValue($Daftarkeluarga[$key]['nama_ibu'])." \line ";
             $darah .= $this->CheckValue($Daftarkeluarga[$key]['darah'])." \line ";
         }
 

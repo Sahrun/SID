@@ -124,16 +124,16 @@ class KeluargaController extends Controller
      */
     public function show($id)
     {
-        $keluarga = Keluarga::join('wilayah as dusun','dusun.wilayah_id', '=','keluarga.wilayah_dusun')
-        ->join('wilayah as rw','rw.wilayah_id', '=','keluarga.wilayah_rw')
-        ->join('wilayah as rt','rt.wilayah_id', '=','keluarga.wilayah_rt')
+        $keluarga = Keluarga::leftjoin('wilayah as dusun','dusun.wilayah_id', '=','keluarga.wilayah_dusun')
+        ->leftjoin('wilayah as rw','rw.wilayah_id', '=','keluarga.wilayah_rw')
+        ->leftjoin('wilayah as rt','rt.wilayah_id', '=','keluarga.wilayah_rt')
         ->leftjoin('penduduk', 'penduduk.penduduk_id', '=', 'keluarga.kepala_keluarga')
         ->where('keluarga.keluarga_id','=',$id)
         ->select('keluarga.*', 'penduduk.full_name','dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')->first();
-      
+     
         $penduduk = Penduduk::where('keluarga_id',$keluarga->keluarga_id)->get();
 
-        $penduduk_baru = Penduduk::where('keluarga_id',NULL)->get();
+       $penduduk_baru = Penduduk::where('keluarga_id',NULL)->get();
 
         return view('pages.kependudukan.keluarga.view',['keluarga' =>$keluarga,'penduduk' =>$penduduk,'penduduk_baru' => $penduduk_baru]);
     }

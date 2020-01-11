@@ -138,9 +138,9 @@ class PendudukController extends Controller
      */
     public function show($id)
     {
-        $penduduk =  Penduduk::join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
-        ->join('wilayah as  rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
-        ->join('wilayah as  rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        $penduduk =  Penduduk::leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->leftjoin('wilayah as  rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->leftjoin('wilayah as  rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
         ->leftjoin('keluarga', 'keluarga.keluarga_id', '=', 'penduduk.keluarga_id')
         ->select('penduduk.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT','keluarga.no_kk as no_kk')
         ->where('penduduk.penduduk_id',$id)->first();
