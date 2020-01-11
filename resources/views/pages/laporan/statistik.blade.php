@@ -20,6 +20,7 @@
                                     <a class="nav-link active" id="v-pills-jekel-tab" data-toggle="pill" href="#v-pills-jekel" role="tab" aria-controls="v-pills-jekel" aria-selected="true">Jenis Kelamin</a>
                                     <a class="nav-link" id="v-pills-agama-tab" data-toggle="pill" href="#v-pills-agama" role="tab" aria-controls="v-pills-agama" aria-selected="false">Agama</a>
                                     <a class="nav-link" id="v-pills-pendidikan-tab" data-toggle="pill" href="#v-pills-pendidikan" role="tab" aria-controls="v-pills-pendidikan" aria-selected="false">Pendidikan</a>
+                                    <a class="nav-link" id="v-pills-pekerjaan-tab" data-toggle="pill" href="#v-pills-pekerjaan" role="tab" aria-controls="v-pills-pekerjaan" aria-selected="false">Pekerjaan</a>
                                     <a class="nav-link" id="v-pills-status-tab" data-toggle="pill" href="#v-pills-status" role="tab" aria-controls="v-pills-status" aria-selected="false">Status Kependudukan</a>
                                     <a class="nav-link" id="v-pills-usia-tab" data-toggle="pill" href="#v-pills-usia" role="tab" aria-controls="v-pills-usia" aria-selected="false">Usia</a>
                                 </div>
@@ -59,6 +60,19 @@
                                                 @foreach ($pendidikan as $item)
                                                 <tr>
                                                     <td>{{$item->pendidikan}}</td> 
+                                                    <td>{{$item->jumlah}}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="v-pills-pekerjaan" role="tabpanel" aria-labelledby="v-pills-pekerjaan-tab">
+                                        <div id="pekerjaan-container" style="width: 100%; height: 60vh;"></div>
+                                        <table class="table table-sm" style="width: auto">
+                                            <tbody>
+                                                @foreach ($pekerjaan as $item)
+                                                <tr>
+                                                    <td>{{$item->pekerjaan}}</td> 
                                                     <td>{{$item->jumlah}}</td>
                                                 </tr>
                                                 @endforeach
@@ -232,6 +246,48 @@
         })
         //endregion Grafik Pendidikan
 
+        //region Grafik Pekerjaan
+        const chartPekerjaan = Highcharts.chart('pekerjaan-container', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            exporting: {
+                enabled: true
+            },
+            title: {
+                text: 'Grafik Penduduk Berdasarkan Pekerjaan'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.y} ({point.percentage:.1f}%)</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            series: [{
+                name: 'Jumlah',
+                colorByPoint: true,
+                data: [
+                    @foreach ($pekerjaan as $item)
+                        {
+                            name: '{{$item->pekerjaan}}',
+                            y: {{$item->jumlah}}
+                        },
+                    @endforeach
+                ]
+            }]
+        })
+        //endregion Grafik Pekerjaan
+
         //region Grafik Status Kependudukan
         const chartStatus = Highcharts.chart('status-container', {
             chart: {
@@ -316,7 +372,7 @@
         })
         //endregion Grafik Usia
         
-        const judul = ['Jenis Kelamin', 'Agama', 'Pendidikan', 'Status Kependudukan', 'Usia'] 
+        const judul = ['Jenis Kelamin', 'Agama', 'Pendidikan', 'Pekerjaan', 'Status Kependudukan', 'Usia'] 
 
         $('#judul').text(judul[$('a[data-toggle=pill].active').index()])
 

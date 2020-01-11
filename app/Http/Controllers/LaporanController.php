@@ -52,6 +52,14 @@ class LaporanController extends Controller
         ->groupBy('pendidikan')
         ->get();
 
+        $pekerjaan = Penduduk::select(DB::raw('ifnull(pekerjaan, "Belum isi data") as pekerjaan, count(*) as jumlah'))
+        ->where([
+            ['status_kependudukan', '<>', 'Meninggal'],
+            ['status_kependudukan', '<>', 'Pindah']
+        ])
+        ->groupBy('pekerjaan')
+        ->get();
+
         $status_kependudukan = Penduduk::select(DB::raw('ifnull(status_kependudukan, "Belum isi data") as status_kependudukan, count(*) as jumlah'))
         ->groupBy('status_kependudukan')
         ->get();
@@ -77,7 +85,7 @@ class LaporanController extends Controller
         ->get();
 
         return view('pages.laporan.statistik', ['jen_kel' => $jen_kel, 'agama' => $agama, 'pendidikan' => $pendidikan,
-            'status_kependudukan' => $status_kependudukan, 'umur' => $umur]);
+            'pekerjaan' => $pekerjaan, 'status_kependudukan' => $status_kependudukan, 'umur' => $umur]);
     }
 
     //region Laporan Penduduk Pindah
