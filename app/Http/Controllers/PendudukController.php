@@ -345,7 +345,11 @@ class PendudukController extends Controller
             $tanggal = $request->tanggal;
         }
 
-        $pemilih->select(DB::raw("* ,TIMESTAMPDIFF(YEAR, tanggal_lahir, '".$date."') as usia"));
+        $pemilih->leftjoin('keluarga', 'keluarga.keluarga_id', '=', 'penduduk.keluarga_id');
+        $pemilih->leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun');
+        $pemilih->leftjoin('wilayah as  rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw');
+        $pemilih->leftjoin('wilayah as  rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt');
+        $pemilih->select(DB::raw("* ,TIMESTAMPDIFF(YEAR, tanggal_lahir, '".$date."') as usia,keluarga.no_kk as no_kk,dusun.wilayah_nama as dusun,rw.wilayah_nama as rw,rt.wilayah_nama as rt"));
 
         if(isset($request->search))
         {
