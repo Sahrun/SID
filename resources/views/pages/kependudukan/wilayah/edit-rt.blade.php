@@ -19,13 +19,12 @@
                                 <label><b>RT</b></label>
                                 <input name="wilayah_nama" type="text" class="form-control" placeholder="RT" value="{{$rt->wilayah_nama}}">
                             </div>
-                            <div class="form-group form-group-default">
+                            <div class="form-group form-group-default" style="overflow: inherit">
                                 <label>Kepala Dusun</label>
-                                <select class="form-control" id="penduduk_id" name="penduduk_id">
-                                @foreach ($penduduk as $item)
-                                        <option value="{{ $item->penduduk_id }}">{{$item->full_name}} - {{ $item->nik }} </option> 
-                                @endforeach
-                                </select>
+                                <div class="autocomplete" style="width:300px;">
+                                        <input id="input-auto-coplate" type="text" placeholder="NIK / Nama" class="form-control input-full" required>
+                                        <input type="hidden" name="penduduk_id" id="penduduk_id" required value="{{$rt->penduduk_id}}"/>
+                                </div>
                             </div>
                             <div class="form-group">
                             <button type="submit" value="Submit" class="btn btn-primary">Update</button>
@@ -39,4 +38,21 @@
             </div>
         </div>
     </div>
+    <script>
+        // Autocomplate
+
+        var penduduk = [];
+
+        @foreach ($penduduk as $item)
+
+                var item = {
+                    penduduk_id:"{{$item->penduduk_id}}",
+                    nik:"{{$item->nik}}",
+                    nama:"{{$item->full_name}}",
+                };
+                penduduk.push(item);
+        @endforeach;
+        autocomplete(document.getElementById("input-auto-coplate"), penduduk,"penduduk_id");
+        // End
+    </script>
     @stop

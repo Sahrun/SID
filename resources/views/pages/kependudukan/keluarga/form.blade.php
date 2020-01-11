@@ -136,7 +136,6 @@
 // Autocomplate
 
 var penduduk = [];
-var temp ={};
 
 @foreach ($penduduk as $item)
 

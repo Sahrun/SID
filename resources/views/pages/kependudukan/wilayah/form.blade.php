@@ -40,20 +40,19 @@
     <script>
         // Autocomplate
 
-var penduduk = [];
-var temp ={};
+    var penduduk = [];
 
-@foreach ($penduduk as $item)
+    @foreach ($penduduk as $item)
 
-        var item = {
-            penduduk_id:"{{$item->penduduk_id}}",
-            nik:"{{$item->nik}}",
-            nama:"{{$item->full_name}}",
-        };
-        penduduk.push(item);
-@endforeach;
-autocomplete(document.getElementById("input-auto-coplate"), penduduk,"penduduk_id");
+            var item = {
+                penduduk_id:"{{$item->penduduk_id}}",
+                nik:"{{$item->nik}}",
+                nama:"{{$item->full_name}}",
+            };
+            penduduk.push(item);
+    @endforeach;
+    autocomplete(document.getElementById("input-auto-coplate"), penduduk,"penduduk_id");
 
-// End
+    // End
 </script>
     @stop

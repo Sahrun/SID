@@ -317,7 +317,7 @@ class WilayahController extends Controller
                 $rt->wilayah_rw      = $id;
                 $rt->wilayah_rt      = NULL;
                 $rt->wilayah_nama    = $request->wilayah_nama;
-                $rt->penduduk_id     = NULL;
+                $rt->penduduk_id     = $request->penduduk_id;
                 $rt->created_at      = Date("Y-m-d h:i:s");
                 $rt->updated_at      = Date("Y-m-d h:i:s");
 

@@ -19,13 +19,12 @@
                                 <label><b>RT</b></label>
                                 <input name="wilayah_nama" type="text" class="form-control" placeholder="RT">
                             </div>
-                            <div class="form-group form-group-default">
+                            <div class="form-group form-group-default" style="overflow: inherit">
                                 <label>Ketua RT</label>
-                                <select class="form-control" id="penduduk_id" name="penduduk_id">
-                                @foreach ($penduduk as $item)
-                                        <option value="{{ $item->penduduk_id }}">{{$item->full_name}} - {{ $item->nik }} </option> 
-                                @endforeach
-                                </select>
+                                <div class="autocomplete" style="width:300px;">
+                                    <input id="input-auto-coplate" type="text" placeholder="NIK / Nama" class="form-control input-full">
+                                    <input type="hidden" name="penduduk_id" id="penduduk_id"/>
+                                </div>
                             </div>
                             <div class="form-group">
                             <a href="{{url('kependudukan/wilayah/view-rw/'.$rw->wilayah_id)}}" class="btn btn-danger">Kembali</a>
@@ -38,4 +37,22 @@
             </div>
         </div>
     </div>
+    <script>
+        // Autocomplate
+
+        var penduduk = [];
+
+        @foreach ($penduduk as $item)
+
+                var item = {
+                    penduduk_id:"{{$item->penduduk_id}}",
+                    nik:"{{$item->nik}}",
+                    nama:"{{$item->full_name}}",
+                };
+                penduduk.push(item);
+        @endforeach;
+        autocomplete(document.getElementById("input-auto-coplate"), penduduk,"penduduk_id");
+
+        // End
+    </script>
     @stop
