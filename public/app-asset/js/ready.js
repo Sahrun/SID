@@ -226,6 +226,7 @@ $(document).ready(function(){
 	}).blur(function(){
 		$(this).parent().removeClass("active");
 	})
+	$("#loading").hide();
 });
 
 // Input File Image
