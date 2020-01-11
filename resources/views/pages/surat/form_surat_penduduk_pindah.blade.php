@@ -22,7 +22,7 @@
                                 <div class="col-md-9 p-0">
                                     <div class="autocomplete" style="width:300px;">
                                             <input id="input-auto-coplate" type="text" placeholder="NIK / Nama" class="form-control input-full" required>
-                                            <input type="hidden" name="penduduk_id" id="penduduk_id" required onchange="GetDataKeluarga(this)"/>
+                                            <input type="hidden" name="penduduk_id" id="penduduk_id" required/>
                                     </div>
                                 </div>
                             </div>
