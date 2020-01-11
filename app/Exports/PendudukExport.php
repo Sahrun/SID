@@ -15,9 +15,9 @@ class PendudukExport implements FromView, ShouldAutoSize
     public function view(): View
     {
         $penduduk = Penduduk::where('status_kependudukan','!=',"Meninggal")
-            ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
-            ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
-            ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+            ->leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+            ->leftjoin('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+            ->leftjoin('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
             ->where('status_kependudukan','!=',"Pindah")
             ->orWhereNull('status_kependudukan')
             ->select('penduduk.*',
