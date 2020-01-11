@@ -20,7 +20,7 @@
 								<label class="col-md-3 label-control"><b>Kepala Keluarga</b></label>
 								<div class="col-md-9 p-0">
                                     <div class="autocomplete" style="width:300px;">
-                                        <input id="input-auto-coplate" type="text" placeholder="NIK / Nama" class="form-control input-full" required>
+                                        <input id="input-auto-coplate" type="text" placeholder="NIK / Nama" class="form-control input-full" required >
                                         <input type="hidden" name="kepala_keluarga" id="kepala_keluarga" required/>
                                     </div>
 								</div>

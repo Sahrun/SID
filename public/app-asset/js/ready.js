@@ -50,6 +50,10 @@ function legendClickCallback(event) {
 
 $(document).ready(function(){
 
+	$(':input').on('focus', function () {
+		$(this).attr('autocomplete', 'off')
+	});
+	
 	$('.btn-refresh-card').on('click', function(){var e=$(this).parents(".card");e.length&&(e.addClass("is-loading"),setTimeout(function(){e.removeClass("is-loading")},3e3))})
 
 	var scrollbarDashboard = $('.sidebar .scrollbar-inner');
@@ -222,7 +226,6 @@ $(document).ready(function(){
 	}).blur(function(){
 		$(this).parent().removeClass("active");
 	})
-
 });
 
 // Input File Image
