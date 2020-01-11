@@ -20,12 +20,10 @@
                             <div class="form-group form-inline">
                                 <label class="col-md-3 label-control"><b>NIK/Nama</b></label>
                                 <div class="col-md-9 p-0">
-                                    <select class="form-control" name="penduduk_id" required onchange="GetDataKeluarga(this)">
-                                        <option value=""> - Pilih -</option>
-                                        @foreach ($penduduk as $item)
-                                        <option value="{{$item->penduduk_id}}">{{$item->nik}} - {{$item->full_name}}</option>
-                                        @endforeach;
-                                    </select>
+                                    <div class="autocomplete" style="width:300px;">
+                                            <input id="input-auto-coplate" type="text" placeholder="NIK / Nama" class="form-control input-full" required>
+                                            <input type="hidden" name="penduduk_id" id="penduduk_id" required onchange="GetDataKeluarga(this)"/>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -131,8 +129,8 @@
 </div>
 <script>
  var url = "{{url('kependudukan/keluarga/')}}";
-   function GetDataKeluarga(evnt){
-       var penduduk_id = evnt.value;
+   function GetDataKeluarga(id){
+       var penduduk_id = id;
        if(penduduk_id !== null && penduduk_id !== "" && penduduk_id !== undefined){
             $.get(url+"/get-data-keluarga/"+penduduk_id, function(data, status){
                 $('table#table_keluarga > tbody').empty();
@@ -154,5 +152,20 @@
        }
        
    }
+    // Autocomplate
+
+    var penduduk = [];
+
+    @foreach ($penduduk as $item)
+
+            var item = {
+                penduduk_id:"{{$item->penduduk_id}}",
+                nik:"{{$item->nik}}",
+                nama:"{{$item->full_name}}",
+            };
+            penduduk.push(item);
+    @endforeach;
+    autocomplete(document.getElementById("input-auto-coplate"), penduduk,"penduduk_id",GetDataKeluarga);
+    // End
 </script>
 @stop

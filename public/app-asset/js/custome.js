@@ -1,4 +1,4 @@
-function autocomplete(inp, arr,identity) {
+function autocomplete(inp, arr,identity,fuc = null) {
     var currentFocus;
     var temp ={};
     inp.addEventListener("input", function(e) {
@@ -46,6 +46,11 @@ function autocomplete(inp, arr,identity) {
                 
                 inp.value = temp.nik + " / " + temp.nama;
                 $("#"+identity+"").val(_penduduk[0].penduduk_id);
+                
+                if(fuc !== null)
+                {
+                  fuc(_penduduk[0].penduduk_id);
+                }
                }
   
                 closeAllLists();
