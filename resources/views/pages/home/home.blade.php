@@ -12,7 +12,7 @@
             <div class="row align-items-center">
               <div class="col-icon">
                 <div class="icon-big text-center icon-primary bubble-shadow-small">
-                  <i class="fas fa-map"></i>
+                  <i class="fas fa-map-marked-alt"></i>
                 </div>
               </div>
               <div class="col col-stats ml-3 ml-sm-0">
@@ -36,8 +36,8 @@
               </div>
               <div class="col col-stats ml-3 ml-sm-0">
                 <div class="numbers">
-                  <p class="card-category">Jumlah RT</p>
-                  <h4 class="card-title">{{$rt[0]->jml_rt}}</h4>
+                  <p class="card-category">Jumlah RW</p>
+                  <h4 class="card-title">{{$rw[0]->jml_rw}}</h4>
                 </div>
               </div>
             </div>
@@ -50,13 +50,13 @@
             <div class="row align-items-center">
               <div class="col-icon">
                 <div class="icon-big text-center icon-success bubble-shadow-small">
-                  <i class="fas fa-map-marker-alt"></i>
+                  <i class="fas fa-map-marked-alt"></i>
                 </div>
               </div>
               <div class="col col-stats ml-3 ml-sm-0">
                 <div class="numbers">
-                  <p class="card-category">Jumlah RW</p>
-                  <h4 class="card-title">{{$rw[0]->jml_rw}}</h4>
+                  <p class="card-category">Jumlah RT</p>
+                  <h4 class="card-title">{{$rt[0]->jml_rt}}</h4>
                 </div>
               </div>
             </div>

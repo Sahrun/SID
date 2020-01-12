@@ -22,7 +22,7 @@
                             <div class="form-group form-group-default" style="overflow: inherit">
                                 <label>Kepala Dusun</label>
                                 <div class="autocomplete" style="width:300px;">
-                                        <input id="input-auto-coplate" type="text" placeholder="NIK / Nama" class="form-control input-full" required>
+                                        <input id="input-auto-coplate" type="text" placeholder="NIK / Nama" class="form-control input-full" >
                                         <input type="hidden" name="penduduk_id" id="penduduk_id" required value="{{$rt->penduduk_id}}"/>
                                 </div>
                             </div>
