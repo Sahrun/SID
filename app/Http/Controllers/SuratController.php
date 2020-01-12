@@ -183,7 +183,7 @@ class SuratController extends Controller
         
         
         $document = str_replace("[form_hari]", $this->hari[date("N",strtotime($kematian->tgl_kematian))], $document);
-        $document = str_replace("[form_tanggal_mati]", date("d",strtotime($kematian->tgl_kematian. ' '.$this->timezone)), $document);
+        $document = str_replace("[form_tanggal_mati]", date("d-m-yy",strtotime($kematian->tgl_kematian. ' '.$this->timezone)), $document);
         $document = str_replace("[form_jam]", $kematian->jam_kematian, $document);
         $document = str_replace("[form_tempat_mati]", $kematian->tempat_kematian, $document);
         $document = str_replace("[sebab_nama]", $kematian->sebab_kematian, $document);
