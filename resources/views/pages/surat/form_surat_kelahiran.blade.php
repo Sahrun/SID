@@ -82,7 +82,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group form-inline">
-                                            <label class="col-md-3 label-control"><b>Desa Pelaor</b></label>
+                                            <label class="col-md-3 label-control"><b>Desa Pelapor</b></label>
                                             <div class="col-md-9 p-0">
                                                 <input type="text" name="desa_pelapor" class="form-control input-full input-pelapor-luar" />
                                             </div>

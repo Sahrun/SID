@@ -307,6 +307,8 @@ class SuratController extends Controller
 
         $surat = new Surat;
         
+        $this->getIdentitalDesaAll();
+
         $staff = Staff::find($request->staf_id);
 
         $kelahiran = Kelahiran::join('penduduk', 'penduduk.penduduk_id', '=', 'kelahiran.penduduk_id')
@@ -368,6 +370,7 @@ class SuratController extends Controller
                 $umur_pelapor = date_diff(date_create($penduduk->tanggal_lahir), date_create('now'))->y;
                 $pekerjaan_pelapor = $penduduk->pekerjaan;
                 $hubungan_pelapor = $penduduk->hubungan_keluarga;
+
             }
 
        }else
@@ -433,7 +436,7 @@ class SuratController extends Controller
             $provinsi_saksi2 = $request->provin_sisaksi2;
        }
 
-        $this->getIdentitalDesaAll();
+        
         $document =  file_get_contents(public_path('master_surat').'\\'.$surat->getnamefile($request->kode_surat));
  
         $document = str_replace("[SEBUTAN_KABUPATEN]",$this->getIdentitas("sebutan_kabupaten"), $document);
@@ -463,7 +466,7 @@ class SuratController extends Controller
         
         
         // data anak
-        $document = str_replace("[form_hari]",date("d",strtotime($kelahiran->tanggal_lahir. ' '.$this->timezone)), $document);
+        $document = str_replace("[form_hari]",$this->hari[date("N",strtotime($kelahiran->tanggal_lahir))], $document);
         $document = str_replace("[form_tanggallahir]",date("d-m-Y",strtotime($kelahiran->tanggal_lahir)), $document);
         $document = str_replace("[form_waktu_lahir]",$kelahiran->tob, $document);
         $document = str_replace("[form_tempatlahir]",$kelahiran->tempat_lahir, $document);
@@ -502,7 +505,7 @@ class SuratController extends Controller
         $document = str_replace("[form_nik_pelapor]",$nik_pelapor, $document);
         $document = str_replace("[form_umur_pelapor]",$umur_pelapor, $document);
         $document = str_replace("[form_pekerjaanpelapor]",$pekerjaan_pelapor, $document);
-        $document = str_replace("[form_desapelapor]",$request->desa_pelapor, $document); 
+        $document = str_replace("[form_desapelapor]",$desa_pelapor, $document); 
         $document = str_replace("[form_kecpelapor]",$kec_pelapor, $document); 
         $document = str_replace("[form_kabpelapor]",$kab_pelapor, $document); 
         $document = str_replace("[form_provinsipelapor]",$provinsi_pelapor, $document);
