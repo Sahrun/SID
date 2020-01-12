@@ -52,6 +52,46 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Pekerjaan Pelapor</b></label>
+								<div class="col-md-9 p-0">
+                                    <select name="pekerjaanpelapor" class="form-control">
+                                        <option value="">- Pilih -</option>
+                                        <option value="BELUM/TIDAK BEKERJA">BELUM/TIDAK BEKERJA </option>
+                                        <option value="MENGURUS RUMAH TANGGA"> MENGURUS RUMAH TANGGA </option>
+                                        <option value="PELAJAR/MAHASISWA"> PELAJAR/MAHASISWA </option>
+                                        <option value="PENSIUNAN"> PENSIUNAN </option>
+                                        <option value="PEGAWAI NEGERI SIPIL (PNS)"> PEGAWAI NEGERI SIPIL (PNS) </option>
+                                        <option value="TENTARA NASIONAL INDONESIA (TNI)"> TENTARA NASIONAL INDONESIA (TNI) </option>
+                                        <option value="KEPOLISIAN RI (POLRI)"> KEPOLISIAN RI (POLRI) </option>
+                                        <option value="PERDAGANGAN"> PERDAGANGAN </option>
+                                        <option value="PETANI/PEKEBUN"> PETANI/PEKEBUN </option>
+                                        <option value="KARYAWAN SWASTA"> KARYAWAN SWASTA </option>
+                                        <option value="KARYAWAN HONORER"> KARYAWAN HONORER </option>
+                                        <option value="BURUH HARIAN LEPAS"> BURUH HARIAN LEPAS </option>
+                                        <option value="PEMBANTU RUMAH TANGGA"> PEMBANTU RUMAH TANGGA </option>
+                                        <option value="SENIMAN"> SENIMAN </option>
+                                        <option value="GURU"> GURU </option>
+                                        <option value="KONSULTAN"> KONSULTAN </option>
+                                        <option value="DOKTER"> DOKTER </option>
+                                        <option value="PERANGKAT DESA"> PERANGKAT DESA </option>
+                                        <option value="WIRASWASTA"> WIRASWASTA </option>
+                                        <option value="LAINNYA"> LAINNYA </option>
+                                    </select>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Alamat Pelapor</b></label>
+								<div class="col-md-9 p-0">
+                                     <input type="text" class="form-control input-full" name="alamat_pelapor" placeholder="Alamat Pelapor">
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>Hubungan Pelapor</b></label>
+								<div class="col-md-9 p-0">
+                                     <input type="text" class="form-control input-full" name="hubungan_pelapor" placeholder="Hubungan Pelapor">
+								</div>
+							</div>
+                            <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>Keperluan</b></label>
 								<div class="col-md-9 p-0">
                                     <input type="text" class="form-control" name="hal" required>

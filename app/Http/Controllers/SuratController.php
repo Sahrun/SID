@@ -195,7 +195,7 @@ class SuratController extends Controller
         $document = str_replace("[nama_pelapor]", $request->nama_pelapor, $document);
         $document = str_replace("[nik_pelapor]", $request->nik_pelapor, $document);
         $document = str_replace("[tanggal_lahir_pelapor]", date("d-m-Y",strtotime($request->tanggal_lahir_pelapor)), $document);
-        $document = str_replace("[pekerjaanpelapor]", $request->pekerjaan_pelapor, $document);
+        $document = str_replace("[pekerjaanpelapor]", $request->pekerjaanpelapor, $document);
         $document = str_replace("[alamat_pelapor]", $request->alamat_pelapor, $document);
         $document = str_replace("[hubungan_pelapor]", $request->hubungan_pelapor, $document);
         
