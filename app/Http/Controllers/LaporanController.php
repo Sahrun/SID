@@ -92,10 +92,11 @@ class LaporanController extends Controller
     public function penduduk_pindah()
     {
         $pnd_pindah = PendudukPindah::join('penduduk', 'penduduk.penduduk_id', '=', 'penduduk_pindah.penduduk_id')
-        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
-        ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
-        ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
-        ->select('penduduk_pindah.*','penduduk.nik','penduduk.full_name','penduduk.no_kk','penduduk.jekel',
+        ->leftjoin('keluarga','keluarga.keluarga_id','=','penduduk.keluarga_id')
+        ->leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->leftjoin('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->leftjoin('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->select('penduduk_pindah.*','penduduk.nik','penduduk.full_name','keluarga.no_kk as no_kk','penduduk.jekel',
             'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
         ->get();
         return view('pages.laporan.penduduk_pindah', ['pnd_pindah' => $pnd_pindah]);
@@ -104,10 +105,11 @@ class LaporanController extends Controller
     public function penduduk_pindah_filter($tgl_awal, $tgl_akhir)
     {
         $pnd_pindah = PendudukPindah::join('penduduk', 'penduduk.penduduk_id', '=', 'penduduk_pindah.penduduk_id')
-        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
-        ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
-        ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
-        ->select('penduduk_pindah.*','penduduk.nik','penduduk.full_name','penduduk.no_kk','penduduk.jekel',
+        ->leftjoin('keluarga','keluarga.keluarga_id','=','penduduk.keluarga_id')
+        ->leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->leftjoin('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->leftjoin('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->select('penduduk_pindah.*','penduduk.nik','penduduk.full_name','keluarga.no_kk as no_kk','penduduk.jekel',
             'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
         ->whereBetween('tgl_pindah', [$tgl_awal, $tgl_akhir])
         ->get();
@@ -131,9 +133,9 @@ class LaporanController extends Controller
     public function pendatang()
     {
         $pendatang = Pendatang::join('penduduk', 'penduduk.penduduk_id', '=', 'pendatang.penduduk_id')
-        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
-        ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
-        ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->leftjoin('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->leftjoin('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
         ->select('pendatang.*','penduduk.nik','penduduk.full_name','penduduk.jekel',
             'penduduk.tempat_lahir', 'penduduk.tanggal_lahir', 'penduduk.agama', 'penduduk.pekerjaan',
             'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
@@ -144,9 +146,9 @@ class LaporanController extends Controller
     public function pendatang_filter($tgl_awal, $tgl_akhir)
     {
         $pendatang = Pendatang::join('penduduk', 'penduduk.penduduk_id', '=', 'pendatang.penduduk_id')
-        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
-        ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
-        ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->leftjoin('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->leftjoin('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
         ->select('pendatang.*','penduduk.nik','penduduk.full_name','penduduk.jekel',
             'penduduk.tempat_lahir', 'penduduk.tanggal_lahir', 'penduduk.agama', 'penduduk.pekerjaan',
             'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
@@ -172,12 +174,13 @@ class LaporanController extends Controller
     public function kelahiran()
     {
         $kelahiran = Kelahiran::join('penduduk', 'penduduk.penduduk_id', '=', 'kelahiran.penduduk_id')
-        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
-        ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
-        ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->leftjoin('keluarga','keluarga.keluarga_id','=','penduduk.keluarga_id')
+        ->leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->leftjoin('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->leftjoin('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
         ->leftjoin('penduduk as ibu','ibu.penduduk_id','=','kelahiran.id_penduduk_ibu')
         ->leftjoin('penduduk as ayah','ayah.penduduk_id','=','kelahiran.id_penduduk_ayah')
-        ->select('kelahiran.*','penduduk.nik','penduduk.full_name','penduduk.no_kk','penduduk.jekel',
+        ->select('kelahiran.*','penduduk.nik','penduduk.full_name','keluarga.no_kk as no_kk','penduduk.jekel',
             'penduduk.tanggal_lahir', 'penduduk.agama', 'penduduk.pekerjaan',
             'ibu.full_name as IBU', 'ayah.full_name as AYAH',
             'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
@@ -188,12 +191,13 @@ class LaporanController extends Controller
     public function kelahiran_filter($tgl_awal, $tgl_akhir)
     {
         $kelahiran = Kelahiran::join('penduduk', 'penduduk.penduduk_id', '=', 'kelahiran.penduduk_id')
-        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
-        ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
-        ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->leftjoin('keluarga','keluarga.keluarga_id','=','penduduk.keluarga_id')
+        ->leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->leftjoin('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->leftjoin('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
         ->leftjoin('penduduk as ibu','ibu.penduduk_id','=','kelahiran.id_penduduk_ibu')
         ->leftjoin('penduduk as ayah','ayah.penduduk_id','=','kelahiran.id_penduduk_ayah')
-        ->select('kelahiran.*','penduduk.nik','penduduk.full_name','penduduk.no_kk','penduduk.jekel',
+        ->select('kelahiran.*','penduduk.nik','penduduk.full_name','keluarga.no_kk as no_kk','penduduk.jekel',
             'penduduk.tanggal_lahir', 'penduduk.agama', 'penduduk.pekerjaan',
             'ibu.full_name as IBU', 'ayah.full_name as AYAH',
             'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
@@ -219,10 +223,11 @@ class LaporanController extends Controller
     public function kematian()
     {
         $kematian = Kematian::join('penduduk', 'penduduk.penduduk_id', '=', 'kematian.penduduk_id')
-        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
-        ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
-        ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
-        ->select('kematian.*','penduduk.nik','penduduk.full_name','penduduk.no_kk',
+        ->leftjoin('keluarga','keluarga.keluarga_id','=','penduduk.keluarga_id')
+        ->leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->leftjoin('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->leftjoin('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->select('kematian.*','penduduk.nik','penduduk.full_name','keluarga.no_kk as no_kk',
             'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
         ->get();
         return view('pages.laporan.kematian', ['kematian' => $kematian]);
@@ -231,10 +236,11 @@ class LaporanController extends Controller
     public function kematian_filter($tgl_awal, $tgl_akhir)
     {
         $kematian = Kematian::join('penduduk', 'penduduk.penduduk_id', '=', 'kematian.penduduk_id')
-        ->join('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
-        ->join('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
-        ->join('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
-        ->select('kematian.*','penduduk.nik','penduduk.full_name','penduduk.no_kk',
+        ->leftjoin('keluarga','keluarga.keluarga_id','=','penduduk.keluarga_id')
+        ->leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
+        ->leftjoin('wilayah as rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
+        ->leftjoin('wilayah as rt', 'rt.wilayah_id', '=', 'penduduk.wilayah_rt')
+        ->select('kematian.*','penduduk.nik','penduduk.full_name','keluarga.no_kk as no_kk',
             'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
             ->whereBetween('tgl_kematian', [$tgl_awal, $tgl_akhir])
         ->get();
