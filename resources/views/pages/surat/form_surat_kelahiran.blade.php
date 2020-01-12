@@ -320,7 +320,7 @@
   {
    if(event.value == "true")
     {
-        $("#saksi1_warga_warga").css("display","block");
+        $("#saksi1_warga_desa").css("display","block");
         $(".input-saksi1-desa").prop('required',true);
         $("#saksi1_warga_luar").css("display","none");
         $('.input-saksi1-luar').removeAttr('required');
@@ -328,7 +328,7 @@
 	{
         $("#saksi1_warga_luar").css("display","block");
         $(".input-saksi1-luar").prop('required',true);
-        $("#saksi1_warga_warga").css("display","none");
+        $("#saksi1_warga_desa").css("display","none");
         $('.input-saksi1-desa').removeAttr('required');
     }
   }
@@ -336,7 +336,7 @@
   {
    if(event.value == "true")
     {
-        $("#saksi2_warga_warga").css("display","block");
+        $("#saksi2_warga_desa").css("display","block");
         $(".input-saksi2-desa").prop('required',true);
         $("#saksi2_warga_luar").css("display","none");
         $('.input-saksi2-luar').removeAttr('required');
@@ -344,7 +344,7 @@
 	{
         $("#saksi2_warga_luar").css("display","block");
         $(".input-saksi2-luar").prop('required',true);
-        $("#saksi2_warga_warga").css("display","none");
+        $("#saksi2_warga_desa").css("display","none");
         $('.input-saksi2-desa').removeAttr('required');
     }
   }
