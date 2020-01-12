@@ -54,7 +54,6 @@ class Penduduk extends Model
         Keluarga::where('keluarga_id',$id)->update(['keluarga_id' => null]);
         Kematian::where('penduduk_id', $id)->delete();
         Pendatang::where('penduduk_id', $id)->delete();
-        Pendatang::where('penduduk_id', $id)->delete();
         PendudukPindah::where('penduduk_id', $id)->delete();
         Surat::where('penduduk_id', $id)->delete();
         $penduduk = Penduduk::find($id);

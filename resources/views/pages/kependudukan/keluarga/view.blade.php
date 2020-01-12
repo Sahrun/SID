@@ -118,18 +118,16 @@
                 <div class="form-group form-inline">
                     <label class="col-md-3 label-control"><b>Anggota Keluarga</b></label>
                     <div class="col-md-9 p-0">
-                            <select class="form-control" name="penduduk_id"> 
-                                    <option value=""> - Pilih -</option>
-                                    @foreach ($penduduk_baru as $item)
-                                    <option value="{{$item->penduduk_id}}">{{$item->full_name}}</option>
-                                    @endforeach;
-                            </select>
+                            <div class="autocomplete" style="width:300px;">
+                                        <input id="input-auto-coplate" type="text" placeholder="NIK / Nama" class="form-control input-full" required >
+                                        <input type="hidden" name="penduduk_id" id="penduduk_id" required/>
+                            </div>
 				</div>
 				</div>
                 <div class="form-group form-inline">
 					<label class="col-md-3 label-control"><b>Hubungan Keluarga</b></label>
 					<div class="col-md-9 p-0">
-                            <select class="form-control" name="hubungan_keluarga" > 
+                            <select class="form-control" name="hubungan_keluarga" required> 
                                     <option value=""> - Pilih -</option>
                                     <option value="KEPALA KELUARGA" style="{{$keluarga->kepala_keluarga?'display:none':''}}">KEPALA KELUARGA</option>
                                     <option value="SUAMI">SUAMI</option>
@@ -211,5 +209,21 @@
            $("#form_update_anggota").attr("action", url+"/update-anggota/"+data.penduduk_id);
         });
    }
+   // Autocomplate
+
+    var penduduk = [];
+
+    @foreach ($penduduk_baru as $item)
+
+            var item = {
+                penduduk_id:"{{$item->penduduk_id}}",
+                nik:"{{$item->nik}}",
+                nama:"{{$item->full_name}}",
+            };
+            penduduk.push(item);
+    @endforeach;
+    autocomplete(document.getElementById("input-auto-coplate"), penduduk,"penduduk_id");
+
+    // End
 </script>
     @stop
