@@ -40,6 +40,12 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>Alamat</b></label>
+								<div class="col-md-9 p-0">
+								<label class="col-md-3 label-control" style="text-align:left;display:block">: {{$penduduk->alamat}}</label>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
                             <label class="col-md-3 label-control" style="text-align:left;display:block"><b>No Kartu Keluarga</b></label>
 								<div class="col-md-9 p-0">
                                 <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$penduduk->no_kk}}</label>
@@ -58,16 +64,52 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>No Akta Kelahiran</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$penduduk->no_akta_kelahiran}}</label>
+                                 </div>
+							</div>
+                            <div class="form-group form-inline">
                             <label class="col-md-3 label-control" style="text-align:left;display:block"><b>Jenis Kelamin</b></label>
 								<div class="col-md-9 p-0">
                                 <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$penduduk->jekel}}</label>
                                  </div>
 							</div>
                             <div class="form-group form-inline">
-                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>Alamat</b></label>
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>Nama Ayah</b></label>
 								<div class="col-md-9 p-0">
-								<label class="col-md-3 label-control" style="text-align:left;display:block">: {{$penduduk->alamat}}</label>
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$penduduk->nama_ayah}}</label>
 								</div>
+							</div>
+                            <div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>Nama Ibu</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$penduduk->nama_ibu}}</label>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>Status Kewarganegaraan</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$penduduk->status_warganegara}}</label>
+                                 </div>
+							</div>
+                            <div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>Nomor KITAS/KITAP</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$penduduk->no_kitas_kitap}}</label>
+                                 </div>
+							</div>
+                            <div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>No Paspor</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$penduduk->no_paspor}}</label>
+                                 </div>
+							</div>
+                            <div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>KTP Elektronik</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$penduduk->ktp_elektronik}}</label>
+                                 </div>
 							</div>
                             <div class="form-group form-inline">
                             <label class="col-md-3 label-control" style="text-align:left;display:block"><b>Agama</b></label>

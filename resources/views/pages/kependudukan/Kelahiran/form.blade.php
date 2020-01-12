@@ -50,21 +50,20 @@
 								</div>
 							</div>
                             <div class="form-group form-inline">
-								<label class="col-md-3 label-control"><b>NIK Ibu</b></label>
-								<div class="col-md-9 p-0">
-                                    <div class="autocomplete" style="width:300px;">
-                                        <input id="input-auto-coplate-nik-ibu" type="text" placeholder="NIK / Nama" class="form-control input-full">
-                                        <input type="hidden" name="id_penduduk_ibu" id="id_penduduk_ibu"/>
-                                    </div>
-                                     
-								</div>
-							</div>
-                            <div class="form-group form-inline">
 								<label class="col-md-3 label-control"><b>NIK Ayah</b></label>
 								<div class="col-md-9 p-0">
                                     <div class="autocomplete" style="width:300px;">
                                         <input id="input-auto-coplate-nik-ayah" type="text" placeholder="NIK / Nama" class="form-control input-full">
                                         <input type="hidden" name="id_penduduk_ayah" id="id_penduduk_ayah"/>
+                                    </div>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+								<label class="col-md-3 label-control"><b>NIK Ibu</b></label>
+								<div class="col-md-9 p-0">
+                                    <div class="autocomplete" style="width:300px;">
+                                        <input id="input-auto-coplate-nik-ibu" type="text" placeholder="NIK / Nama" class="form-control input-full">
+                                        <input type="hidden" name="id_penduduk_ibu" id="id_penduduk_ibu"/>
                                     </div>
 								</div>
 							</div>

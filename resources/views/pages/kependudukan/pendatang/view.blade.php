@@ -63,10 +63,52 @@
                                 <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$pendatang->tanggal_lahir}}</label>
 								</div>
 							</div>
+							<div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>No Akta Kelahiran</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$pendatang->no_akta_kelahiran}}</label>
+                                 </div>
+							</div>
                             <div class="form-group form-inline">
 							<label class="col-md-3 label-control" style="text-align:left;display:block"><b>Jenis Kelamin</b></label>
 								<div class="col-md-9 p-0">
                                 <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$pendatang->jekel}}</label>
+                                 </div>
+							</div>
+							<div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>Nama Ayah</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$pendatang->nama_ayah}}</label>
+								</div>
+							</div>
+                            <div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>Nama Ibu</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$pendatang->nama_ibu}}</label>
+								</div>
+							</div>
+							<div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>Status Kewarganegaraan</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$pendatang->status_warganegara}}</label>
+                                 </div>
+							</div>
+							<div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>Nomor KITAS/KITAP</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$pendatang->no_kitas_kitap}}</label>
+                                 </div>
+							</div>
+                            <div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>No Paspor</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$pendatang->no_paspor}}</label>
+                                 </div>
+							</div>
+                            <div class="form-group form-inline">
+                            <label class="col-md-3 label-control" style="text-align:left;display:block"><b>KTP Elektronik</b></label>
+								<div class="col-md-9 p-0">
+                                <label class="col-md-3 label-control" style="text-align:left;display:block">: {{$pendatang->ktp_elektronik}}</label>
                                  </div>
 							</div>
                             <div class="form-group form-inline">
