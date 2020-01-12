@@ -20,15 +20,16 @@
 
         <div class="collapse in" id="collapseExample">
           <ul class="nav">
-            <li>
-              <a href="#profile">
-                <span class="link-collapse">My Profile</span>
+          <li>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
               </a>
-            </li>
-            <li>
-              <a href="#edit">
-                <span class="link-collapse">Edit Profile</span>
-              </a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+              </form>
             </li>
           </ul>
         </div>
