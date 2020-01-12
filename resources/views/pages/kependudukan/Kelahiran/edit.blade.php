@@ -142,9 +142,8 @@
 								<label class="col-md-3 label-control"><b>Status Kependudukan</b></label>
 								<div class="col-md-9 p-0"> 
                                     <select class="form-control" disabled>  
-                                        <option>Tetap</option>
+                                        <option>{{$kelahiran->status_kependudukan}}</option>
                                     </select>
-                                    <input name="status_kependudukan" value="Pendatang" type="hidden"/>
 								</div>
 							</div>
                             <div class="form-group form-inline">

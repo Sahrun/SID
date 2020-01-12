@@ -289,19 +289,17 @@ class KeluargaController extends Controller
 
         $penduduk = Penduduk::find($id);
 
-        $kepala_keluarga = Penduduk::where('status_kependudukan','!=',"Meninggal")
-        ->where('status_kependudukan','!=',"Pindah")
+        $kepala_keluarga = Penduduk::where('status_kependudukan','!=',"Pindah")
         ->where('keluarga_id','=', $penduduk->keluarga_id)
         ->where('penduduk_id','!=',$penduduk->penduduk_id)
         ->where('hubungan_keluarga','=','KEPALA KELUARGA')
-        ->orWhereNull('status_kependudukan')->first();
+        ->first();
 
-        $keluarga = Penduduk::where('status_kependudukan','!=',"Meninggal")
-        ->where('status_kependudukan','!=',"Pindah")
+        $keluarga = Penduduk::where('status_kependudukan','!=',"Pindah")
         ->where('keluarga_id','=', $penduduk->keluarga_id)
         ->where('penduduk_id','!=',$penduduk->penduduk_id)
         ->where('hubungan_keluarga','!=','KEPALA KELUARGA')
-        ->orWhereNull('status_kependudukan')->get();
+        ->get();
 
         if($kepala_keluarga != null){
             array_push($result,array(

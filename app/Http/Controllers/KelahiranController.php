@@ -101,7 +101,7 @@ class KelahiranController extends Controller
             $penduduk->pekerjaan = null;
             $penduduk->status_perkawinan = null;
             $penduduk->golongan_darah = $request->golongan_darah;
-            $penduduk->status_kependudukan = null;
+            $penduduk->status_kependudukan = "Tetap";
             $penduduk->keluarga_id = $request->keluarga_id;
             $penduduk->hubungan_keluarga = "ANAK";
             $penduduk->wilayah_dusun = $request->wilayah_dusun;
@@ -201,7 +201,7 @@ class KelahiranController extends Controller
             $penduduk->pekerjaan   = $request->pekerjaan;
             $penduduk->status_perkawinan   = $request->status_perkawinan;
             $penduduk->golongan_darah   = $request->golongan_darah;
-            $penduduk->status_kependudukan   = $request->status_kependudukan;
+            $penduduk->status_kependudukan   = $penduduk->status_kependudukan;
             $penduduk->alamat = $request->alamat;
             $penduduk->ktp_elektronik = $request->ktp_elektronik;
             $penduduk->no_akta_kelahiran = $request->no_akta_kelahiran;
