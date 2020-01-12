@@ -11,6 +11,7 @@ use App\Staff;
 use App\Penduduk;
 use App\Kelahiran;
 use App\Keluarga;
+use App\PendudukPindah;
 
 class SuratController extends Controller
 {
@@ -116,7 +117,9 @@ class SuratController extends Controller
         }
         else if($kode_surat == "S05")
         {
-            $penduduk = Penduduk::where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
+            $penduduk = PendudukPindah::join('penduduk', 'penduduk.penduduk_id', '=', 'penduduk_pindah.penduduk_id')
+            ->select('penduduk.*')
+            ->get();
 
             return View($surat->getsuratValue($kode_surat,"page"),['kode_surat' => $kode_surat,'penduduk' => $penduduk,'staff' => $staff]);
 
@@ -183,7 +186,7 @@ class SuratController extends Controller
         
         
         $document = str_replace("[form_hari]", $this->hari[date("N",strtotime($kematian->tgl_kematian))], $document);
-        $document = str_replace("[form_tanggal_mati]", date("d-m-yy",strtotime($kematian->tgl_kematian. ' '.$this->timezone)), $document);
+        $document = str_replace("[form_tanggal_mati]", date("d-m-yy",strtotime($kematian->tgl_kematian)), $document);
         $document = str_replace("[form_jam]", $kematian->jam_kematian, $document);
         $document = str_replace("[form_tempat_mati]", $kematian->tempat_kematian, $document);
         $document = str_replace("[sebab_nama]", $kematian->sebab_kematian, $document);
