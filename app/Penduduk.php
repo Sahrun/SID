@@ -8,6 +8,7 @@ use App\Keluarga;
 use App\Kematian;
 use App\Pendatang;
 use App\PendudukPindah;
+use App\Surat;
 use Illuminate\Database\Eloquent\Model;
 
 class Penduduk extends Model
@@ -55,6 +56,7 @@ class Penduduk extends Model
         Pendatang::where('penduduk_id', $id)->delete();
         Pendatang::where('penduduk_id', $id)->delete();
         PendudukPindah::where('penduduk_id', $id)->delete();
+        Surat::where('penduduk_id', $id)->delete();
         $penduduk = Penduduk::find($id);
         $penduduk->delete();
   }
