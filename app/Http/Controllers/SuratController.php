@@ -556,8 +556,8 @@ class SuratController extends Controller
         $document = str_replace("[form_nama_ayah]",$ayah->full_name, $document);
         $document = str_replace("[nik_ayah]",$ayah->nik, $document);
         $document = str_replace("[umur_ayah]",date_diff(date_create($ayah->tanggal_lahir), date_create('now'))->y, $document);
-        $document = str_replace("[pekerjaanayah]","ok", $document);
-        $document = str_replace("[alamat_ayah]",$ayah->tanggal_lahir->alamat, $document);   
+        $document = str_replace("[pekerjaanayah]",$ayah->pekerjaan, $document);
+        $document = str_replace("[alamat_ayah]",$ayah->alamat, $document);   
         $document = str_replace("[sebutan_desa]",$this->getIdentitas("sebutan_desa"), $document);
         $document = str_replace("[desaayah]",$this->getIdentitas("nama_desa"), $document);
         $document = str_replace("[sebutan_kecamatan]",$this->getIdentitas("sebutan_kecamatan"), $document);
