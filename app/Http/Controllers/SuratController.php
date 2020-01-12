@@ -877,7 +877,12 @@ class SuratController extends Controller
         $Daftarkeluarga = array();
         $this->getIdentitalDesaAll();
 
-        $keluarga = Keluarga::find($id);
+        $keluarga = Keluarga::leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'keluarga.wilayah_dusun')
+        ->leftjoin('wilayah as  rw', 'rw.wilayah_id', '=', 'keluarga.wilayah_rw')
+        ->leftjoin('wilayah as  rt', 'rt.wilayah_id', '=', 'keluarga.wilayah_rt')
+        ->where('keluarga_id','=',$id)
+        ->select('keluarga.*', 'dusun.wilayah_nama as DUSUN','rw.wilayah_nama as RW','rt.wilayah_nama as RT')
+        ->first();
 
         $kepala_keluarga = Penduduk::leftjoin('wilayah as dusun', 'dusun.wilayah_id', '=', 'penduduk.wilayah_dusun')
             ->leftjoin('wilayah as  rw', 'rw.wilayah_id', '=', 'penduduk.wilayah_rw')
@@ -1043,9 +1048,9 @@ class SuratController extends Controller
         $document =  file_get_contents(public_path('master_surat').'\\'."kk.rtf");
  
         $document = str_replace("*kk",$kepala_keluarga->full_name, $document);
-        $document = str_replace("alamat_plus_dusun",$kepala_keluarga->alamat." : ".$kepala_keluarga->DUSUN, $document);
-        $document = str_replace("*rt",$kepala_keluarga->RT, $document);
-        $document = str_replace("*rw", $kepala_keluarga->RW, $document);
+        $document = str_replace("alamat_plus_dusun",$keluarga->alamat_keluarga." : ".$keluarga->DUSUN, $document);
+        $document = str_replace("*rt",$keluarga->RT, $document);
+        $document = str_replace("*rw", $keluarga->RW, $document);
         $document = str_replace("desa",$this->getIdentitas("nama_desa"), $document);
         $document = str_replace("no_kk",$keluarga->no_kk, $document);
 
