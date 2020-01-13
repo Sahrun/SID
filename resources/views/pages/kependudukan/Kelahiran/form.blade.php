@@ -108,7 +108,7 @@
 								<div class="col-md-9 p-0">
 									<select name="hob" class="form-control" required> 
                                         <option value="">- Pilih -</option>
-                                        <option value="Dockter">Dokter</option>
+                                        <option value="Dokter">Dokter</option>
                                         <option value="Bidan">Bidan</option>
                                         <option value="Dukun Beranak">Dukun Beranak</option>
                                         <option value="Lainya">Lainnya</option>
