@@ -169,6 +169,7 @@
           </ul>
         </div>
       </li>
+      @if(Auth::user()->user_role_id == 1)
       <li class="nav-item" id="pengaturan">
         <a data-toggle="collapse" href="#pengaturan-menu" id="pengaturan-sub">
           <i class="fas fa-cog"></i>
@@ -185,6 +186,7 @@
           </ul>
         </div>
       </li>
+      @endif
     </ul>
   </div>
 </div>
