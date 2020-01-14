@@ -15,8 +15,8 @@
                                 <div class="btn-round ml-auto">
                                     <form method="POST" action="{{url('/surat/rekap-surat/')}}">
                                        @csrf
-                                       Start <input type="date" name="startDate" value="{{$filter['startDate']}}"/>
-                                       End <input type="date" name="endDate" value="{{$filter['endDate']}}"/>
+                                       Tanggal Mulai <input type="date" name="startDate" value="{{$filter['startDate']}}"/>
+                                       Tanggal Akhir <input type="date" name="endDate" value="{{$filter['endDate']}}"/>
                                        <input type="submit" value="submit"/>
                                     </form>
                                 </div>
