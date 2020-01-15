@@ -28,9 +28,9 @@
         @foreach ($pemilihtetap as $item)
         <tr role="row">
             <td>{{$no++}}</td>
-            <td>{{$item->nik}}</td>
+            <td>{{$item->nik}}&nbsp;</td>
             <td>{{$item->full_name}}</td>
-            <td>{{$item->no_kk}}</td>
+            <td>{{$item->no_kk}}&nbsp;</td>
             <td>{{$item->dusun}}</td>
             <td>{{$item->rw}}</td>
             <td>{{$item->rt}}</td>
