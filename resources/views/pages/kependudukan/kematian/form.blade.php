@@ -100,7 +100,7 @@
                         </div>
                     </div>
                     <div class="col-lg-12" style="text-align:right">
-                        <a href="{{url('kependudukan/pendatang')}}" class="btn btn-danger">Kembali</a>
+                        <a href="{{url('kependudukan/kematian')}}" class="btn btn-danger">Kembali</a>
                     </div>
                 </div>
             </div>
