@@ -79,8 +79,7 @@ class KematianController extends Controller
 
         if(isset($request->search))
         {
-            $penduduk->where('nik','like',''.$request->search.'%');
-            $penduduk->orWhere('full_name', 'like',''.$request->search.'%');
+            $penduduk->whereRaw("(nik like '".$request->search."%' OR full_name like '".$request->search."%')");
         }
 
         if(isset($request->page) && !empty($request->page))
