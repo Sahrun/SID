@@ -66,10 +66,48 @@ class PendudukPindahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $penduduk = Penduduk::where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah")->orWhereNull('status_kependudukan')->get();
-         return view('pages.kependudukan.penduduk_pindah.form',['penduduk'=> $penduduk]);
+
+        $penduduk = new Penduduk;
+
+        $pages = 0;
+        $page = 0;
+        $showdata = 10;
+
+        $penduduk = $penduduk->newQuery();
+
+        $penduduk->where('status_kependudukan','!=',"Meninggal")->where('status_kependudukan','!=',"Pindah");
+
+
+        if(isset($request->search))
+        {
+            $penduduk->where('nik','like',''.$request->search.'%');
+            $penduduk->orWhere('full_name', 'like',''.$request->search.'%');
+        }
+
+        if(isset($request->page) && !empty($request->page))
+        {
+            $page = $request->page;
+
+        }
+
+        if(isset($request->showdata) && !empty($request->showdata))
+        {
+            $showdata = $request->showdata;
+
+        }
+
+        $result  = $penduduk->get();
+
+        $penduduk->offset(($page * $showdata));
+        $penduduk->limit($showdata);
+
+        $penduduk = $penduduk->get();
+         
+        $pages =  ceil(count($result) / $showdata);
+        
+        return view('pages.kependudukan.penduduk_pindah.form',['penduduk'=> $penduduk,'pages' => $pages,'page' => $page,'showdata' => $showdata]);
     }
 
     /**
